@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "tsc --build",
+    "dev:watch": "yarn run dev --watch",
+    "dev:force": "yarn run dev --force",
+    "clean": "tsc --build --clean"
+  },
+  "workspaces": [],
+  "devDependencies": {
+    "@types/node": "^17.0.39",
+    "typescript": "^4.7.3"
+  },
+  "packageManager": "yarn@3.2.1"
+}
