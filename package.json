@@ -11,6 +11,7 @@
     "lint:fix": "yarn run lint --fix"
   },
   "workspaces": [
+    "./packages/io",
     "./packages/types"
   ],
   "devDependencies": {
