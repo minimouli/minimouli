@@ -1,0 +1,69 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./packages/*/tsconfig.json"],
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "env": {
+    "es2022": true
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "prefer-arrow",
+    "unicorn"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:unicorn/recommended"
+  ],
+  "rules": {
+    // eslint -- Suggestions
+    "eqeqeq": "error",
+    "no-console": "error",
+    "no-sequences": [
+      "error", {
+        "allowInParentheses": false
+      }
+    ],
+
+    // eslint -- Layout & Formatting
+    "eol-last": ["warn", "always"],
+    "linebreak-style": ["warn", "unix"],
+    "no-multi-spaces": "warn",
+    "no-tabs": "error",
+    "no-trailing-spaces": "warn",
+
+    /// @typescript-eslint/eslint-plugin -- Base Rules
+    "@typescript-eslint/consistent-type-exports": "warn",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn", {
+        "prefer": "type-imports"
+      }
+    ],
+
+    // @typescript-eslint/eslint-plugin -- Extension Rules
+    "@typescript-eslint/semi": ["warn", "never"],
+
+    // eslint-plugin-import -- Helpful warnings
+    "import/export": "error",
+    "import/no-extraneous-dependencies": "error",
+    "import/no-mutable-exports": "error",
+
+    // eslint-plugin-import -- Module systems
+    "import/no-commonjs": "error",
+
+    // eslint-plugin-import -- Style guide
+    "import/newline-after-import": "warn",
+
+    // prefer-arrow
+    "prefer-arrow/prefer-arrow-functions": "error"
+  }
+}
