@@ -289,6 +289,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@minimouli/types@workspace:packages/types":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/types@workspace:packages/types"
+  languageName: unknown
+  linkType: soft
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"

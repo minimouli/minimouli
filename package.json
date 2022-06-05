@@ -10,7 +10,9 @@
     "lint": "eslint ./packages/*/src --ext .ts,.tsx",
     "lint:fix": "yarn run lint --fix"
   },
-  "workspaces": [],
+  "workspaces": [
+    "./packages/types"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
