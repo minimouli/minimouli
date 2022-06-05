@@ -1,0 +1,24 @@
+{
+  "name": "@minimouli/fs",
+  "version": "2.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/fs",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@minimouli/io": "^2.0.0",
+    "@minimouli/types": "^2.0.0"
+  }
+}

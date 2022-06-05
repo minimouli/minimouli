@@ -289,7 +289,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@minimouli/io@workspace:packages/io":
+"@minimouli/fs@workspace:packages/fs":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/fs@workspace:packages/fs"
+  dependencies:
+    "@minimouli/io": ^2.0.0
+    "@minimouli/types": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
+"@minimouli/io@^2.0.0, @minimouli/io@workspace:packages/io":
   version: 0.0.0-use.local
   resolution: "@minimouli/io@workspace:packages/io"
   dependencies:
