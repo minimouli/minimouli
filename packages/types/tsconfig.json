@@ -7,6 +7,6 @@
   "exclude": [
     "./dist",
     "./src/**/__tests__",
-    "./stream.d.ts"
+    "./*.d.ts",
   ]
 }

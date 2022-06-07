@@ -5,7 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './entries/Directory.js'
-export * from './entries/Entry.js'
-export * from './entries/File.js'
-export * from './identifiers/Path.js'
+// eslint-disable-next-line import/export
+export * from './dist/options'

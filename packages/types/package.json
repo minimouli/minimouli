@@ -16,6 +16,8 @@
   "license": "MIT",
   "files": [
     "./dist",
+    "./options.js",
+    "./options.d.ts",
     "./stream.js",
     "./stream.d.ts"
   ]
