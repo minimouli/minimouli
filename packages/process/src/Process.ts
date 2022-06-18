@@ -19,6 +19,13 @@ interface ProcessEvents {
     spawn: Callable
 }
 
+type TerminateSignal = 'SIGTERM' | 'SIGKILL'
+
+enum TerminateSource {
+    UNDEFINED = 'TerminateSource.UNDEFINED',
+    TIMEOUT = 'TerminateSource.timeout'
+}
+
 class Process {
 
     private child: child_process.ChildProcess
@@ -26,6 +33,8 @@ class Process {
     public readonly stdin: NativeWritable | undefined = undefined
     public readonly stdout: NativeReadable | undefined = undefined
     public readonly stderr: NativeReadable | undefined = undefined
+
+    private terminateSource = TerminateSource.UNDEFINED
 
     constructor(child: child_process.ChildProcess) {
         this.child = child
@@ -48,6 +57,15 @@ class Process {
         this.child.disconnect()
     }
 
+    kill(signal: NodeJS.Signals = 'SIGTERM'): void {
+        this.child.kill(signal)
+    }
+
+    terminate(source: TerminateSource, signal: TerminateSignal = 'SIGTERM'): void {
+        this.kill(signal)
+        this.terminateSource = source
+    }
+
     on<E extends keyof ProcessEvents>(event: E, listener: ProcessEvents[E]): void {
         this.child.on(event, listener)
     }
@@ -58,6 +76,10 @@ class Process {
 
     removeListener<E extends keyof ProcessEvents>(event: E, listener: ProcessEvents[E]): void {
         this.child.removeListener(event, listener)
+    }
+
+    get hasTimedOut(): boolean {
+        return this.terminateSource === TerminateSource.TIMEOUT
     }
 
     get pid(): number | undefined {
@@ -71,7 +93,8 @@ class Process {
 }
 
 export {
-    Process
+    Process,
+    TerminateSource
 }
 export type {
     ProcessEvents

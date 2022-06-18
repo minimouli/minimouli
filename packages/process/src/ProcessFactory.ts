@@ -8,9 +8,10 @@
 import child_process from 'node:child_process'
 import { Path } from '@minimouli/fs'
 import { Descriptor } from '@minimouli/types/stream.js'
-import { Process } from './Process.js'
+import { Process, TerminateSource } from './Process.js'
 import type stream from 'node:stream'
-import type { ProcessStdio, StdioValue, FileDescriptorInstruction } from './ProcessStdio.js'
+import type { Unit } from '@minimouli/types'
+import type { FileDescriptorInstruction, ProcessStdio, StdioValue } from './ProcessStdio.js'
 
 type ValidStdioValue = number | FileDescriptorInstruction | stream.Stream | null
 
@@ -40,6 +41,7 @@ class ProcessFactory {
     }
 
     private _ipc = false
+    private timeout: Unit.ms = Number.NaN
 
     constructor(name: string | Path, args: string[] = []) {
         this.name = name.toString()
@@ -61,6 +63,11 @@ class ProcessFactory {
         return this
     }
 
+    setTimeout(timeout: Unit.ms): this {
+        this.timeout = timeout
+        return this
+    }
+
     spawn(): Process {
 
         const child = child_process.spawn(this.name, this.args, {
@@ -73,7 +80,18 @@ class ProcessFactory {
             ]
         })
 
-        return new Process(child)
+        const process = new Process(child)
+
+        if (this.timeout > 0) {
+
+            const timer = setTimeout(() => {
+                process.terminate(TerminateSource.TIMEOUT, 'SIGKILL')
+            }, this.timeout)
+
+            child.on('exit', () => clearTimeout(timer))
+        }
+
+        return process
     }
 
 }
