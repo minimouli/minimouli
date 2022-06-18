@@ -40,6 +40,14 @@ class Process {
             this.stderr = new ReadableStream(child.stderr)
     }
 
+    send(message: child_process.Serializable): void {
+        this.child.send(message)
+    }
+
+    disconnect(): void {
+        this.child.disconnect()
+    }
+
     on<E extends keyof ProcessEvents>(event: E, listener: ProcessEvents[E]): void {
         this.child.on(event, listener)
     }

@@ -39,6 +39,8 @@ class ProcessFactory {
         stderr: Descriptor.STDERR
     }
 
+    private _ipc = false
+
     constructor(name: string | Path, args: string[] = []) {
         this.name = name.toString()
         this.args = args
@@ -54,6 +56,11 @@ class ProcessFactory {
         return this
     }
 
+    ipc(): this {
+        this._ipc = true
+        return this
+    }
+
     spawn(): Process {
 
         const child = child_process.spawn(this.name, this.args, {
@@ -61,7 +68,8 @@ class ProcessFactory {
             stdio: [
                 normalizeStdioValue(this._stdio.stdin),
                 normalizeStdioValue(this._stdio.stdout),
-                normalizeStdioValue(this._stdio.stderr)
+                normalizeStdioValue(this._stdio.stderr),
+                this._ipc ? 'ipc' : 'ignore'
             ]
         })
 
