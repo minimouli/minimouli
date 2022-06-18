@@ -7,3 +7,4 @@
 
 export * from './Process.js'
 export * from './ProcessFactory.js'
+export * from './ProcessStdio.js'
