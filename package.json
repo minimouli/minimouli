@@ -16,6 +16,7 @@
   "workspaces": [
     "./packages/fs",
     "./packages/io",
+    "./packages/process",
     "./packages/types"
   ],
   "devDependencies": {
