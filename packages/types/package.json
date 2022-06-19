@@ -16,9 +16,11 @@
   "license": "MIT",
   "files": [
     "./dist",
-    "./options.js",
+    "./hints.d.ts",
+    "./hints.js",
     "./options.d.ts",
-    "./stream.js",
-    "./stream.d.ts"
+    "./options.js",
+    "./stream.d.ts",
+    "./stream.js"
   ]
 }
