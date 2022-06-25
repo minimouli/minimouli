@@ -1,13 +1,9 @@
 {
   "testMatch": [
-    "**/__tests__/**/*.ts"
+    "**/__tests__/**/*.spec.ts"
   ],
   "testPathIgnorePatterns": [
     "/node_modules/"
   ],
-  "preset": "ts-jest",
-  "resolver": "ts-jest-resolver",
-  "transform": {
-    "^.+\\\\.ts?$": "ts-jest"
-  }
+  "resolver": "ts-jest-resolver"
 }
