@@ -18,6 +18,8 @@
     "./dist",
     "./hints.d.ts",
     "./hints.js",
+    "./objects.d.ts",
+    "./objects.js",
     "./options.d.ts",
     "./options.js",
     "./stream.d.ts",
