@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './FileOptions.js'
-export * from './MatcherOutputOptions.js'
+// eslint-disable-next-line import/export
+export * from './dist/matchers'

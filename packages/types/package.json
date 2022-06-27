@@ -18,6 +18,8 @@
     "./dist",
     "./hints.d.ts",
     "./hints.js",
+    "./matchers.d.ts",
+    "./matchers.js",
     "./objects.d.ts",
     "./objects.js",
     "./options.d.ts",

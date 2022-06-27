@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './FileOptions.js'
-export * from './MatcherOutputOptions.js'
+export * from './Matcher.js'
+export * from './MatcherShape.js'
+export * from './RawMatcher.js'
