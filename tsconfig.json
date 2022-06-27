@@ -11,6 +11,9 @@
       "path": "./packages/io"
     },
     {
+      "path": "./packages/matchers"
+    },
+    {
       "path": "./packages/process"
     },
     {

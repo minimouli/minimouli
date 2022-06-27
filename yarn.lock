@@ -1985,7 +1985,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/process@workspace:packages/process":
+"@minimouli/matchers@workspace:packages/matchers":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/matchers@workspace:packages/matchers"
+  dependencies:
+    "@minimouli/fs": ^2.0.0
+    "@minimouli/process": ^2.0.0
+    "@minimouli/types": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
+"@minimouli/process@^2.0.0, @minimouli/process@workspace:packages/process":
   version: 0.0.0-use.local
   resolution: "@minimouli/process@workspace:packages/process"
   dependencies:
