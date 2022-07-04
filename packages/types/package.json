@@ -16,6 +16,8 @@
   "license": "MIT",
   "files": [
     "./dist",
+    "./blocks.d.ts",
+    "./blocks.js",
     "./hints.d.ts",
     "./hints.js",
     "./matchers.d.ts",
