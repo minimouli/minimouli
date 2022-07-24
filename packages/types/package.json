@@ -27,6 +27,8 @@
     "./options.d.ts",
     "./options.js",
     "./stream.d.ts",
-    "./stream.js"
+    "./stream.js",
+    "./syntheses.d.ts",
+    "./syntheses.js"
   ]
 }
