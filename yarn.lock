@@ -1968,6 +1968,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@minimouli/framework@workspace:packages/framework":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/framework@workspace:packages/framework"
+  dependencies:
+    "@minimouli/matchers": ^2.0.0
+    "@minimouli/types": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@minimouli/fs@^2.0.0, @minimouli/fs@workspace:packages/fs":
   version: 0.0.0-use.local
   resolution: "@minimouli/fs@workspace:packages/fs"
@@ -1985,17 +1994,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/matchers@workspace:packages/matchers":
+"@minimouli/matchers@^2.0.0, @minimouli/matchers@workspace:packages/matchers":
   version: 0.0.0-use.local
   resolution: "@minimouli/matchers@workspace:packages/matchers"
   dependencies:
-    "@minimouli/fs": ^2.0.0
-    "@minimouli/process": ^2.0.0
     "@minimouli/types": ^2.0.0
   languageName: unknown
   linkType: soft
 
-"@minimouli/process@^2.0.0, @minimouli/process@workspace:packages/process":
+"@minimouli/process@workspace:packages/process":
   version: 0.0.0-use.local
   resolution: "@minimouli/process@workspace:packages/process"
   dependencies:
