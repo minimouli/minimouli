@@ -15,8 +15,8 @@ enum HintType {
 }
 
 enum HintStatus {
-    SUCCESS = 'Hint.SUCCESS',
-    FAILURE = 'Hint.FAILURE'
+    SUCCESS = 'Status.SUCCESS',
+    FAILURE = 'Status.FAILURE'
 }
 
 enum HintCategory {
