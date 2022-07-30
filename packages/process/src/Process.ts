@@ -23,7 +23,7 @@ type TerminateSignal = 'SIGTERM' | 'SIGKILL'
 
 enum TerminateSource {
     UNDEFINED = 'TerminateSource.UNDEFINED',
-    TIMEOUT = 'TerminateSource.timeout'
+    TIMEOUT = 'TerminateSource.TIMEOUT'
 }
 
 class Process {
