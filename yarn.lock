@@ -2002,12 +2002,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/process@workspace:packages/process":
+"@minimouli/process@^2.0.0, @minimouli/process@workspace:packages/process":
   version: 0.0.0-use.local
   resolution: "@minimouli/process@workspace:packages/process"
   dependencies:
     "@minimouli/fs": ^2.0.0
     "@minimouli/io": ^2.0.0
+    "@minimouli/types": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
+"@minimouli/scanner@workspace:packages/scanner":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/scanner@workspace:packages/scanner"
+  dependencies:
+    "@minimouli/fs": ^2.0.0
+    "@minimouli/process": ^2.0.0
     "@minimouli/types": ^2.0.0
   languageName: unknown
   linkType: soft

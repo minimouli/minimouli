@@ -20,6 +20,9 @@
       "path": "./packages/process"
     },
     {
+      "path": "./packages/scanner"
+    },
+    {
       "path": "./packages/types"
     }
   ]
