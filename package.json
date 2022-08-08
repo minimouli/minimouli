@@ -17,6 +17,7 @@
     "./packages/framework",
     "./packages/fs",
     "./packages/io",
+    "./packages/ipc",
     "./packages/matchers",
     "./packages/process",
     "./packages/scanner",

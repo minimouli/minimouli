@@ -1994,6 +1994,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@minimouli/ipc@workspace:packages/ipc":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/ipc@workspace:packages/ipc"
+  dependencies:
+    "@minimouli/process": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@minimouli/matchers@^2.0.0, @minimouli/matchers@workspace:packages/matchers":
   version: 0.0.0-use.local
   resolution: "@minimouli/matchers@workspace:packages/matchers"

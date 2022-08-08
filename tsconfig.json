@@ -14,6 +14,9 @@
       "path": "./packages/io"
     },
     {
+      "path": "./packages/ipc"
+    },
+    {
       "path": "./packages/matchers"
     },
     {
