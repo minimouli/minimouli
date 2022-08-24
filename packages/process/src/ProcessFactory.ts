@@ -13,6 +13,17 @@ import type stream from 'node:stream'
 import type { Unit } from '@minimouli/types'
 import type { FileDescriptorInstruction, ProcessStdio, StdioValue } from './ProcessStdio.js'
 
+interface SpawnSuccessResponse {
+    process: Process
+    error: undefined
+}
+
+interface SpawnFailureResponse {
+    process: undefined
+    error: string
+}
+
+type SpawnResponse = SpawnSuccessResponse | SpawnFailureResponse
 type ValidStdioValue = number | FileDescriptorInstruction | stream.Stream | null
 
 const normalizeStdioValue = (value: StdioValue): ValidStdioValue => {
@@ -29,8 +40,8 @@ const normalizeStdioValue = (value: StdioValue): ValidStdioValue => {
 
 class ProcessFactory {
 
-    private name: string
-    private args: string[]
+    private readonly name: string
+    private readonly args: string[]
 
     private _cwd: Path | undefined = undefined
 
@@ -68,30 +79,40 @@ class ProcessFactory {
         return this
     }
 
-    spawn(): Process {
+    spawn(): Promise<SpawnResponse> {
 
-        const child = child_process.spawn(this.name, this.args, {
-            cwd: (this._cwd ?? Path.current()).toString(),
-            stdio: [
-                normalizeStdioValue(this._stdio.stdin),
-                normalizeStdioValue(this._stdio.stdout),
-                normalizeStdioValue(this._stdio.stderr),
-                this._ipc ? 'ipc' : 'ignore'
-            ]
+        return new Promise((resolve) => {
+
+            const child = child_process.spawn(this.name, this.args, {
+                cwd: (this._cwd ?? Path.current()).toString(),
+                stdio: [
+                    normalizeStdioValue(this._stdio.stdin),
+                    normalizeStdioValue(this._stdio.stdout),
+                    normalizeStdioValue(this._stdio.stderr),
+                    this._ipc ? 'ipc' : 'ignore'
+                ]
+            })
+            const process = new Process(child)
+
+            if (this.timeout > 0) {
+
+                const timer = setTimeout(() => {
+                    process.terminate(TerminateSource.TIMEOUT, 'SIGKILL')
+                }, this.timeout)
+
+                child.on('exit', () => clearTimeout(timer))
+            }
+
+            process.on('error', () => resolve({
+                error: 'The child process cannot be spawned',
+                process: undefined
+            }))
+
+            process.on('spawn', () => resolve({
+                process,
+                error: undefined
+            }))
         })
-
-        const process = new Process(child)
-
-        if (this.timeout > 0) {
-
-            const timer = setTimeout(() => {
-                process.terminate(TerminateSource.TIMEOUT, 'SIGKILL')
-            }, this.timeout)
-
-            child.on('exit', () => clearTimeout(timer))
-        }
-
-        return process
     }
 
 }

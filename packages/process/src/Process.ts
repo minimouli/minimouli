@@ -6,9 +6,11 @@
  */
 
 import { ReadableStream, WritableStream } from '@minimouli/io'
+import { Descriptor } from '@minimouli/types/stream.js'
 import type child_process from 'node:child_process'
-import type { NativeReadable, NativeWritable } from '@minimouli/types/stream.js'
 import type { Callable } from '@minimouli/types'
+import type { WaitOptions } from '@minimouli/types/options.js'
+import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream.js'
 
 interface ProcessEvents {
     close: Callable<[number | null, NodeJS.Signals | null]>
@@ -19,6 +21,19 @@ interface ProcessEvents {
     spawn: Callable
 }
 
+interface WaitSuccessResponse {
+    code: number | null
+    output: ReadableContent | undefined
+    error: undefined
+}
+
+interface WaitFailureResponse {
+    code: number | null
+    output: undefined
+    error: string
+}
+
+type WaitResponse = WaitSuccessResponse | WaitFailureResponse
 type TerminateSignal = 'SIGTERM' | 'SIGKILL'
 
 enum TerminateSource {
@@ -64,6 +79,56 @@ class Process {
     terminate(source: TerminateSource, signal: TerminateSignal = 'SIGTERM'): void {
         this.kill(signal)
         this.terminateSource = source
+    }
+
+    wait(options: Partial<WaitOptions> = {}): Promise<WaitResponse> {
+        return new Promise((resolve) => {
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            this.child.on('exit', async (code) => {
+
+                if (!options.descriptor) {
+                    resolve({
+                        code,
+                        output: undefined,
+                        error: undefined
+                    })
+                    return
+                }
+
+                let stream: NativeReadable | undefined
+
+                if (options.descriptor === Descriptor.STDOUT)
+                    stream = this.stdout
+                if (options.descriptor === Descriptor.STDERR)
+                    stream = this.stderr
+
+                if (stream === undefined) {
+                    resolve({
+                        error: 'The desired output is not available',
+                        code,
+                        output: undefined
+                    })
+                    return
+                }
+
+                const { contents, error } = await stream.getContents()
+
+                if (error !== undefined) {
+                    resolve({
+                        error: 'The desired output is not available',
+                        code,
+                        output: undefined
+                    })
+                    return
+                }
+
+                resolve({
+                    code,
+                    output: contents,
+                    error: undefined
+                })
+            })
+        })
     }
 
     on<E extends keyof ProcessEvents>(event: E, listener: ProcessEvents[E]): void {

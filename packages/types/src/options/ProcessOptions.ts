@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './FileOptions.js'
-export * from './MatcherOutputOptions.js'
-export * from './ProcessOptions.js'
+import type { Descriptor } from '../stream'
+
+interface WaitOptions {
+    descriptor: Descriptor.STDOUT | Descriptor.STDERR
+}
+
+export type {
+    WaitOptions
+}

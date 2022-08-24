@@ -6,6 +6,7 @@
  */
 
 import { ProcessFactory } from '@minimouli/process'
+import { Descriptor } from '@minimouli/types/stream.js'
 import { EpitechGithubDecoder } from './decoders/EpitechGithubDecoder.js'
 import { EpitechSelfHostDecoder } from './decoders/EpitechSelfHostDecoder.js'
 import type { Path } from '@minimouli/fs'
@@ -45,52 +46,39 @@ class Scanner {
 
     private async getRemoteOrigin(): Promise<GetRemoteOriginResponse> {
 
-        return new Promise((resolve) => {
-
-            const git = new ProcessFactory('git', ['config', '--get', 'remote.origin.url'])
-                .cwd(this.directory)
-                .stdio({
-                    stdin: 'ignore',
-                    stdout: 'pipe',
-                    stderr: 'ignore'
-                })
-                .spawn()
-
-            git.on('error', () => resolve({
-                error: 'Cannot perform a directory scan. Please check if git is correctly installed',
-                url: undefined
-            }))
-
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            git.on('exit', async (code) => {
-
-                if (code !== 0) {
-                    resolve({
-                        error: 'The scanned directory is not a git repository',
-                        url: undefined
-                    })
-                    return
-                }
-
-                if (git.stdout === undefined)
-                    return
-
-                const { contents } = await git.stdout.getContents()
-
-                if (contents === null) {
-                    resolve({
-                        error: 'Cannot perform a directory scan',
-                        url: undefined
-                    })
-                    return
-                }
-
-                resolve({
-                    url: contents.toString().trim(),
-                    error: undefined
-                })
+        const { process: git, error: error1 } = await new ProcessFactory('git', ['config', '--get', 'remote.origin.url'])
+            .cwd(this.directory)
+            .stdio({
+                stdin: 'ignore',
+                stdout: 'pipe',
+                stderr: 'ignore'
             })
-        })
+            .spawn()
+
+        if (error1 !== undefined)
+            return {
+                error: 'Cannot perform a directory scan, please check if git is correctly installed',
+                url: undefined
+            }
+
+        const { code, output, error: error2 } = await git.wait({ descriptor: Descriptor.STDOUT })
+
+        if (code !== 0)
+            return {
+                error: 'The scanned directory is probably not a git repository',
+                url: undefined
+            }
+
+        if (error2 !== undefined || output === undefined || output === null)
+            return {
+                error: 'Cannot perform a directory scan',
+                url: undefined
+            }
+
+        return {
+            url: output.toString().trim(),
+            error: undefined
+        }
     }
 
     async scan(): Promise<ScanResponse> {
