@@ -8,8 +8,9 @@
 import { Worker } from './Worker.js'
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteConfig } from '@minimouli/types/config.js'
-import type { SuiteSynthesis } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
+import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
 
 class Orchestrator {
@@ -40,6 +41,22 @@ class Orchestrator {
                 return { error: 'At least one worker cannot being prepared' }
 
         return { error: undefined }
+    }
+
+    async plan(): Promise<PlanResponse> {
+
+        let syntheses: SuiteSynthesisPlan[] = []
+        const results = await Promise.all(this.workers.map((worker) => worker.plan()))
+
+        for (const result of results) {
+
+            if (result.error !== undefined)
+                return { error: 'At least one worker is impossible to use', syntheses: undefined }
+
+            syntheses = [...syntheses, ...result.syntheses]
+        }
+
+        return { syntheses, error: undefined }
     }
 
     async run(): Promise<RunResponse> {

@@ -8,4 +8,5 @@
 export * from './ProjectSynthesis.js'
 export * from './RunSynthesis.js'
 export * from './SuiteSynthesis.js'
+export * from './SuiteSynthesisPlan.js'
 export * from './TestSynthesis.js'

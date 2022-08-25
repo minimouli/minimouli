@@ -12,6 +12,7 @@ import { configSchema } from './schemas/config.schema.js'
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteConfig } from '@minimouli/types/config.js'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
+import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
 
 interface ReadConfigSuccessResponse {
@@ -71,6 +72,14 @@ class Runner {
             return { error: error4 }
 
         return { error: undefined }
+    }
+
+    async plan(): Promise<PlanResponse> {
+
+        if (this.orchestrator === undefined)
+            return { error: 'The runner must be prepared before', syntheses: undefined }
+
+        return this.orchestrator.plan()
     }
 
     async run(): Promise<RunResponse> {

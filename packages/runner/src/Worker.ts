@@ -11,17 +11,20 @@ import type { Path } from '@minimouli/fs'
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Process } from '@minimouli/process'
 import type { MoulinetteConfig } from '@minimouli/types/config.js'
-import type { SuiteSynthesis } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
+import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
 
 interface IssuedEvents extends EventDescriptions {
     init: [MoulinetteConfig]
+    plan: []
     run: []
 }
 
 interface ReceivedEvents extends EventDescriptions {
     'init:success': []
+    'plan:result': [SuiteSynthesisPlan[]]
     'run:result': [SuiteSynthesis[]]
 }
 
@@ -69,6 +72,26 @@ class Worker {
 
             channel.on('init:success', handleInitSuccess)
             channel.emit('init', config)
+        })
+    }
+
+    async plan(): Promise<PlanResponse> {
+
+        if (this.channel === undefined)
+            return { error: 'The worker must be prepared before', syntheses: undefined }
+
+        const channel = this.channel
+
+        return new Promise((resolve) => {
+
+            const handleResult = (syntheses: SuiteSynthesisPlan[]) => {
+                channel.remove('plan:result', handleResult)
+
+                resolve({ syntheses, error: undefined })
+            }
+
+            channel.on('plan:result', handleResult)
+            channel.emit('plan')
         })
     }
 

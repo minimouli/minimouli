@@ -6,7 +6,7 @@
  */
 
 import { Trigger } from '../hooks/Hook.js'
-import type { SuiteSynthesis } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
 import type { Context } from './contexts/Context.js'
 
 class Suite {
@@ -20,6 +20,14 @@ class Suite {
         this.context.emit(Trigger.BEFORE_SUITE_IS_EXECUTED)
         await this.context.execute()
         this.context.emit(Trigger.AFTER_SUITE_IS_EXECUTED)
+    }
+
+    plan(): SuiteSynthesisPlan {
+        return {
+            name: this.name,
+            tests: this.context.tests.map((test) => test.name),
+            suites: this.context.suites.map((suite) => suite.plan())
+        }
     }
 
     synthesize(): SuiteSynthesis {
