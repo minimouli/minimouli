@@ -38,7 +38,7 @@ class Channel<Issued extends EventDescriptions, Received extends EventDescriptio
 
     protected dispatch(message: Message<Received>): void {
         const { event, args } = message
-        this.emitter.emit(event.toString(), args)
+        this.emitter.emit(event.toString(), ...args)
     }
 
     on<Event extends keyof Received>(event: Event, listener: Callable<Received[Event]>): void {
