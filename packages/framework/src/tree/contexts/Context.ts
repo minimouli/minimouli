@@ -20,6 +20,7 @@ interface Context {
 
     get tests(): Test[]
     get suites(): Suite[]
+    get path(): string[]
 
 }
 

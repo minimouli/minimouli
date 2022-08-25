@@ -6,3 +6,4 @@
  */
 
 export * from './Runner.js'
+export * from './types/WorkerEvents.js'

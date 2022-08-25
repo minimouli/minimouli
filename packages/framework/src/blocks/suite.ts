@@ -12,7 +12,7 @@ import type { Suite as SuiteBlock, SuiteFn } from '@minimouli/types/blocks.js'
 
 const suite: SuiteBlock = (name: string, fn: SuiteFn) => {
 
-    const context = new SuiteContext(Tree.currentContext())
+    const context = new SuiteContext(Tree.currentContext(), name)
     const newSuite = new Suite(context, name)
 
     Tree.currentContext().addSuite(newSuite)

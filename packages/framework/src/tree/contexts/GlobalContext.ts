@@ -39,6 +39,10 @@ class GlobalContext implements Context {
         void trigger
     }
 
+    get path(): string[] {
+        return []
+    }
+
 }
 
 export {

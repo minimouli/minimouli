@@ -5,16 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { EventEmitter } from 'node:events'
 import { Channel } from '@minimouli/ipc'
 import { ProcessFactory } from '@minimouli/process'
 import type { Path } from '@minimouli/fs'
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Process } from '@minimouli/process'
+import type { Unit } from '@minimouli/types'
 import type { MoulinetteConfig } from '@minimouli/types/config.js'
-import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesis, SuiteSynthesisPlan, TestStatus } from '@minimouli/types/syntheses.js'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
+import type { WorkerEvents } from './types/WorkerEvents.js'
 
 interface IssuedEvents extends EventDescriptions {
     init: [MoulinetteConfig]
@@ -26,16 +29,28 @@ interface ReceivedEvents extends EventDescriptions {
     'init:success': []
     'plan:result': [SuiteSynthesisPlan[]]
     'run:result': [SuiteSynthesis[]]
+    'test:perform': [string, string[]]
+    'test:complete': [string, string[], TestStatus, Unit.ms]
 }
 
 class Worker {
 
     private childProcess: Process | undefined
     private channel: Channel<IssuedEvents, ReceivedEvents> | undefined
+    private emitter = new EventEmitter()
 
     constructor(
+        private id: number,
         private testsFilePath: Path
     ) {}
+
+    on<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+        this.emitter.on(event, listener)
+    }
+
+    removeListener<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+        this.emitter.removeListener(event, listener)
+    }
 
     async load(): Promise<ErrorCatcherResponse> {
 
@@ -53,6 +68,14 @@ class Worker {
 
         this.childProcess = node
         this.channel = Channel.fromChildProcess<IssuedEvents, ReceivedEvents>(node)
+
+        this.channel.on('test:perform', (...args) => {
+            this.emitter.emit('test:perform', this.id, ...args)
+        })
+        this.channel.on('test:complete', (...args) => {
+            this.emitter.emit('test:complete', this.id, ...args)
+        })
+
         return { error: undefined }
     }
 

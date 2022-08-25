@@ -17,7 +17,8 @@ class SuiteContext implements Context {
     private hooks: Hook[] = []
 
     constructor(
-        private parentContext: Context
+        private parentContext: Context,
+        private name: string
     ) {}
 
     addTest(test: Test): void {
@@ -56,6 +57,10 @@ class SuiteContext implements Context {
 
             hook.execute()
         }
+    }
+
+    get path(): string[] {
+        return [...this.parentContext.path, this.name]
     }
 
 }

@@ -12,13 +12,24 @@ import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/synthe
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
+import type { WorkerEvents } from './types/WorkerEvents.js'
 
 class Orchestrator {
 
     private readonly workers: Worker[]
 
     constructor(testsFilePaths: Path[]) {
-        this.workers = testsFilePaths.map((testsFilePath) => new Worker(testsFilePath))
+        this.workers = testsFilePaths.map((testsFilePath, index) => new Worker(index, testsFilePath))
+    }
+
+    on<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+        for (const worker of this.workers)
+            worker.on(event, listener)
+    }
+
+    removeListener<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+        for (const worker of this.workers)
+            worker.removeListener(event, listener)
     }
 
     async load(): Promise<ErrorCatcherResponse> {

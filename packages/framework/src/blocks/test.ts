@@ -12,7 +12,7 @@ import type { Test as TestBlock, TestFn } from '@minimouli/types/blocks.js'
 const test: TestBlock = (name: string, fn: TestFn) => {
 
     const context = Tree.currentContext()
-    const newTest = new Test(name, fn)
+    const newTest = new Test(name, context.path, fn)
 
     context.addTest(newTest)
 }

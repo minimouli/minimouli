@@ -5,13 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Channel } from '@minimouli/ipc'
 import { TestStatus } from '@minimouli/types/syntheses.js'
 import { TestExecutor } from '../TestExecutor.js'
+import type { EventDescriptions } from '@minimouli/ipc'
 import type { Unit } from '@minimouli/types'
 import type { TestFn } from '@minimouli/types/blocks.js'
 import type { Hint } from '@minimouli/types/hints.js'
 import type { TestSynthesis } from '@minimouli/types/syntheses.js'
 import type { SuiteContext } from './contexts/SuiteContext.js'
+
+interface IssuedEvents extends EventDescriptions {
+    'test:perform': [string, string[]]
+    'test:complete': [string, string[], TestStatus, Unit.ms]
+}
 
 class Test {
 
@@ -21,13 +28,18 @@ class Test {
 
     constructor(
         public readonly name: string,
+        public readonly path: string[],
         private fn: TestFn
     ) {}
 
     async execute(context: SuiteContext): Promise<void> {
 
         const executor = new TestExecutor(context, this.fn)
+        const channel = Channel.fromCurrentProcess<IssuedEvents, EventDescriptions>()
+
+        channel.emit('test:perform', this.name, this.path)
         const { status, hint, duration } = await executor.execute()
+        channel.emit('test:complete', this.name, this.path, status, duration)
 
         this.status = status
         this.hint = hint

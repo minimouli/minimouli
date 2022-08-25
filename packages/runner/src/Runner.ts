@@ -14,6 +14,7 @@ import type { MoulinetteConfig } from '@minimouli/types/config.js'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
+import type { WorkerEvents } from './types/WorkerEvents.js'
 
 interface ReadConfigSuccessResponse {
     config: MoulinetteConfig
@@ -46,6 +47,22 @@ class Runner {
         private projectPath: Path,
         private moulinettePath: Path
     ) {}
+
+    on<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+
+        if (this.orchestrator === undefined)
+            return
+
+        this.orchestrator.on(event, listener)
+    }
+
+    removeListener<E extends keyof WorkerEvents>(event: E, listener: WorkerEvents[E]): void {
+
+        if (this.orchestrator === undefined)
+            return
+
+        this.orchestrator.removeListener(event, listener)
+    }
 
     async prepare(): Promise<ErrorCatcherResponse> {
 
