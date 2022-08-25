@@ -5,62 +5,59 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type child_process from 'node:child_process'
+import { EventEmitter } from 'node:events'
+import type { Serializable } from 'node:child_process'
 import type { Process } from '@minimouli/process'
 import type { Callable } from '@minimouli/types'
 import type { Message } from './Message.js'
 
-type ChannelProcess = Process | NodeJS.Process
-type ChannelEvents = Record<string, unknown[]>
-type ChannelEventsMap<T extends ChannelEvents> = {
-    [E in keyof T]?: Callable<T[E]>[]
-}
+type SupportedProcess = Process | NodeJS.Process
+type EventDescriptions = Record<string, unknown[]>
+type EventEmitterCallable = (...args: unknown[]) => void
 
-class Channel<T extends ChannelEvents> {
+class Channel<Issued extends EventDescriptions, Received extends EventDescriptions> {
 
-    private process: ChannelProcess
-    private listeners: ChannelEventsMap<T> = {}
+    private process: SupportedProcess
+    private emitter = new EventEmitter()
 
-    private constructor(process: ChannelProcess) {
+    private constructor(process: SupportedProcess) {
         this.process = process
 
-        this.process.on('message', (data: child_process.Serializable) => {
-            this.dispatch(data as Message<ChannelEvents>)
+        this.process.on('message', (data: Serializable) => {
+            this.dispatch(data as Message<Received>)
         })
     }
 
-    static fromCurrentProcess<T extends ChannelEvents>(): Channel<T> {
-        return new Channel<T>(process)
+    static fromCurrentProcess<Issued extends EventDescriptions, Received extends EventDescriptions>(): Channel<Issued, Received> {
+        return new Channel(process)
     }
 
-    static fromSubprocess<T extends ChannelEvents>(subprocess: Process): Channel<T> {
-        return new Channel<T>(subprocess)
+    static fromChildProcess<Issued extends EventDescriptions, Received extends EventDescriptions>(subprocess: Process): Channel<Issued, Received> {
+        return new Channel(subprocess)
     }
 
-    on<E extends keyof T>(event: E, listener: Callable<T[E]>): void {
-        const listeners = this.listeners[event] ?? []
-        this.listeners[event] = [...listeners, listener]
+    protected dispatch(message: Message<Received>): void {
+        const { event, args } = message
+        this.emitter.emit(event.toString(), args)
     }
 
-    emit<E extends keyof T>(event: E, ...args: T[E]): void {
+    on<Event extends keyof Received>(event: Event, listener: Callable<Received[Event]>): void {
+        this.emitter.on(event.toString(), listener as EventEmitterCallable)
+    }
 
-        const message: Message<ChannelEvents> = {
-            event: event.toString(),
+    remove<Event extends keyof Received>(event: Event, listener: Callable<Received[Event]>): void {
+        this.emitter.removeListener(event.toString(), listener as EventEmitterCallable)
+    }
+
+    emit<Event extends keyof Issued>(event: Event, ...args: Issued[Event]): void {
+
+        const message: Message<Issued> = {
+            event,
             args
         }
 
         if (this.process.send)
             this.process.send(message)
-    }
-
-    private dispatch(message: Message<ChannelEvents>): void {
-
-        const { event, args } = message
-        const listeners = this.listeners[event] ?? []
-
-        for (const listener of listeners)
-            // @ts-expect-error Message arguments are typed as unknown[], fix this later if possible
-            listener(...args)
     }
 
     disconnect(): void {
@@ -73,5 +70,5 @@ export {
     Channel
 }
 export type {
-    ChannelEvents
+    EventDescriptions
 }

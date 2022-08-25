@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ChannelEvents } from './Channel.js'
+import type { EventDescriptions } from './Channel.js'
 
-interface Message<T extends ChannelEvents> {
-    event: keyof T
-    args: unknown[]
+/* Event and args properties are unrelated, use it with caution */
+interface Message<Descriptions extends EventDescriptions> {
+    event: keyof Descriptions
+    args: Descriptions[keyof Descriptions]
 }
 
 export type {
