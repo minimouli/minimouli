@@ -20,6 +20,7 @@
     "./packages/ipc",
     "./packages/matchers",
     "./packages/process",
+    "./packages/runner",
     "./packages/scanner",
     "./packages/types"
   ],

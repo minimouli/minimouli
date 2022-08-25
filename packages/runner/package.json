@@ -1,0 +1,27 @@
+{
+  "name": "@minimouli/runner",
+  "version": "2.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/runner",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@minimouli/fs": "^2.0.0",
+    "@minimouli/ipc": "^2.0.0",
+    "@minimouli/process": "^2.0.0",
+    "@minimouli/types": "^2.0.0",
+    "joi": "^17.6.0"
+  }
+}

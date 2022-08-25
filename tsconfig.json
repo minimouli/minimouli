@@ -23,6 +23,9 @@
       "path": "./packages/process"
     },
     {
+      "path": "./packages/runner"
+    },
+    {
       "path": "./packages/scanner"
     },
     {
