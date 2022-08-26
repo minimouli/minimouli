@@ -1984,6 +1984,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@minimouli/console@workspace:packages/console":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/console@workspace:packages/console"
+  dependencies:
+    "@minimouli/fs": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@minimouli/framework@workspace:packages/framework":
   version: 0.0.0-use.local
   resolution: "@minimouli/framework@workspace:packages/framework"
