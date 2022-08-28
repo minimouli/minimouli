@@ -18,6 +18,11 @@
     "./dist"
   ],
   "dependencies": {
-    "@minimouli/fs": "^2.0.0"
+    "@minimouli/fs": "^2.0.0",
+    "ink": "^3.2.0",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17"
   }
 }
