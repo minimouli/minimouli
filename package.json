@@ -20,6 +20,7 @@
     "./packages/io",
     "./packages/ipc",
     "./packages/matchers",
+    "./packages/minimouli",
     "./packages/process",
     "./packages/runner",
     "./packages/scanner",

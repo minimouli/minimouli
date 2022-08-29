@@ -23,6 +23,9 @@
       "path": "./packages/matchers"
     },
     {
+      "path": "./packages/minimouli"
+    },
+    {
       "path": "./packages/process"
     },
     {

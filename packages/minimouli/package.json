@@ -1,0 +1,29 @@
+{
+  "name": "minimouli",
+  "version": "2.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/minimouli",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./dist"
+  ],
+  "bin": "./bin/minimouli.js",
+  "dependencies": {
+    "@minimouli/console": "^2.0.0",
+    "ink": "^3.2.0",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17"
+  }
+}
