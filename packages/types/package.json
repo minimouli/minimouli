@@ -32,5 +32,8 @@
     "./stream.js",
     "./syntheses.d.ts",
     "./syntheses.js"
-  ]
+  ],
+  "dependencies": {
+    "core-js": "^3.25.0"
+  }
 }

@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "@minimouli/io": "^2.0.0",
-    "@minimouli/types": "^2.0.0"
+    "@minimouli/types": "^2.0.0",
+    "core-js": "^3.25.0"
   }
 }
