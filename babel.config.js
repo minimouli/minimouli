@@ -6,6 +6,15 @@
  */
 
 const buildConfig = {
+    plugins: [
+        'babel-plugin-transform-typescript-metadata',
+        [
+            '@babel/plugin-proposal-decorators',
+            {
+                version: 'legacy'
+            }
+        ]
+    ],
     presets: [
         [
             '@babel/preset-env',
@@ -25,6 +34,15 @@ const buildConfig = {
 }
 
 const testConfig = {
+    plugins: [
+        'babel-plugin-transform-typescript-metadata',
+        [
+            '@babel/plugin-proposal-decorators',
+            {
+                version: 'legacy'
+            }
+        ]
+    ],
     presets: [
         [
             '@babel/preset-env',

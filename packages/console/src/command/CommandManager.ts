@@ -10,13 +10,19 @@ import { findCommandAndArguments } from '../helpers/find.helper.js'
 import { matchArguments, matchOptions } from '../helpers/match.helper.js'
 import { ArgumentParser } from '../parser/ArgumentParser.js'
 import type { Command } from './Command.js'
+import type { InjectableManager } from '../injectable/InjectableManager.js'
+import type { Class } from '../types/Class.js'
 
 class CommandManager {
 
     public readonly commands: Command[] = []
 
-    register(command: Command): void {
-        this.commands.push(command)
+    constructor(
+        private injectableManager: InjectableManager
+    ) {}
+
+    register(command: Class<Command>): void {
+        this.commands.push(this.injectableManager.instantiate(command))
     }
 
     findCommand(args: string[]): Command | undefined {

@@ -21,7 +21,8 @@
     "@minimouli/fs": "^2.0.0",
     "core-js": "^3.25.0",
     "ink": "^3.2.0",
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/react": "^17"
