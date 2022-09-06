@@ -6,7 +6,9 @@
  */
 
 import { render } from 'ink'
+import React from 'react'
 import { CommandManager } from './command/CommandManager.js'
+import { InjectableContext } from './contexts/injectable.context.js'
 import { InjectableManager } from './injectable/InjectableManager.js'
 import type { Command } from './command/Command.js'
 import type { Class } from './types/Class.js'
@@ -47,7 +49,11 @@ class Application {
         if (command === undefined)
             return
 
-        render(command.execute())
+        render(
+            <InjectableContext.Provider value={this.injectableManager} >
+                {command.execute()}
+            </InjectableContext.Provider>
+        )
     }
 
 }
