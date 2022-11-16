@@ -7,7 +7,7 @@
 
 import { AfterAllHook } from '../hooks/AfterAllHook.js'
 import { Tree } from '../tree/Tree.js'
-import type { Hook, HookFn } from '@minimouli/types/blocks.js'
+import type { Hook, HookFn } from '@minimouli/types/blocks'
 
 const afterAll: Hook = (fn: HookFn) => {
 

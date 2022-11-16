@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
+import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { NumberMatcher } from '../NumberMatcher.js'
 import {
     assert,

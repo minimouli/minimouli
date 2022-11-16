@@ -7,11 +7,11 @@
 
 /* eslint-disable @typescript-eslint/no-meaningless-void-operator */
 
-import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
-import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints.js'
-import type { Matcher } from '@minimouli/types/matchers.js'
-import type { IPath } from '@minimouli/types/objects.js'
-import type { MatcherOutputOptions } from '@minimouli/types/options.js'
+import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { Matcher } from '@minimouli/types/matchers'
+import type { IPath } from '@minimouli/types/objects'
+import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class UndefinedMatcher implements Matcher<undefined> {
 

@@ -7,8 +7,8 @@
 
 import { Worker } from './Worker.js'
 import type { Path } from '@minimouli/fs'
-import type { MoulinetteConfig } from '@minimouli/types/config.js'
-import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
+import type { MoulinetteConfig } from '@minimouli/types/config'
+import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'

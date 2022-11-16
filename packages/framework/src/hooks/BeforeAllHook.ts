@@ -7,7 +7,7 @@
 
 import { Trigger } from './Hook.js'
 import type { Hook } from './Hook.js'
-import type { HookFn } from '@minimouli/types/blocks.js'
+import type { HookFn } from '@minimouli/types/blocks'
 
 class BeforeAllHook implements Hook {
 

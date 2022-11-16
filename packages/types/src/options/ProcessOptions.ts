@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Descriptor } from '../stream'
+import type { Descriptor } from '../stream/index.js'
 
 interface WaitOptions {
     descriptor: Descriptor.STDOUT | Descriptor.STDERR

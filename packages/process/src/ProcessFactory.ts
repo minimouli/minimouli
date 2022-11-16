@@ -7,7 +7,7 @@
 
 import child_process from 'node:child_process'
 import { Path } from '@minimouli/fs'
-import { Descriptor } from '@minimouli/types/stream.js'
+import { Descriptor } from '@minimouli/types/stream'
 import { Process, TerminateSource } from './Process.js'
 import type stream from 'node:stream'
 import type { Unit } from '@minimouli/types'

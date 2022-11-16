@@ -13,7 +13,7 @@ import { expect } from './blocks/expect.js'
 import { sleep } from './blocks/sleep.js'
 import { suite } from './blocks/suite.js'
 import { test } from './blocks/test.js'
-import type { Expect, Hook, Sleep, Suite, Test } from '@minimouli/types/blocks.js'
+import type { Expect, Hook, Sleep, Suite, Test } from '@minimouli/types/blocks'
 
 /* eslint-disable no-var */
 declare global {

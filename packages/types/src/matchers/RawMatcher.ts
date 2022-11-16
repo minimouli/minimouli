@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { IPath } from '../objects'
-import type { MatcherOutputOptions } from '../options'
+import type { IPath } from '../objects/index.js'
+import type { MatcherOutputOptions } from '../options/index.js'
 
 interface RawMatcher<R> {
 

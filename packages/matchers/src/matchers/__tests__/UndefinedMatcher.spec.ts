@@ -7,8 +7,8 @@
 
 /* eslint-disable unicorn/no-useless-undefined */
 
-import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
-import { UndefinedMatcher } from '../UndefinedMatcher'
+import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import { UndefinedMatcher } from '../UndefinedMatcher.js'
 
 describe('UndefinedMatcher', () => {
 

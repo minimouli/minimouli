@@ -6,13 +6,13 @@
  */
 
 import { performance } from 'node:perf_hooks'
-import { HintStatus, HintType } from '@minimouli/types/hints.js'
-import { TestStatus } from '@minimouli/types/syntheses.js'
+import { HintStatus, HintType } from '@minimouli/types/hints'
+import { TestStatus } from '@minimouli/types/syntheses'
 import { FrameworkError } from './errors/FrameworkError.js'
 import { Trigger } from './hooks/Hook.js'
 import type { Unit } from '@minimouli/types'
-import type { TestFn } from '@minimouli/types/blocks.js'
-import type { Hint, MatcherErrorHint } from '@minimouli/types/hints.js'
+import type { TestFn } from '@minimouli/types/blocks'
+import type { Hint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Context } from './tree/contexts/Context.js'
 
 interface ExecuteTestSuccessResponse {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
+import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { ObjectMatcher } from '../ObjectMatcher.js'
 import { assertToBeFalsy, assertToBeNull, assertToBeTruthy, assertToEqual } from '../../helpers/assert.helper.js'
 

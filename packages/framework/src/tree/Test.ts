@@ -6,13 +6,13 @@
  */
 
 import { Channel } from '@minimouli/ipc'
-import { TestStatus } from '@minimouli/types/syntheses.js'
+import { TestStatus } from '@minimouli/types/syntheses'
 import { TestExecutor } from '../TestExecutor.js'
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Unit } from '@minimouli/types'
-import type { TestFn } from '@minimouli/types/blocks.js'
-import type { Hint } from '@minimouli/types/hints.js'
-import type { TestSynthesis } from '@minimouli/types/syntheses.js'
+import type { TestFn } from '@minimouli/types/blocks'
+import type { Hint } from '@minimouli/types/hints'
+import type { TestSynthesis } from '@minimouli/types/syntheses'
 import type { SuiteContext } from './contexts/SuiteContext.js'
 
 interface IssuedEvents extends EventDescriptions {

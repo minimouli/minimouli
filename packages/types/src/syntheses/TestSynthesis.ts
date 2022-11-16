@@ -6,7 +6,7 @@
  */
 
 import type { ms } from '../Unit.js'
-import type { Hint } from '../hints'
+import type { Hint } from '../hints/index.js'
 
 enum TestStatus {
     SUCCESS = 'Status.SUCCESS',

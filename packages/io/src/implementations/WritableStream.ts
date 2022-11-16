@@ -12,7 +12,7 @@ import type {
     NativeWritable,
     NativeWritableEvents,
     WritableContent
-} from '@minimouli/types/stream.js'
+} from '@minimouli/types/stream'
 
 class WritableStream implements NativeWritable {
 

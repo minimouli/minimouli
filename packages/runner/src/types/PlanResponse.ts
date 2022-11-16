@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesisPlan } from '@minimouli/types/syntheses'
 
 interface PlanSuccessResponse {
     syntheses: SuiteSynthesisPlan[]

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { MatcherShape } from '../matchers'
+import type { MatcherShape } from '../matchers/index.js'
 import type { ms } from '../Unit.js'
 
 type BlockFn = () => void

@@ -15,25 +15,20 @@
   },
   "license": "MIT",
   "files": [
-    "./dist",
-    "./blocks.d.ts",
-    "./blocks.js",
-    "./config.d.ts",
-    "./config.js",
-    "./hints.d.ts",
-    "./hints.js",
-    "./matchers.d.ts",
-    "./matchers.js",
-    "./objects.d.ts",
-    "./objects.js",
-    "./options.d.ts",
-    "./options.js",
-    "./stream.d.ts",
-    "./stream.js",
-    "./syntheses.d.ts",
-    "./syntheses.js"
+    "./dist"
   ],
   "dependencies": {
     "core-js": "^3.25.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./blocks": "./dist/blocks/index.js",
+    "./config": "./dist/config/index.js",
+    "./hints": "./dist/hints/index.js",
+    "./matchers": "./dist/matchers/index.js",
+    "./objects": "./dist/objects/index.js",
+    "./options": "./dist/options/index.js",
+    "./stream": "./dist/stream/index.js",
+    "./syntheses": "./dist/syntheses/index.js"
   }
 }

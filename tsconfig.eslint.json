@@ -4,6 +4,7 @@
     "./packages/types/*.d.ts"
   ],
   "compilerOptions": {
+    "moduleResolution": "nodenext",
     "strictNullChecks": true
   }
 }

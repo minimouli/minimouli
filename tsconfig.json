@@ -1,6 +1,7 @@
 {
   "files": [],
   "compilerOptions": {
+    "moduleResolution": "nodenext",
     "esModuleInterop": true
   },
   "references": [

@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Hint } from '../hints'
-import type { IPath } from '../objects'
-import type { MatcherOutputOptions } from '../options'
+import type { Hint } from '../hints/index.js'
+import type { IPath } from '../objects/index.js'
+import type { MatcherOutputOptions } from '../options/index.js'
 
 interface Matcher<R> {
 

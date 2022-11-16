@@ -8,8 +8,8 @@
 import fs from 'node:fs'
 import { ReadableStream, WritableStream } from '@minimouli/io'
 import { Entry } from './Entry.js'
-import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream.js'
-import type { ReadStreamOptions, StreamOptions } from '@minimouli/types/options.js'
+import type { ReadStreamOptions, StreamOptions } from '@minimouli/types/options'
+import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream'
 
 interface OpenReadableSuccessResponse {
     stream: NativeReadable

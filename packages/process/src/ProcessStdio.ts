@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Descriptor, NativeReadable, NativeWritable } from '@minimouli/types/stream.js'
+import type { Descriptor, NativeReadable, NativeWritable } from '@minimouli/types/stream'
 
 type FileDescriptorInstruction = 'pipe' | 'ignore' | 'inherit'
 

@@ -6,7 +6,7 @@
  */
 
 import stream from 'node:stream'
-import { ReadableMode } from '@minimouli/types/stream.js'
+import { ReadableMode } from '@minimouli/types/stream'
 import { DetachedStreamError } from '../errors/DetachedStreamError.js'
 import { StreamError } from '../errors/StreamError.js'
 import type {
@@ -14,7 +14,7 @@ import type {
     NativeReadableEvents,
     NativeWritable,
     ReadableContent
-} from '@minimouli/types/stream.js'
+} from '@minimouli/types/stream'
 
 class ReadableStream implements NativeReadable {
 

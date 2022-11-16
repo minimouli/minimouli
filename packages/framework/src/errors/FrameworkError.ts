@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Hint } from '@minimouli/types/hints.js'
+import type { Hint } from '@minimouli/types/hints'
 
 class FrameworkError extends Error {
 

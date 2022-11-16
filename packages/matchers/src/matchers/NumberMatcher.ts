@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
+import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assert, assertToBe, assertToBeFalsy, assertToBeNaN, assertToBeTruthy } from '../helpers/assert.helper.js'
-import type { CompHint, EqualHint, MatcherErrorHint } from '@minimouli/types/hints.js'
-import type { Matcher } from '@minimouli/types/matchers.js'
-import type { IPath } from '@minimouli/types/objects.js'
-import type { MatcherOutputOptions } from '@minimouli/types/options.js'
+import type { CompHint, EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { Matcher } from '@minimouli/types/matchers'
+import type { IPath } from '@minimouli/types/objects'
+import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class NumberMatcher implements Matcher<number> {
 

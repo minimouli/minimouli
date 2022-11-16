@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints.js'
+import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../helpers/assert.helper.js'
-import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints.js'
-import type { Matcher } from '@minimouli/types/matchers.js'
-import type { IPath } from '@minimouli/types/objects.js'
-import type { MatcherOutputOptions } from '@minimouli/types/options.js'
+import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { Matcher } from '@minimouli/types/matchers'
+import type { IPath } from '@minimouli/types/objects'
+import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class BooleanMatcher implements Matcher<boolean> {
 

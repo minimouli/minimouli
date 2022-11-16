@@ -6,7 +6,7 @@
  */
 
 import { ProcessFactory } from '@minimouli/process'
-import { Descriptor } from '@minimouli/types/stream.js'
+import { Descriptor } from '@minimouli/types/stream'
 import { EpitechGithubDecoder } from './decoders/EpitechGithubDecoder.js'
 import { EpitechSelfHostDecoder } from './decoders/EpitechSelfHostDecoder.js'
 import type { Path } from '@minimouli/fs'
@@ -108,4 +108,7 @@ class Scanner {
 
 export {
     Scanner
+}
+export type {
+    ScanResponse
 }

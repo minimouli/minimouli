@@ -6,11 +6,11 @@
  */
 
 import { ReadableStream, WritableStream } from '@minimouli/io'
-import { Descriptor } from '@minimouli/types/stream.js'
+import { Descriptor } from '@minimouli/types/stream'
 import type child_process from 'node:child_process'
 import type { Callable } from '@minimouli/types'
-import type { WaitOptions } from '@minimouli/types/options.js'
-import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream.js'
+import type { WaitOptions } from '@minimouli/types/options'
+import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream'
 
 interface ProcessEvents {
     close: Callable<[number | null, NodeJS.Signals | null]>

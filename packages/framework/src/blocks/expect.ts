@@ -12,12 +12,12 @@ import {
     StringMatcher,
     UndefinedMatcher
 } from '@minimouli/matchers'
-import { HintStatus, HintType } from '@minimouli/types/hints.js'
+import { HintStatus, HintType } from '@minimouli/types/hints'
 import { AssertionError } from '../errors/AssertionError.js'
 import { MatcherError } from '../errors/MatcherError.js'
-import type { Expect } from '@minimouli/types/blocks.js'
-import type { Hint } from '@minimouli/types/hints.js'
-import type { Matcher } from '@minimouli/types/matchers.js'
+import type { Expect } from '@minimouli/types/blocks'
+import type { Hint } from '@minimouli/types/hints'
+import type { Matcher } from '@minimouli/types/matchers'
 
 const getMatcher = <R>(received: R): Matcher<R> => {
     switch (typeof received) {

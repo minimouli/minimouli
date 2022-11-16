@@ -8,7 +8,7 @@
 import { Tree } from '../tree/Tree.js'
 import { Suite } from '../tree/Suite.js'
 import { SuiteContext } from '../tree/contexts/SuiteContext.js'
-import type { Suite as SuiteBlock, SuiteFn } from '@minimouli/types/blocks.js'
+import type { Suite as SuiteBlock, SuiteFn } from '@minimouli/types/blocks'
 
 const suite: SuiteBlock = (name: string, fn: SuiteFn) => {
 

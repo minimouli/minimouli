@@ -6,7 +6,7 @@
  */
 
 import { Trigger } from '../hooks/Hook.js'
-import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses.js'
+import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses'
 import type { Context } from './contexts/Context.js'
 
 class Suite {

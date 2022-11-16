@@ -6,7 +6,7 @@
  */
 
 import type { Unit } from '@minimouli/types'
-import type { Sleep } from '@minimouli/types/blocks.js'
+import type { Sleep } from '@minimouli/types/blocks'
 
 const sleep: Sleep = (duration: Unit.ms) => new Promise((resolve) => setTimeout(resolve, duration))
 
