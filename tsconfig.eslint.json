@@ -1,0 +1,9 @@
+{
+  "include": [
+    "./packages/**/__tests__",
+    "./packages/types/*.d.ts"
+  ],
+  "compilerOptions": {
+    "strictNullChecks": true
+  }
+}
