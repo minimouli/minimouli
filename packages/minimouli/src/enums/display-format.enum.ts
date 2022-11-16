@@ -6,9 +6,10 @@
  */
 
 enum DisplayFormat {
-    Text = 'text',
+    MinifiedJson = 'minified-json',
+    Object = 'object',
     PrettyJson = 'json',
-    MinifiedJson = 'minified-json'
+    Text = 'text'
 }
 
 export {

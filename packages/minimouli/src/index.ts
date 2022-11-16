@@ -9,6 +9,7 @@ import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Application } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
+import { ScanCommand } from './commands/scan.command.js'
 import { VersionCommand } from './commands/version.command.js'
 import { ConfigService } from './services/config.service.js'
 import { ScanService } from './services/scan.service.js'
@@ -26,6 +27,7 @@ const run = async (args: string[]): Promise<void> => {
     ])
 
     app.addCommands([
+        ScanCommand,
         VersionCommand
     ])
 
