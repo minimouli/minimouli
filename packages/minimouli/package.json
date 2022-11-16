@@ -26,6 +26,7 @@
     "@minimouli/scanner": "^2.0.0",
     "core-js": "^3.25.0",
     "deepmerge": "^4.2.2",
+    "error-stack-parser": "^2.1.4",
     "ink": "^3.2.0",
     "joi": "^17.6.0",
     "react": "^17.0.2"
