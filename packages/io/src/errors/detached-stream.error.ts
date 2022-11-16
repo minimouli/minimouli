@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { StreamError } from './StreamError.js'
+import { StreamError } from './stream-error.js'
 
 class DetachedStreamError extends StreamError {
 

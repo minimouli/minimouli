@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './errors/DetachedStreamError.js'
-export * from './errors/StreamError.js'
-export * from './implementations/ReadableStream.js'
-export * from './implementations/WritableStream.js'
+export * from './errors/detached-stream.error.js'
+export * from './errors/stream-error.js'
+export * from './streams/readable.stream.js'
+export * from './streams/writable.stream.js'

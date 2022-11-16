@@ -7,8 +7,8 @@
 
 import stream from 'node:stream'
 import { ReadableMode } from '@minimouli/types/stream'
-import { DetachedStreamError } from '../errors/DetachedStreamError.js'
-import { StreamError } from '../errors/StreamError.js'
+import { DetachedStreamError } from '../errors/detached-stream.error.js'
+import { StreamError } from '../errors/stream-error.js'
 import type {
     NativeReadable,
     NativeReadableEvents,

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { DetachedStreamError } from '../errors/DetachedStreamError.js'
-import { StreamError } from '../errors/StreamError.js'
+import { DetachedStreamError } from '../errors/detached-stream.error.js'
+import { StreamError } from '../errors/stream-error.js'
 import type stream from 'node:stream'
 import type {
     NativeWritable,
