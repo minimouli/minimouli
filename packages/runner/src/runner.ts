@@ -7,37 +7,34 @@
 
 import fs from 'node:fs'
 import { File } from '@minimouli/fs'
-import { Orchestrator } from './Orchestrator.js'
+import { Orchestrator } from './orchestrator.js'
 import { configSchema } from './schemas/config.schema.js'
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteConfig } from '@minimouli/types/config'
-import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
-import type { PlanResponse } from './types/PlanResponse.js'
-import type { RunResponse } from './types/RunResponse.js'
-import type { WorkerEvents } from './types/WorkerEvents.js'
+import type { ErrorCatcherResponse } from './types/error-catcher-response.type.js'
+import type { PlanResponse } from './types/plan-response.type.js'
+import type { RunResponse } from './types/run-response.type.js'
+import type { WorkerEvents } from './types/worker-events.type.js'
 
-interface ReadConfigSuccessResponse {
-    config: MoulinetteConfig
-    error: undefined
-}
+type ReadConfigResponse =
+    | {
+        config: MoulinetteConfig
+        error?: undefined
+    }
+    | {
+        error: string
+        config?: undefined
+    }
 
-interface ReadConfigFailureResponse {
-    config: undefined
-    error: string
-}
-
-interface CheckBinariesSuccessResponse {
-    succeed: true
-    error: undefined
-}
-
-interface CheckBinariesFailureResponse {
-    succeed: false
-    error: string
-}
-
-type ReadConfigResponse = ReadConfigSuccessResponse | ReadConfigFailureResponse
-type CheckBinariesResponse = CheckBinariesSuccessResponse | CheckBinariesFailureResponse
+type CheckBinariesResponse =
+    | {
+        succeed: true
+        error?: undefined
+    }
+    | {
+        succeed: false
+        error: string
+    }
 
 class Runner {
 
@@ -121,7 +118,7 @@ class Runner {
         const { contents, error: error1 } = await configFile.getContents()
 
         if (error1 !== undefined || contents === null)
-            return { error: 'The moulinette configuration file cannot be read', config: undefined }
+            return { error: 'The moulinette configuration file cannot be read' }
 
         try {
 
@@ -129,12 +126,12 @@ class Runner {
             const { error: error2 } = configSchema.validate(config)
 
             if (error2 !== undefined)
-                return { error: 'The moulinette configuration file is not in an accepted format (validation)', config: undefined }
+                return { error: 'The moulinette configuration file is not in an accepted format (validation)' }
 
-            return { config, error: undefined }
+            return { config }
 
         } catch {
-            return { error: 'The moulinette configuration file is not in an accepted format (non-json)', config: undefined }
+            return { error: 'The moulinette configuration file is not in an accepted format (non-json)' }
         }
     }
 
@@ -156,7 +153,7 @@ class Runner {
             }
         }
 
-        return { succeed: true, error: undefined }
+        return { succeed: true }
     }
 
 }

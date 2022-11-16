@@ -14,10 +14,10 @@ import type { Process } from '@minimouli/process'
 import type { Unit } from '@minimouli/types'
 import type { MoulinetteConfig } from '@minimouli/types/config'
 import type { SuiteSynthesis, SuitePlanSynthesis, TestStatus } from '@minimouli/types/syntheses'
-import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
-import type { PlanResponse } from './types/PlanResponse.js'
-import type { RunResponse } from './types/RunResponse.js'
-import type { WorkerEvents } from './types/WorkerEvents.js'
+import type { ErrorCatcherResponse } from './types/error-catcher-response.type.js'
+import type { PlanResponse } from './types/plan-response.type.js'
+import type { RunResponse } from './types/run-response.type.js'
+import type { WorkerEvents } from './types/worker-events.type.js'
 
 interface IssuedEvents extends EventDescriptions {
     init: [MoulinetteConfig]
@@ -101,7 +101,7 @@ class Worker {
     async plan(): Promise<PlanResponse> {
 
         if (this.channel === undefined)
-            return { error: 'The worker must be prepared before', syntheses: undefined }
+            return { error: 'The worker must be prepared before' }
 
         const channel = this.channel
 
@@ -110,7 +110,7 @@ class Worker {
             const handleResult = (syntheses: SuitePlanSynthesis[]) => {
                 channel.remove('plan:result', handleResult)
 
-                resolve({ syntheses, error: undefined })
+                resolve({ syntheses })
             }
 
             channel.on('plan:result', handleResult)
@@ -121,7 +121,7 @@ class Worker {
     async run(): Promise<RunResponse> {
 
         if (this.channel === undefined)
-            return { error: 'The worker must be prepared before', syntheses: undefined }
+            return { error: 'The worker must be prepared before' }
 
         const channel = this.channel
 
@@ -129,7 +129,7 @@ class Worker {
 
             const handleResult = (syntheses: SuiteSynthesis[]) => {
                 channel.remove('run:result', handleResult)
-                resolve({ syntheses, error: undefined })
+                resolve({ syntheses })
             }
 
             channel.on('run:result', handleResult)

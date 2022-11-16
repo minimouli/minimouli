@@ -7,17 +7,15 @@
 
 import type { SuiteSynthesis } from '@minimouli/types/syntheses'
 
-interface RunSuccessResponse {
-    syntheses: SuiteSynthesis[]
-    error: undefined
-}
-
-interface RunFailureResponse {
-    syntheses: undefined
-    error: string
-}
-
-type RunResponse = RunSuccessResponse | RunFailureResponse
+type RunResponse =
+    | {
+        syntheses: SuiteSynthesis[]
+        error?: undefined
+    }
+    | {
+        error: string
+        syntheses?: undefined
+    }
 
 export type {
     RunResponse

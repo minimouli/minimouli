@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Worker } from './Worker.js'
+import { Worker } from './worker.js'
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteConfig } from '@minimouli/types/config'
 import type { SuiteSynthesis, SuitePlanSynthesis } from '@minimouli/types/syntheses'
-import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
-import type { PlanResponse } from './types/PlanResponse.js'
-import type { RunResponse } from './types/RunResponse.js'
-import type { WorkerEvents } from './types/WorkerEvents.js'
+import type { ErrorCatcherResponse } from './types/error-catcher-response.type.js'
+import type { PlanResponse } from './types/plan-response.type.js'
+import type { RunResponse } from './types/run-response.type.js'
+import type { WorkerEvents } from './types/worker-events.type.js'
 
 class Orchestrator {
 
@@ -62,12 +62,12 @@ class Orchestrator {
         for (const result of results) {
 
             if (result.error !== undefined)
-                return { error: 'At least one worker is impossible to use', syntheses: undefined }
+                return { error: 'At least one worker is impossible to use' }
 
             syntheses = [...syntheses, ...result.syntheses]
         }
 
-        return { syntheses, error: undefined }
+        return { syntheses }
     }
 
     async run(): Promise<RunResponse> {
@@ -80,12 +80,12 @@ class Orchestrator {
             const { syntheses: currentSyntheses, error } = await worker.run()
 
             if (error !== undefined)
-                return { error: 'At least one worker is impossible to use', syntheses: undefined }
+                return { error: 'At least one worker is impossible to use' }
 
             syntheses = [...syntheses, ...currentSyntheses]
         }
 
-        return { syntheses, error: undefined }
+        return { syntheses }
     }
 
     terminate(): void {

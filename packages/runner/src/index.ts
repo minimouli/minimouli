@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Runner.js'
-export * from './types/WorkerEvents.js'
+export * from './runner.js'
+export * from './types/worker-events.type.js'

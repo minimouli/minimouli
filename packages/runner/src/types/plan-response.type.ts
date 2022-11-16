@@ -7,17 +7,15 @@
 
 import type { SuitePlanSynthesis } from '@minimouli/types/syntheses'
 
-interface PlanSuccessResponse {
-    syntheses: SuitePlanSynthesis[]
-    error: undefined
-}
-
-interface PlanFailureResponse {
-    syntheses: undefined
-    error: string
-}
-
-type PlanResponse = PlanSuccessResponse | PlanFailureResponse
+type PlanResponse =
+    | {
+        syntheses: SuitePlanSynthesis[]
+        error?: undefined
+    }
+    | {
+        error: string
+        syntheses?: undefined
+    }
 
 export type {
     PlanResponse
