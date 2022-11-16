@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { EventDescriptions } from './Channel.js'
+import type { EventDescriptions } from '../channel.js'
 
 /* Event and args properties are unrelated, use it with caution */
 interface Message<Descriptions extends EventDescriptions> {

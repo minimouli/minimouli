@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Channel.js'
-export * from './Message.js'
+export * from './channel.js'
+export * from './types/message.type.js'

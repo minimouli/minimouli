@@ -9,11 +9,11 @@ import { EventEmitter } from 'node:events'
 import type { Serializable } from 'node:child_process'
 import type { Process } from '@minimouli/process'
 import type { Callable } from '@minimouli/types'
-import type { Message } from './Message.js'
+import type { Message } from './types/message.type.js'
 
 type SupportedProcess = Process | NodeJS.Process
 type EventDescriptions = Record<string, unknown[]>
-type EventEmitterCallable = (...args: unknown[]) => void
+type EventEmitterCallable = Callable<[...args: unknown[]]>
 
 class Channel<Issued extends EventDescriptions, Received extends EventDescriptions> {
 
