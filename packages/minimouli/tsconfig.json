@@ -3,6 +3,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
+
+    "experimentalDecorators": true,
     "jsx": "react"
   },
   "exclude": [
@@ -12,6 +14,9 @@
   "references": [
     {
       "path": "../console"
+    },
+    {
+      "path": "../fs"
     }
   ]
 }

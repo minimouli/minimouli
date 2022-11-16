@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "minimouli",
+    "cli": "minimouli",
+    "version": [2, 0, 0],
+    "links": {
+      "website": "https://minimouli.com",
+      "repository": {
+        "organization": "https://github.com/minimouli",
+        "project": "https://github.com/minimouli/minimouli"
+      },
+      "issues": "https://github.com/minimouli/minimouli/issues"
+    }
+  }
+}
