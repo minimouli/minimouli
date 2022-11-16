@@ -9,6 +9,7 @@ import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Application } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
+import { VersionCommand } from './commands/version.command.js'
 import { ConfigService } from './services/config.service.js'
 
 const run = async (args: string[]): Promise<void> => {
@@ -20,6 +21,10 @@ const run = async (args: string[]): Promise<void> => {
 
     await app.addInjectables([
         ConfigService.setup(configPath)
+    ])
+
+    app.addCommands([
+        VersionCommand
     ])
 
     app.exec(args)
