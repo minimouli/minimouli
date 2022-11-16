@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './callable.js'
-export * as Unit from './unit.js'
-export * from './version.js'
+type Version = [number, number, number]
+
+export type {
+    Version
+}
