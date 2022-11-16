@@ -27,6 +27,7 @@
     "./packages/process",
     "./packages/runner",
     "./packages/scanner",
+    "./packages/sdk",
     "./packages/types"
   ],
   "devDependencies": {

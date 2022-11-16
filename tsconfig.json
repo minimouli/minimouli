@@ -36,6 +36,9 @@
       "path": "./packages/scanner"
     },
     {
+      "path": "./packages/sdk"
+    },
+    {
       "path": "./packages/types"
     }
   ]

@@ -2612,6 +2612,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@minimouli/sdk@workspace:packages/sdk":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/sdk@workspace:packages/sdk"
+  dependencies:
+    "@minimouli/types": ^2.0.0
+    core-js: ^3.25.0
+  languageName: unknown
+  linkType: soft
+
 "@minimouli/types@^2.0.0, @minimouli/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@minimouli/types@workspace:packages/types"
