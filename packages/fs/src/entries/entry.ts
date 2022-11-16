@@ -6,7 +6,7 @@
  */
 
 import fs from 'node:fs'
-import type { Path } from '../identifiers/Path.js'
+import type { Path } from '../identifiers/path.identifier.js'
 
 interface AccessSuccessResponse {
     succeed: true

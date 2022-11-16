@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Path } from '../Path.js'
+import { Path } from '../path.identifier.js'
 
 describe('Path', () => {
 

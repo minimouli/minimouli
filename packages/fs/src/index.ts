@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './entries/Directory.js'
-export * from './entries/Entry.js'
-export * from './entries/File.js'
-export * from './identifiers/Path.js'
+export * from './entries/directory.entry.js'
+export * from './entries/entry.js'
+export * from './entries/file.entry.js'
+export * from './identifiers/path.identifier.js'

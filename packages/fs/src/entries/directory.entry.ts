@@ -6,20 +6,18 @@
  */
 
 import fs from 'node:fs'
-import { Entry } from './Entry.js'
+import { Entry } from './entry.js'
 import type { MakeDirectoryOptions } from 'node:fs'
 
-interface MkdirSuccessResponse {
-    succeed: true
-    error: undefined
-}
-
-interface MkdirFailureResponse {
-    succeed: false
-    error: string
-}
-
-type MkdirResponse = MkdirSuccessResponse | MkdirFailureResponse
+type MkdirResponse =
+    | {
+        succeed: true
+        error?: undefined
+    }
+    | {
+        succeed: false
+        error: string
+    }
 
 class Directory extends Entry {
 
@@ -32,7 +30,7 @@ class Directory extends Entry {
                 if (error)
                     resolve({ error: error.message, succeed: false })
                 else
-                    resolve({ succeed: true, error: undefined })
+                    resolve({ succeed: true })
             })
         })
     }

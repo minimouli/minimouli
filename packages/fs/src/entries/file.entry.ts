@@ -7,27 +7,29 @@
 
 import fs from 'node:fs'
 import { ReadableStream, WritableStream } from '@minimouli/io'
-import { Entry } from './Entry.js'
+import { Entry } from './entry.js'
 import type { ReadStreamOptions, StreamOptions } from '@minimouli/types/options'
 import type { NativeReadable, NativeWritable, ReadableContent } from '@minimouli/types/stream'
 
-interface OpenReadableSuccessResponse {
-    stream: NativeReadable
-    error: undefined
-}
+type OpenReadableResponse =
+    | {
+        stream: NativeReadable
+        error?: undefined
+    }
+    | {
+        error: string
+        stream?: undefined
+    }
 
-interface OpenWritableSuccessResponse {
-    stream: NativeWritable
-    error: undefined
-}
-
-interface OpenFailureResponse {
-    stream: undefined
-    error: string
-}
-
-type OpenReadableResponse = OpenReadableSuccessResponse | OpenFailureResponse
-type OpenWritableResponse = OpenWritableSuccessResponse | OpenFailureResponse
+type OpenWritableResponse =
+    | {
+        stream: NativeWritable
+        error?: undefined
+    }
+    | {
+        error: string
+        stream?: undefined
+    }
 
 class File extends Entry {
 
@@ -38,13 +40,11 @@ class File extends Entry {
             const stream = fs.createReadStream(this.path.toString(), options)
 
             stream.on('error', () => resolve({
-                error: 'Cannot open a readable stream',
-                stream: undefined
+                error: 'Cannot open a readable stream'
             }))
 
             stream.on('ready', () => resolve({
-                stream: new ReadableStream(stream),
-                error: undefined
+                stream: new ReadableStream(stream)
             }))
         })
     }
@@ -56,13 +56,11 @@ class File extends Entry {
             const stream = fs.createWriteStream(this.path.toString(), options)
 
             stream.on('error', () => resolve({
-                error: 'Cannot open a writable stream',
-                stream: undefined
+                error: 'Cannot open a writable stream'
             }))
 
             stream.on('ready', () => resolve({
-                stream: new WritableStream(stream),
-                error: undefined
+                stream: new WritableStream(stream)
             }))
         })
     }
