@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HintBase, HintCategory, HintType, ObjectType } from './Hint.js'
+import type { HintBase, HintCategory, HintType, ObjectType } from './hint.js'
 
 interface StringDiffHint extends HintBase {
     type: HintType.STRING_DIFF

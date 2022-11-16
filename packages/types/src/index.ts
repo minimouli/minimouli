@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Callable.js'
-export * as Unit from './Unit.js'
+export * from './callable.js'
+export * as Unit from './unit.js'

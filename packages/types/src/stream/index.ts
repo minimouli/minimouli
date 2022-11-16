@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Descriptor.js'
-export * from './Duplex.js'
-export * from './NativeReadable.js'
-export * from './NativeWritable.js'
-export * from './Readable.js'
-export * from './Stream.js'
-export * from './Writable.js'
+export * from './descriptor.js'
+export * from './duplex.stream.js'
+export * from './navive-readable.stream.js'
+export * from './native-readable.stream.js'
+export * from './readable.stream.js'
+export * from './stream.js'
+export * from './writable.stream.js'

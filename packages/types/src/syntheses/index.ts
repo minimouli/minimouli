@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './ProjectSynthesis.js'
-export * from './RunSynthesis.js'
-export * from './SuiteSynthesis.js'
-export * from './SuiteSynthesisPlan.js'
-export * from './TestSynthesis.js'
+export * from './project.synthesis.js'
+export * from './run.synthesis.js'
+export * from './suite.synthesis.js'
+export * from './suite-plan.synthesis.js'
+export * from './test.synthesis.js'

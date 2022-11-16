@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ProjectSynthesis } from './ProjectSynthesis.js'
-import type { SuiteSynthesis } from './SuiteSynthesis.js'
+import type { ProjectSynthesis } from './project.synthesis.js'
+import type { SuiteSynthesis } from './suite.synthesis.js'
 
 interface RunSynthesis {
     project: ProjectSynthesis

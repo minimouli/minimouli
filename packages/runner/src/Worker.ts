@@ -13,7 +13,7 @@ import type { EventDescriptions } from '@minimouli/ipc'
 import type { Process } from '@minimouli/process'
 import type { Unit } from '@minimouli/types'
 import type { MoulinetteConfig } from '@minimouli/types/config'
-import type { SuiteSynthesis, SuiteSynthesisPlan, TestStatus } from '@minimouli/types/syntheses'
+import type { SuiteSynthesis, SuitePlanSynthesis, TestStatus } from '@minimouli/types/syntheses'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
@@ -27,7 +27,7 @@ interface IssuedEvents extends EventDescriptions {
 
 interface ReceivedEvents extends EventDescriptions {
     'init:success': []
-    'plan:result': [SuiteSynthesisPlan[]]
+    'plan:result': [SuitePlanSynthesis[]]
     'run:result': [SuiteSynthesis[]]
     'test:perform': [string, string[]]
     'test:complete': [string, string[], TestStatus, Unit.ms]
@@ -107,7 +107,7 @@ class Worker {
 
         return new Promise((resolve) => {
 
-            const handleResult = (syntheses: SuiteSynthesisPlan[]) => {
+            const handleResult = (syntheses: SuitePlanSynthesis[]) => {
                 channel.remove('plan:result', handleResult)
 
                 resolve({ syntheses, error: undefined })

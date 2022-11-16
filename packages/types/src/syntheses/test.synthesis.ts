@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ms } from '../Unit.js'
+import type { ms } from '../unit.js'
 import type { Hint } from '../hints/index.js'
 
 enum TestStatus {

@@ -5,16 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { RawMatcher } from './RawMatcher.js'
+import type { TestSynthesis } from './test.synthesis.js'
 
-interface AndNot<T> {
-    not: T
+interface SuiteSynthesis {
+    name: string
+    tests: TestSynthesis[]
+    suites: SuiteSynthesis[]
 }
 
-type MatcherShape<R> =
-    RawMatcher<R>
-    & AndNot<RawMatcher<R>>
-
 export type {
-    MatcherShape
+    SuiteSynthesis
 }

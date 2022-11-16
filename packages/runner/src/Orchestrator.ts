@@ -8,7 +8,7 @@
 import { Worker } from './Worker.js'
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteConfig } from '@minimouli/types/config'
-import type { SuiteSynthesis, SuiteSynthesisPlan } from '@minimouli/types/syntheses'
+import type { SuiteSynthesis, SuitePlanSynthesis } from '@minimouli/types/syntheses'
 import type { ErrorCatcherResponse } from './types/ErrorCatcherResponse.js'
 import type { PlanResponse } from './types/PlanResponse.js'
 import type { RunResponse } from './types/RunResponse.js'
@@ -56,7 +56,7 @@ class Orchestrator {
 
     async plan(): Promise<PlanResponse> {
 
-        let syntheses: SuiteSynthesisPlan[] = []
+        let syntheses: SuitePlanSynthesis[] = []
         const results = await Promise.all(this.workers.map((worker) => worker.plan()))
 
         for (const result of results) {

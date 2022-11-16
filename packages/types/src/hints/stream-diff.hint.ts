@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HintBase, HintCategory, HintType } from './Hint.js'
+import type { HintBase, HintCategory, HintType } from './hint.js'
 
 interface StreamDiffHint extends HintBase {
     type: HintType.STREAM_DIFF

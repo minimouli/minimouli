@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { IPath } from './IPath.js'
+import type { PathInterface } from './path.interface.js'
 
-interface IExecutable {
+interface ExecutableInterface {
 
     get exitCode(): number | null
 
-    get savedStdoutPath(): IPath
-    get savedStderrPath(): IPath
+    get savedStdoutPath(): PathInterface
+    get savedStderrPath(): PathInterface
 
 }
 
 export type {
-    IExecutable
+    ExecutableInterface
 }

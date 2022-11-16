@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HintBase, HintCategory, HintType } from './Hint.js'
-import type { ms } from '../Unit.js'
+import type { HintBase, HintCategory, HintType } from './hint.js'
+import type { ms } from '../unit.js'
 
 interface TimeoutHint extends HintBase {
     type: HintType.TIMEOUT

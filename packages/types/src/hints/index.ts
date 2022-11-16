@@ -5,22 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CompHint } from './CompHint.js'
-import type { EqualHint } from './EqualHint.js'
-import type { MatcherErrorHint } from './MatcherErrorHint.js'
-import type { StreamDiffHint } from './StreamDiffHint.js'
-import type { StringDiffHint } from './StringDiffHint.js'
-import type { TimeoutHint } from './TimeoutHint.js'
+import type { CompHint } from './comp.hint.js'
+import type { EqualHint } from './equal.hint.js'
+import type { MatcherErrorHint } from './matcher-error.hint.js'
+import type { StreamDiffHint } from './stream-diff.hint.js'
+import type { StringDiffHint } from './string-diff.hint.js'
+import type { TimeoutHint } from './timeout.hint.js'
 
-type Hint = CompHint | EqualHint | MatcherErrorHint | StreamDiffHint | StringDiffHint | TimeoutHint
+type Hint =
+    | CompHint
+    | EqualHint
+    | MatcherErrorHint
+    | StreamDiffHint
+    | StringDiffHint
+    | TimeoutHint
 
-export * from './CompHint.js'
-export * from './EqualHint.js'
-export * from './Hint.js'
-export * from './MatcherErrorHint.js'
-export * from './StreamDiffHint.js'
-export * from './StringDiffHint.js'
-export * from './TimeoutHint.js'
+export * from './comp.hint.js'
+export * from './equal.hint.js'
+export * from './hint.js'
+export * from './matcher-error.hint.js'
+export * from './stream-diff.hint.js'
+export * from './string-diff.hint.js'
+export * from './timeout.hint.js'
 export type {
     Hint
 }

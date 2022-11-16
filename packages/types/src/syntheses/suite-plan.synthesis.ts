@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { TestSynthesis } from './TestSynthesis.js'
-
-interface SuiteSynthesis {
+interface SuitePlanSynthesis {
     name: string
-    tests: TestSynthesis[]
-    suites: SuiteSynthesis[]
+    tests: string[]
+    suites: SuitePlanSynthesis[]
 }
 
 export type {
-    SuiteSynthesis
+    SuitePlanSynthesis
 }

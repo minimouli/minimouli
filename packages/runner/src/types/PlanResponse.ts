@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { SuiteSynthesisPlan } from '@minimouli/types/syntheses'
+import type { SuitePlanSynthesis } from '@minimouli/types/syntheses'
 
 interface PlanSuccessResponse {
-    syntheses: SuiteSynthesisPlan[]
+    syntheses: SuitePlanSynthesis[]
     error: undefined
 }
 

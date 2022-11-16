@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Readable } from './Readable.js'
-import type { Writable } from './Writable.js'
+import type { Readable } from './readable.stream.js'
+import type { Writable } from './writable.stream.js'
 
 interface Duplex extends Readable, Writable {}
 

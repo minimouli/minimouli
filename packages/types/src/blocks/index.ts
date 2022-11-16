@@ -6,7 +6,7 @@
  */
 
 import type { MatcherShape } from '../matchers/index.js'
-import type { ms } from '../Unit.js'
+import type { ms } from '../unit.js'
 
 type BlockFn = () => void
 type ConcurrentBlockFn = () => Promise<void>

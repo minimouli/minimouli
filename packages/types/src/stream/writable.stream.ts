@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Stream, WritableContent } from './Stream.js'
+import type { Stream, WritableContent } from './stream.js'
 
 interface Writable extends Stream {
 

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-interface IPath {
+interface PathInterface {
 
     toString(): string
 
 }
 
 export type {
-    IPath
+    PathInterface
 }

@@ -9,7 +9,7 @@ import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBeFalsy, assertToBeNull, assertToBeTruthy, assertToEqual } from '../helpers/assert.helper.js'
 import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
-import type { IPath } from '@minimouli/types/objects'
+import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class ObjectMatcher implements Matcher<object | null> {
@@ -286,7 +286,7 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toOutput(received: object | null, expected: string[] | IPath, options: Partial<MatcherOutputOptions>): Promise<MatcherErrorHint> {
+    toOutput(received: object | null, expected: string[] | PathInterface, options: Partial<MatcherOutputOptions>): Promise<MatcherErrorHint> {
         void expected
         void options
 

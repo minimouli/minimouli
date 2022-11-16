@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Stream, ReadableContent } from './Stream.js'
+import type { Stream, ReadableContent } from './stream.js'
 
 enum ReadableMode {
     NULL = 0,

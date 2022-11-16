@@ -6,10 +6,10 @@
  */
 
 import type stream from 'node:stream'
-import type { NativeWritable } from './NativeWritable.js'
-import type { Readable } from './Readable.js'
-import type { ReadableContent } from './Stream.js'
-import type { Callable } from '../Callable.js'
+import type { NativeWritable } from './native-readable.stream.js'
+import type { Readable } from './readable.stream.js'
+import type { ReadableContent } from './stream.js'
+import type { Callable } from '../callable.js'
 
 interface NativeReadableEvents {
     close: Callable

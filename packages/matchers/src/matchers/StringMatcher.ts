@@ -9,7 +9,7 @@ import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../helpers/assert.helper.js'
 import type { EqualHint, MatcherErrorHint, StringDiffHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
-import type { IPath } from '@minimouli/types/objects'
+import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class StringMatcher implements Matcher<string> {
@@ -259,7 +259,7 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toOutput(received: string, expected: string[] | IPath, options: Partial<MatcherOutputOptions>): Promise<MatcherErrorHint> {
+    toOutput(received: string, expected: string[] | PathInterface, options: Partial<MatcherOutputOptions>): Promise<MatcherErrorHint> {
         void expected
         void options
 

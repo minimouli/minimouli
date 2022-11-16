@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HintBase, HintStatus, HintType, ObjectType } from './Hint.js'
+import type { HintBase, HintStatus, HintType, ObjectType } from './hint.js'
 
 interface MatcherErrorHint extends HintBase {
     type: HintType.MATCHER_ERROR

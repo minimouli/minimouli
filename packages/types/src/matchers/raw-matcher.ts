@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { IPath } from '../objects/index.js'
+import type { PathInterface } from '../interfaces/index.js'
 import type { MatcherOutputOptions } from '../options/index.js'
 
 interface RawMatcher<R> {
@@ -34,7 +34,7 @@ interface RawMatcher<R> {
 
     toExitWith(expected: number): void
 
-    toOutput(expected: string[] | IPath, options?: Partial<MatcherOutputOptions>): Promise<void>
+    toOutput(expected: string[] | PathInterface, options?: Partial<MatcherOutputOptions>): Promise<void>
 
 }
 

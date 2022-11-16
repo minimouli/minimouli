@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HintBase, HintType, ObjectType } from './Hint.js'
+import type { HintBase, HintType, ObjectType } from './hint.js'
 
 interface EqualHint extends HintBase {
     type: HintType.EQUAL

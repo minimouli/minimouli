@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './IExecutable.js'
-export * from './IPath.js'
+export * from './executable.interface.js'
+export * from './path.interface.js'

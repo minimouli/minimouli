@@ -6,7 +6,7 @@
  */
 
 import type { Hint } from '../hints/index.js'
-import type { IPath } from '../objects/index.js'
+import type { PathInterface } from '../interfaces/index.js'
 import type { MatcherOutputOptions } from '../options/index.js'
 
 interface Matcher<R> {
@@ -35,7 +35,7 @@ interface Matcher<R> {
 
     toExitWith(received: R, expected: number): Hint
 
-    toOutput(received: R, expected: string[] | IPath, options: Partial<MatcherOutputOptions>): Promise<Hint>
+    toOutput(received: R, expected: string[] | PathInterface, options: Partial<MatcherOutputOptions>): Promise<Hint>
 
 }
 
