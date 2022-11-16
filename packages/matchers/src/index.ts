@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './matchers/BooleanMatcher.js'
-export * from './matchers/NumberMatcher.js'
-export * from './matchers/ObjectMatcher.js'
-export * from './matchers/StringMatcher.js'
-export * from './matchers/UndefinedMatcher.js'
+export * from './matchers/boolean.matcher.js'
+export * from './matchers/number.matcher.js'
+export * from './matchers/object.matcher.js'
+export * from './matchers/string.matcher.js'
+export * from './matchers/undefined.matcher.js'

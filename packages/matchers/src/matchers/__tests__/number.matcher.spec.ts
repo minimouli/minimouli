@@ -5,37 +5,45 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
-import { StringMatcher } from '../StringMatcher.js'
-import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../../helpers/assert.helper.js'
+import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import { NumberMatcher } from '../number.matcher.js'
+import {
+    assert,
+    assertToBe,
+    assertToBeFalsy,
+    assertToBeNaN,
+    assertToBeTruthy
+} from '../../helpers/assert.helper.js'
 
 jest.mock('../../helpers/assert.helper.js')
 
+const mockedAssert = jest.mocked(assert)
 const mockedAssertToBe = jest.mocked(assertToBe)
 const mockedAssertToBeFalsy = jest.mocked(assertToBeFalsy)
+const mockedAssertToBeNaN = jest.mocked(assertToBeNaN)
 const mockedAssertToBeTruthy = jest.mocked(assertToBeTruthy)
 
-describe('StringMatcher', () => {
+describe('NumberMatcher', () => {
 
-    const matcher = new StringMatcher()
+    const matcher = new NumberMatcher()
 
     describe('toBe', () => {
 
         it('should match the hint when the assertion succeeds', () => {
 
             mockedAssertToBe.mockReturnValue(true)
-            const hint = matcher.toBe('hello', 'hello')
+            const hint = matcher.toBe(0, 0)
 
             expect(hint).toEqual({
-                type: HintType.STRING_DIFF,
+                type: HintType.EQUAL,
                 status: HintStatus.SUCCESS,
                 received: {
-                    value: ['hello'],
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 expected: {
-                    value: ['hello'],
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -50,18 +58,18 @@ describe('StringMatcher', () => {
         it('should match the hint when the assertion fails', () => {
 
             mockedAssertToBe.mockReturnValue(false)
-            const hint = matcher.toBe('hello', 'bonjour')
+            const hint = matcher.toBe(0, 1)
 
             expect(hint).toEqual({
-                type: HintType.STRING_DIFF,
+                type: HintType.EQUAL,
                 status: HintStatus.FAILURE,
                 received: {
-                    value: ['hello'],
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 expected: {
-                    value: ['bonjour'],
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -80,14 +88,14 @@ describe('StringMatcher', () => {
         it('should match the hint when the assertion succeeds', () => {
 
             mockedAssertToBeTruthy.mockReturnValue(true)
-            const hint = matcher.toBeTruthy('hello')
+            const hint = matcher.toBeTruthy(1)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.SUCCESS,
                 received: {
-                    value: 'hello',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -102,14 +110,14 @@ describe('StringMatcher', () => {
         it('should match the hint when the assertion fails', () => {
 
             mockedAssertToBeTruthy.mockReturnValue(false)
-            const hint = matcher.toBeTruthy('')
+            const hint = matcher.toBeTruthy(0)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.FAILURE,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -128,14 +136,14 @@ describe('StringMatcher', () => {
         it('should match the hint when the assertion succeeds', () => {
 
             mockedAssertToBeFalsy.mockReturnValue(true)
-            const hint = matcher.toBeFalsy('')
+            const hint = matcher.toBeFalsy(0)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.SUCCESS,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -150,14 +158,14 @@ describe('StringMatcher', () => {
         it('should match the hint when the assertion fails', () => {
 
             mockedAssertToBeFalsy.mockReturnValue(false)
-            const hint = matcher.toBeFalsy('hello')
+            const hint = matcher.toBeFalsy(1)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.FAILURE,
                 received: {
-                    value: 'hello',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -175,14 +183,14 @@ describe('StringMatcher', () => {
 
         it('should match the hint', () => {
 
-            const hint = matcher.toBeNull('')
+            const hint = matcher.toBeNull(0)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.FAILURE,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -200,14 +208,14 @@ describe('StringMatcher', () => {
 
         it('should match the hint', () => {
 
-            const hint = matcher.toBeDefined('')
+            const hint = matcher.toBeDefined(0)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.SUCCESS,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -225,14 +233,14 @@ describe('StringMatcher', () => {
 
         it('should match the hint', () => {
 
-            const hint = matcher.toBeUndefined('')
+            const hint = matcher.toBeUndefined(0)
 
             expect(hint).toEqual({
                 type: HintType.EQUAL,
                 status: HintStatus.FAILURE,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -248,17 +256,39 @@ describe('StringMatcher', () => {
 
     describe('toBeNaN', () => {
 
-        it('should match the hint', () => {
+        it('should match the hint when the assertion succeeds', () => {
 
-            const hint = matcher.toBeNaN('')
+            mockedAssertToBeNaN.mockReturnValue(true)
+            const hint = matcher.toBeNaN(Number.NaN)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
-                message: 'received must be a number',
+                type: HintType.EQUAL,
+                status: HintStatus.SUCCESS,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: 'NaN',
+                    type: ObjectType.NUMBER
+                },
+                snippet: {
+                    arguments: {
+                        received: ['received'],
+                        expected: []
+                    },
+                    method: 'toBeNaN'
+                }
+            })
+        })
+
+        it('should match the hint when the assertion fails', () => {
+
+            mockedAssertToBeNaN.mockReturnValue(false)
+            const hint = matcher.toBeNaN(0)
+
+            expect(hint).toEqual({
+                type: HintType.EQUAL,
+                status: HintStatus.FAILURE,
+                received: {
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -274,17 +304,49 @@ describe('StringMatcher', () => {
 
     describe('toBeLessThan', () => {
 
-        it('should match the hint', () => {
+        it('should match the hint when the assertion succeeds', () => {
 
-            const hint = matcher.toBeLessThan('', 0)
+            mockedAssert.mockReturnValue(true)
+            const hint = matcher.toBeLessThan(1, 2)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
-                message: 'received must be a number',
+                type: HintType.COMP,
+                status: HintStatus.SUCCESS,
+                symbol: CompSymbol.LESS_THAN,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '2',
+                    type: ObjectType.NUMBER
+                },
+                snippet: {
+                    arguments: {
+                        received: ['received'],
+                        expected: ['expected']
+                    },
+                    method: 'toBeLessThan'
+                }
+            })
+        })
+
+        it('should match the hint when the assertion fails', () => {
+
+            mockedAssert.mockReturnValue(false)
+            const hint = matcher.toBeLessThan(1, 0)
+
+            expect(hint).toEqual({
+                type: HintType.COMP,
+                status: HintStatus.FAILURE,
+                symbol: CompSymbol.LESS_THAN,
+                received: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -300,17 +362,49 @@ describe('StringMatcher', () => {
 
     describe('toBeLessThanOrEqual', () => {
 
-        it('should match the hint', () => {
+        it('should match the hint when the assertion succeeds', () => {
 
-            const hint = matcher.toBeLessThanOrEqual('', 0)
+            mockedAssert.mockReturnValue(true)
+            const hint = matcher.toBeLessThanOrEqual(1, 1)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
-                message: 'received must be a number',
+                type: HintType.COMP,
+                status: HintStatus.SUCCESS,
+                symbol: CompSymbol.LESS_THAN_OR_EQUAL,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                snippet: {
+                    arguments: {
+                        received: ['received'],
+                        expected: ['expected']
+                    },
+                    method: 'toBeLessThanOrEqual'
+                }
+            })
+        })
+
+        it('should match the hint when the assertion fails', () => {
+
+            mockedAssert.mockReturnValue(false)
+            const hint = matcher.toBeLessThanOrEqual(1, 0)
+
+            expect(hint).toEqual({
+                type: HintType.COMP,
+                status: HintStatus.FAILURE,
+                symbol: CompSymbol.LESS_THAN_OR_EQUAL,
+                received: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -326,17 +420,49 @@ describe('StringMatcher', () => {
 
     describe('toBeGreaterThan', () => {
 
-        it('should match the hint', () => {
+        it('should match the hint when the assertion succeeds', () => {
 
-            const hint = matcher.toBeGreaterThan('', 0)
+            mockedAssert.mockReturnValue(true)
+            const hint = matcher.toBeGreaterThan(1, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
-                message: 'received must be a number',
+                type: HintType.COMP,
+                status: HintStatus.SUCCESS,
+                symbol: CompSymbol.GREATER_THAN,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '0',
+                    type: ObjectType.NUMBER
+                },
+                snippet: {
+                    arguments: {
+                        received: ['received'],
+                        expected: ['expected']
+                    },
+                    method: 'toBeGreaterThan'
+                }
+            })
+        })
+
+        it('should match the hint when the assertion fails', () => {
+
+            mockedAssert.mockReturnValue(false)
+            const hint = matcher.toBeGreaterThan(1, 2)
+
+            expect(hint).toEqual({
+                type: HintType.COMP,
+                status: HintStatus.FAILURE,
+                symbol: CompSymbol.GREATER_THAN,
+                received: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '2',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -352,17 +478,49 @@ describe('StringMatcher', () => {
 
     describe('toBeGreaterThanOrEqual', () => {
 
-        it('should match the hint', () => {
+        it('should match the hint when the assertion succeeds', () => {
 
-            const hint = matcher.toBeGreaterThanOrEqual('', 0)
+            mockedAssert.mockReturnValue(true)
+            const hint = matcher.toBeGreaterThanOrEqual(1, 1)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
-                message: 'received must be a number',
+                type: HintType.COMP,
+                status: HintStatus.SUCCESS,
+                symbol: CompSymbol.GREATER_THAN_OR_EQUAL,
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                snippet: {
+                    arguments: {
+                        received: ['received'],
+                        expected: ['expected']
+                    },
+                    method: 'toBeGreaterThanOrEqual'
+                }
+            })
+        })
+
+        it('should match the hint when the assertion fails', () => {
+
+            mockedAssert.mockReturnValue(false)
+            const hint = matcher.toBeGreaterThanOrEqual(1, 2)
+
+            expect(hint).toEqual({
+                type: HintType.COMP,
+                status: HintStatus.FAILURE,
+                symbol: CompSymbol.GREATER_THAN_OR_EQUAL,
+                received: {
+                    value: '1',
+                    type: ObjectType.NUMBER
+                },
+                expected: {
+                    value: '2',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -380,15 +538,15 @@ describe('StringMatcher', () => {
 
         it('should match the hint', () => {
 
-            const hint = matcher.toExitWith('', 0)
+            const hint = matcher.toExitWith(0, 0)
 
             expect(hint).toEqual({
                 type: HintType.MATCHER_ERROR,
                 status: HintStatus.FAILURE,
                 message: 'received must be an executable',
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {
@@ -406,15 +564,15 @@ describe('StringMatcher', () => {
 
         it('should match the hint', async () => {
 
-            const hint = await matcher.toOutput('', 0, {})
+            const hint = await matcher.toOutput(0, 0, {})
 
             expect(hint).toEqual({
                 type: HintType.MATCHER_ERROR,
                 status: HintStatus.FAILURE,
                 message: 'received must be an executable',
                 received: {
-                    value: '',
-                    type: ObjectType.STRING
+                    value: '0',
+                    type: ObjectType.NUMBER
                 },
                 snippet: {
                     arguments: {

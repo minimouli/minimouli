@@ -6,7 +6,7 @@
  */
 
 import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
-import { BooleanMatcher } from '../BooleanMatcher.js'
+import { BooleanMatcher } from '../boolean.matcher.js'
 import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../../helpers/assert.helper.js'
 
 jest.mock('../../helpers/assert.helper.js')
