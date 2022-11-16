@@ -2601,7 +2601,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/scanner@workspace:packages/scanner":
+"@minimouli/scanner@^2.0.0, @minimouli/scanner@workspace:packages/scanner":
   version: 0.0.0-use.local
   resolution: "@minimouli/scanner@workspace:packages/scanner"
   dependencies:
@@ -6792,6 +6792,8 @@ __metadata:
   resolution: "minimouli@workspace:packages/minimouli"
   dependencies:
     "@minimouli/console": ^2.0.0
+    "@minimouli/fs": ^2.0.0
+    "@minimouli/scanner": ^2.0.0
     "@types/react": ^17
     core-js: ^3.25.0
     deepmerge: ^4.2.2

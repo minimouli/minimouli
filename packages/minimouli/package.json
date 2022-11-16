@@ -23,6 +23,7 @@
   "dependencies": {
     "@minimouli/console": "^2.0.0",
     "@minimouli/fs": "^2.0.0",
+    "@minimouli/scanner": "^2.0.0",
     "core-js": "^3.25.0",
     "deepmerge": "^4.2.2",
     "ink": "^3.2.0",
