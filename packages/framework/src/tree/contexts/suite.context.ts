@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Context } from './Context.js'
-import type { Suite } from '../Suite.js'
-import type { Test } from '../Test.js'
-import type { Hook, Trigger } from '../../hooks/Hook.js'
+import type { Context } from './context.js'
+import type { Suite } from '../suite.js'
+import type { Test } from '../test.js'
+import type { Hook, Trigger } from '../../hooks/hook.js'
 
 class SuiteContext implements Context {
 

@@ -6,7 +6,7 @@
  */
 
 import { HintStatus, HintType } from '@minimouli/types/hints'
-import { FrameworkError } from './FrameworkError.js'
+import { FrameworkError } from './framework.error.js'
 
 class MatcherError extends FrameworkError {
 

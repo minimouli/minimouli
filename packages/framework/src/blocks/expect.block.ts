@@ -13,8 +13,8 @@ import {
     UndefinedMatcher
 } from '@minimouli/matchers'
 import { HintStatus, HintType } from '@minimouli/types/hints'
-import { AssertionError } from '../errors/AssertionError.js'
-import { MatcherError } from '../errors/MatcherError.js'
+import { AssertionError } from '../errors/assertion.error.js'
+import { MatcherError } from '../errors/matcher.error.js'
 import type { Expect } from '@minimouli/types/blocks'
 import type { Hint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'

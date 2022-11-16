@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { BeforeAllHook } from '../hooks/BeforeAllHook.js'
-import { Tree } from '../tree/Tree.js'
+import { BeforeAllHook } from '../hooks/before-all.hook.js'
+import { Tree } from '../tree/tree.js'
 import type { Hook, HookFn } from '@minimouli/types/blocks'
 
 const beforeAll: Hook = (fn: HookFn) => {

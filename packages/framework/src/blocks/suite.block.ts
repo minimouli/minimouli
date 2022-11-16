@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Tree } from '../tree/Tree.js'
-import { Suite } from '../tree/Suite.js'
-import { SuiteContext } from '../tree/contexts/SuiteContext.js'
+import { Tree } from '../tree/tree.js'
+import { Suite } from '../tree/suite.js'
+import { SuiteContext } from '../tree/contexts/suite.context.js'
 import type { Suite as SuiteBlock, SuiteFn } from '@minimouli/types/blocks'
 
 const suite: SuiteBlock = (name: string, fn: SuiteFn) => {

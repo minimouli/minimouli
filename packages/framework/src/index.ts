@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { afterAll } from './blocks/afterAll.js'
-import { afterEach } from './blocks/afterEach.js'
-import { beforeAll } from './blocks/beforeAll.js'
-import { beforeEach } from './blocks/beforeEach.js'
-import { expect } from './blocks/expect.js'
-import { sleep } from './blocks/sleep.js'
-import { suite } from './blocks/suite.js'
-import { test } from './blocks/test.js'
+import { afterAll } from './blocks/after-all.block.js'
+import { afterEach } from './blocks/after-each.block.js'
+import { beforeAll } from './blocks/before-all.block.js'
+import { beforeEach } from './blocks/before-each.block.js'
+import { expect } from './blocks/expect.block.js'
+import { sleep } from './blocks/sleep.block.js'
+import { suite } from './blocks/suite.block.js'
+import { test } from './blocks/test.block.js'
 import type { Expect, Hook, Sleep, Suite, Test } from '@minimouli/types/blocks'
 
 /* eslint-disable no-var */

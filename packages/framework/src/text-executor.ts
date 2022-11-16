@@ -8,12 +8,12 @@
 import { performance } from 'node:perf_hooks'
 import { HintStatus, HintType } from '@minimouli/types/hints'
 import { TestStatus } from '@minimouli/types/syntheses'
-import { FrameworkError } from './errors/FrameworkError.js'
-import { Trigger } from './hooks/Hook.js'
+import { FrameworkError } from './errors/framework.error.js'
+import { Trigger } from './hooks/hook.js'
 import type { Unit } from '@minimouli/types'
 import type { TestFn } from '@minimouli/types/blocks'
 import type { Hint, MatcherErrorHint } from '@minimouli/types/hints'
-import type { Context } from './tree/contexts/Context.js'
+import type { Context } from './tree/contexts/context.js'
 
 interface ExecuteTestSuccessResponse {
     status: TestStatus.SUCCESS
@@ -30,7 +30,7 @@ type ExecuteResponse = ExecuteTestResponse & {
     duration: Unit.ms
 }
 
-class TestExecutor {
+class TextExecutor {
 
     constructor(
         private context: Context,
@@ -79,5 +79,5 @@ class TestExecutor {
 }
 
 export {
-    TestExecutor
+    TextExecutor
 }

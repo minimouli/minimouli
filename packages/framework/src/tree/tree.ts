@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GlobalContext } from './contexts/GlobalContext.js'
-import type { Context } from './contexts/Context.js'
+import { GlobalContext } from './contexts/global.context.js'
+import type { Context } from './contexts/context.js'
 
 const contexts: Context[] = [new GlobalContext()]
 

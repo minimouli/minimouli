@@ -7,13 +7,13 @@
 
 import { Channel } from '@minimouli/ipc'
 import { TestStatus } from '@minimouli/types/syntheses'
-import { TestExecutor } from '../TestExecutor.js'
+import { TextExecutor } from '../text-executor.js'
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Unit } from '@minimouli/types'
 import type { TestFn } from '@minimouli/types/blocks'
 import type { Hint } from '@minimouli/types/hints'
 import type { TestSynthesis } from '@minimouli/types/syntheses'
-import type { SuiteContext } from './contexts/SuiteContext.js'
+import type { SuiteContext } from './contexts/suite.context.js'
 
 interface IssuedEvents extends EventDescriptions {
     'test:perform': [string, string[]]
@@ -34,7 +34,7 @@ class Test {
 
     async execute(context: SuiteContext): Promise<void> {
 
-        const executor = new TestExecutor(context, this.fn)
+        const executor = new TextExecutor(context, this.fn)
         const channel = Channel.fromCurrentProcess<IssuedEvents, EventDescriptions>()
 
         channel.emit('test:perform', this.name, this.path)

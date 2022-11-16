@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Trigger } from './Hook.js'
-import type { Hook } from './Hook.js'
+import { Trigger } from './hook.js'
+import type { Hook } from './hook.js'
 import type { HookFn } from '@minimouli/types/blocks'
 
-class AfterAllHook implements Hook {
+class BeforeAllHook implements Hook {
 
     public readonly triggers = [
-        Trigger.AFTER_SUITE_IS_EXECUTED
+        Trigger.BEFORE_SUITE_IS_EXECUTED
     ]
     public readonly isAppliedOnChildren = false
 
@@ -27,5 +27,5 @@ class AfterAllHook implements Hook {
 }
 
 export {
-    AfterAllHook
+    BeforeAllHook
 }

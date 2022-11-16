@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Trigger } from '../hooks/Hook.js'
+import { Trigger } from '../hooks/hook.js'
 import type { SuiteSynthesis, SuitePlanSynthesis } from '@minimouli/types/syntheses'
-import type { Context } from './contexts/Context.js'
+import type { Context } from './contexts/context.js'
 
 class Suite {
 

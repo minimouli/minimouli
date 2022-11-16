@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AfterEachHook } from '../hooks/AfterEachHook.js'
-import { Tree } from '../tree/Tree.js'
+import { BeforeEachHook } from '../hooks/before-each.hook.js'
+import { Tree } from '../tree/tree.js'
 import type { Hook, HookFn } from '@minimouli/types/blocks'
 
-const afterEach: Hook = (fn: HookFn) => {
+const beforeEach: Hook = (fn: HookFn) => {
 
     const context = Tree.currentContext()
-    const hook = new AfterEachHook(fn)
+    const hook = new BeforeEachHook(fn)
 
     context.addHook(hook)
 }
 
 export {
-    afterEach
+    beforeEach
 }
