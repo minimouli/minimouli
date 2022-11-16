@@ -5,17 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Class } from './Class.js'
-import type { InjectableManager } from '../injectable/InjectableManager.js'
+import type { Class } from './class.type.js'
+import type { InjectableManager } from '../injectable/injectable-manager.js'
 
 interface InjectableFactory<T extends object = object> {
     useFactory: (injectableManager: InjectableManager) => T | Promise<T>
     token: Class<T>
 }
 
-type Injectable<T extends object = object> = Class<T> | InjectableFactory<T>
-
 export type {
-    Injectable,
     InjectableFactory
 }

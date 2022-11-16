@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Command } from '../command/Command.js'
-import type { CommandManager } from '../command/CommandManager.js'
+import type { Command } from '../command/command.js'
+import type { CommandManager } from '../command/command-manager.js'
 
 type CommandAndArguments = [Command, string[]]
 

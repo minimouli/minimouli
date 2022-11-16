@@ -6,9 +6,10 @@
  */
 
 import { INJECTED_DEPENDENCIES_METADATA } from '../constants.js'
-import type { Class } from '../types/Class.js'
-import type { DependencyMetadata } from '../types/DependencyMetadata.js'
-import type { Injectable, InjectableFactory } from '../types/Injectable.js'
+import type { Class } from '../types/class.type.js'
+import type { DependencyMetadata } from '../types/dependency-metadata.type.js'
+import type { Injectable } from '../types/injectable.type.js'
+import type { InjectableFactory } from '../types/injectable-factory.type.js'
 
 class InjectableManager {
 

@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 import { createContext } from 'react'
-import type { InjectableManager } from '../injectable/InjectableManager.js'
+import type { InjectableManager } from '../injectable/injectable-manager.js'
 
 type InjectableContextValue = InjectableManager | undefined
 
@@ -15,7 +14,4 @@ const InjectableContext = createContext<InjectableContextValue>(undefined)
 
 export {
     InjectableContext
-}
-export type {
-    InjectableContextValue
 }

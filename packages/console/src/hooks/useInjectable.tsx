@@ -7,7 +7,7 @@
 
 import { useContext } from 'react'
 import { InjectableContext } from '../contexts/injectable.context.js'
-import type { Class } from '../types/Class.js'
+import type { Class } from '../types/class.type.js'
 
 const useInjectable = <T extends object>(token: Class<T>): T => {
 

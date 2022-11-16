@@ -8,10 +8,10 @@
 import { fillArguments, fillOptions } from '../helpers/fill.helper.js'
 import { findCommandAndArguments } from '../helpers/find.helper.js'
 import { matchArguments, matchOptions } from '../helpers/match.helper.js'
-import { ArgumentParser } from '../parser/ArgumentParser.js'
-import type { Command } from './Command.js'
-import type { InjectableManager } from '../injectable/InjectableManager.js'
-import type { Class } from '../types/Class.js'
+import { ArgumentParser } from '../parser/argument-parser.js'
+import type { Command } from './command.js'
+import type { InjectableManager } from '../injectable/injectable-manager.js'
+import type { Class } from '../types/class.type.js'
 
 class CommandManager {
 

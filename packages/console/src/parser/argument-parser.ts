@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ArgumentToken, OptionToken } from './Token.js'
+import type { ArgumentToken, OptionToken } from './token.js'
 
 class ArgumentParser {
 

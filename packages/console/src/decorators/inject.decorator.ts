@@ -7,8 +7,8 @@
 
 import 'reflect-metadata'
 import { INJECTED_DEPENDENCIES_METADATA } from '../constants.js'
-import type { Class } from '../types/Class.js'
-import type { DependencyMetadata } from '../types/DependencyMetadata.js'
+import type { Class } from '../types/class.type.js'
+import type { DependencyMetadata } from '../types/dependency-metadata.type.js'
 
 const Inject = <T extends object>(token: Class<T>) =>
     (target: object, key: string | symbol, index: number): void => {

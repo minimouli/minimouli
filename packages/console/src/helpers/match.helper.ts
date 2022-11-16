@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Argument } from '../arguments/Argument.js'
-import type { ArgumentToken, OptionToken } from '../parser/Token.js'
+import type { Argument } from '../arguments/argument.js'
+import type { ArgumentToken, OptionToken } from '../parser/token.js'
 
 interface ArgumentMatch {
     argument: Argument<unknown>

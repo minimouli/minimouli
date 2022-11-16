@@ -7,12 +7,12 @@
 
 import { render } from 'ink'
 import React from 'react'
-import { CommandManager } from './command/CommandManager.js'
+import { CommandManager } from './command/command-manager.js'
 import { InjectableContext } from './contexts/injectable.context.js'
-import { InjectableManager } from './injectable/InjectableManager.js'
-import type { Command } from './command/Command.js'
-import type { Class } from './types/Class.js'
-import type { Injectable } from './types/Injectable.js'
+import { InjectableManager } from './injectable/injectable-manager.js'
+import type { Command } from './command/command.js'
+import type { Class } from './types/class.type.js'
+import type { Injectable } from './types/injectable.type.js'
 
 class Application {
 

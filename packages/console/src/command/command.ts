@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ReactElement } from 'react'
-import type { Argument } from '../arguments/Argument.js'
+import type { ReactNode } from 'react'
+import type { Argument } from '../arguments/argument.js'
 
 abstract class Command {
 
@@ -26,7 +26,7 @@ abstract class Command {
         return option
     }
 
-    abstract execute(): ReactElement
+    abstract execute(): ReactNode
 
     abstract get name(): string
     abstract get description(): string[]

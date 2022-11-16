@@ -6,7 +6,7 @@
  */
 
 import { Path } from '@minimouli/fs'
-import { Argument } from './Argument.js'
+import { Argument } from './argument.js'
 
 class PathArgument extends Argument<Path> {
 

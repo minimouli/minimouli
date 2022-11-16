@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Class } from './Class.js'
+import type { Class } from './class.type.js'
 
 interface DependencyMetadata {
     token: Class

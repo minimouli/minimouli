@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ArgumentParser } from '../ArgumentParser.js'
+import { ArgumentParser } from '../argument-parser.js'
 
 describe('ArgumentParser', () => {
 

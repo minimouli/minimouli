@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Argument } from './Argument.js'
+import { Argument } from './argument.js'
 
 class EnumArgument extends Argument<string> {
 
