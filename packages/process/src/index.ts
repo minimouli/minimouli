@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Process.js'
-export * from './ProcessFactory.js'
-export * from './ProcessStdio.js'
+export * from './process.js'
+export * from './process.factory.js'
+export * from './types/process-stdio.type.js'

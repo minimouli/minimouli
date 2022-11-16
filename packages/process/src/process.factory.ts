@@ -8,22 +8,21 @@
 import child_process from 'node:child_process'
 import { Path } from '@minimouli/fs'
 import { Descriptor } from '@minimouli/types/stream'
-import { Process, TerminateSource } from './Process.js'
+import { Process, TerminateSource } from './process.js'
 import type stream from 'node:stream'
 import type { Unit } from '@minimouli/types'
-import type { FileDescriptorInstruction, ProcessStdio, StdioValue } from './ProcessStdio.js'
+import type { FileDescriptorInstruction, ProcessStdioType, StdioValue } from './types/process-stdio.type.js'
 
-interface SpawnSuccessResponse {
-    process: Process
-    error: undefined
-}
+type SpawnResponse =
+    | {
+        process: Process
+        error?: undefined
+    }
+    | {
+        error: string
+        process?: undefined
+    }
 
-interface SpawnFailureResponse {
-    process: undefined
-    error: string
-}
-
-type SpawnResponse = SpawnSuccessResponse | SpawnFailureResponse
 type ValidStdioValue = number | FileDescriptorInstruction | stream.Stream | null
 
 const normalizeStdioValue = (value: StdioValue): ValidStdioValue => {
@@ -45,7 +44,7 @@ class ProcessFactory {
 
     private _cwd: Path | undefined = undefined
 
-    private _stdio: ProcessStdio = {
+    private _stdio: ProcessStdioType = {
         stdin: Descriptor.STDIN,
         stdout: Descriptor.STDOUT,
         stderr: Descriptor.STDERR
@@ -64,7 +63,7 @@ class ProcessFactory {
         return this
     }
 
-    stdio(stdio: Partial<ProcessStdio>): this {
+    stdio(stdio: Partial<ProcessStdioType>): this {
         this._stdio = { ...this._stdio, ...stdio }
         return this
     }
@@ -104,13 +103,11 @@ class ProcessFactory {
             }
 
             process.on('error', () => resolve({
-                error: 'The child process cannot be spawned',
-                process: undefined
+                error: 'The child process cannot be spawned'
             }))
 
             process.on('spawn', () => resolve({
-                process,
-                error: undefined
+                process
             }))
         })
     }

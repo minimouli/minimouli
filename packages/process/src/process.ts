@@ -21,19 +21,18 @@ interface ProcessEvents {
     spawn: Callable
 }
 
-interface WaitSuccessResponse {
-    code: number | null
-    output: ReadableContent | undefined
-    error: undefined
-}
+type WaitResponse =
+    | {
+        code: number | null
+        output: ReadableContent | undefined
+        error?: undefined
+    }
+    | {
+        error: string
+        code: number | null
+        output?: undefined
+    }
 
-interface WaitFailureResponse {
-    code: number | null
-    output: undefined
-    error: string
-}
-
-type WaitResponse = WaitSuccessResponse | WaitFailureResponse
 type TerminateSignal = 'SIGTERM' | 'SIGKILL'
 
 enum TerminateSource {
@@ -89,8 +88,7 @@ class Process {
                 if (!options.descriptor) {
                     resolve({
                         code,
-                        output: undefined,
-                        error: undefined
+                        output: undefined
                     })
                     return
                 }
@@ -105,8 +103,7 @@ class Process {
                 if (stream === undefined) {
                     resolve({
                         error: 'The desired output is not available',
-                        code,
-                        output: undefined
+                        code
                     })
                     return
                 }
@@ -116,16 +113,14 @@ class Process {
                 if (error !== undefined) {
                     resolve({
                         error: 'The desired output is not available',
-                        code,
-                        output: undefined
+                        code
                     })
                     return
                 }
 
                 resolve({
                     code,
-                    output: contents,
-                    error: undefined
+                    output: contents
                 })
             })
         })

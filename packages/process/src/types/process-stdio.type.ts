@@ -14,14 +14,14 @@ type Stdout = Descriptor.STDOUT | FileDescriptorInstruction | NativeWritable | n
 type Stderr = Descriptor.STDERR | FileDescriptorInstruction | NativeWritable | null
 type StdioValue = Stdin | Stdout | Stderr
 
-interface ProcessStdio {
+interface ProcessStdioType {
     stdin: Stdin
     stdout: Stdout
     stderr: Stderr
 }
 
 export type {
-    ProcessStdio,
+    ProcessStdioType,
     Stdin,
     Stdout,
     Stderr,
