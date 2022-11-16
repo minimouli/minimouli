@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { ScanResult } from '../ScanResult.js'
+import type { ScanResult } from '../scan-result.js'
 
 interface Decoder {
 

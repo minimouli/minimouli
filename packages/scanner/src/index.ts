@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Scanner.js'
-export * from './ScanResult.js'
+export * from './scanner.js'
+export * from './scan-result.js'

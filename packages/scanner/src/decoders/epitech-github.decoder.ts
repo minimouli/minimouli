@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { Decoder } from './Decoder.js'
-import type { ScanResult } from '../ScanResult.js'
+import type { Decoder } from './decoder.js'
+import type { ScanResult } from '../scan-result.js'
 
-class EpitechSelfHostDecoder implements Decoder {
+class EpitechGitHubDecoder implements Decoder {
 
-    private static expression = /git@git\.epitech\.eu:\/[\w-]+\.[\w-]+@epitech\.eu\/(?<module>[a-z]+)_(?<project>[\w-]+)_\d{4}(?:\.git)?/i
+    private static expression = /(?:git@github\.com:|https:\/\/github\.com\/)[\w-]*epitech[\w-]*\/(?<module>[a-z]-[a-z]{3}-\d{3})-[a-z]+-\d-\d-(?<project>\w+)-[\w-]+\.[\w-]+(?:\.git)?/i
 
     decode(url: string): ScanResult | undefined {
 
-        const matches = url.match(EpitechSelfHostDecoder.expression)
+        const matches = url.match(EpitechGitHubDecoder.expression)
 
         if (matches === null || matches.groups === undefined || matches.input === undefined)
             return undefined
@@ -32,7 +32,7 @@ class EpitechSelfHostDecoder implements Decoder {
                 organization: 'epitech'
             },
             repository: {
-                host: 'git.epitech.eu',
+                host: 'github.com',
                 url: matches.input
             }
         }
@@ -41,5 +41,5 @@ class EpitechSelfHostDecoder implements Decoder {
 }
 
 export {
-    EpitechSelfHostDecoder
+    EpitechGitHubDecoder
 }

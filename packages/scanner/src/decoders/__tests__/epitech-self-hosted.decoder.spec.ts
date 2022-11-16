@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { EpitechSelfHostDecoder } from '../EpitechSelfHostDecoder.js'
+import { EpitechSelfHostedDecoder } from '../epitech-self-hosted.decoder.js'
 
-describe('EpitechSelfHostDecoder', () => {
+describe('EpitechSelfHostedDecoder', () => {
 
     const result = {
         keywords: {
@@ -24,7 +24,7 @@ describe('EpitechSelfHostDecoder', () => {
     it('should match the project url', () => {
         const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPE_bistromatic_2019.git'
 
-        expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+        expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
             ...result,
             repository: {
                 host: 'git.epitech.eu',
@@ -36,13 +36,13 @@ describe('EpitechSelfHostDecoder', () => {
     it('should not match an url from another code repository server', () => {
         const url = 'git@github.com:Epitech/B-CPE-000-CITY-1-1-bistromatic-john.doe.git'
 
-        expect(new EpitechSelfHostDecoder().decode(url)).toBeUndefined()
+        expect(new EpitechSelfHostedDecoder().decode(url)).toBeUndefined()
     })
 
     it('should match without the .git suffix', () => {
         const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPE_bistromatic_2019'
 
-        expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+        expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
             ...result,
             repository: {
                 host: 'git.epitech.eu',
@@ -56,7 +56,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match an uppercase project name', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPE_BSQ_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 keywords: {
                     school: 'epitech',
                     project: 'bsq'
@@ -76,7 +76,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match an alphanumeric project name', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/PSU_42sh_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 keywords: {
                     school: 'epitech',
                     project: '42sh'
@@ -96,7 +96,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match an alphanumeric project name', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/PSU_my_printf_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 keywords: {
                     school: 'epitech',
                     project: 'my_printf'
@@ -116,7 +116,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match a project name that contains hyphen', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPool_match-nmatch_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 keywords: {
                     school: 'epitech',
                     project: 'match-nmatch'
@@ -140,7 +140,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match an alphanumeric owner name', () => {
             const url = 'git@git.epitech.eu:/john1.doe@epitech.eu/CPE_bistromatic_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 ...result,
                 repository: {
                     host: 'git.epitech.eu',
@@ -152,7 +152,7 @@ describe('EpitechSelfHostDecoder', () => {
         it('should match an owner name that contains hyphen', () => {
             const url = 'git@git.epitech.eu:/john-john.doe@epitech.eu/CPE_bistromatic_2019.git'
 
-            expect(new EpitechSelfHostDecoder().decode(url)).toStrictEqual({
+            expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
                 ...result,
                 repository: {
                     host: 'git.epitech.eu',
