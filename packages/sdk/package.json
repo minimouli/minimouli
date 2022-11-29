@@ -19,6 +19,11 @@
   ],
   "dependencies": {
     "@minimouli/types": "^2.0.0",
-    "core-js": "^3.25.0"
+    "axios": "^1.2.0",
+    "core-js": "^3.25.0",
+    "deepmerge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0"
   }
 }
