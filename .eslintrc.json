@@ -371,8 +371,9 @@
         "allowList": {
           "args": true,
           "fn": true,
+          "i": true,
           "props": true,
-          "i": true
+          "searchParams": true
         },
         "ignore": [
           ".*Fn$",
@@ -380,6 +381,7 @@
           ".*ResDto$",
           ".*.req.dto",
           ".*.res.dto",
+          ".*SearchParams$",
           "Props$",
           "rootDir"
         ]
