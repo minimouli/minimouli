@@ -8,12 +8,14 @@
 import { HttpClient } from './http-client.js'
 import { AccountResource } from './resources/account.resource.js'
 import { OrganizationResource } from './resources/organization.resource.js'
+import { ProjectResource } from './resources/project.resource.js'
 import type { ClientOptions } from './types/options/client.options.type.js'
 
 class Client {
 
     public readonly accounts: AccountResource
     public readonly organizations: OrganizationResource
+    public readonly projects: ProjectResource
 
     constructor(options: Partial<ClientOptions>) {
 
@@ -24,6 +26,7 @@ class Client {
 
         this.accounts = new AccountResource(httpClient)
         this.organizations = new OrganizationResource(httpClient)
+        this.projects = new ProjectResource(httpClient)
     }
 
 }
