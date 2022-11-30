@@ -61,6 +61,31 @@ class GitHubDeviceFlowAuth {
         this.dispatchEventsFromResponse(response3)
     }
 
+    async login(): Promise<void> {
+
+        /* Step 1 - Request user code */
+        const response1 = await this.requestUserCode()
+        const [stage1] = response1
+
+        this.dispatchEventsFromResponse(response1)
+
+        if (stage1 === GitHubDeviceFlowAuthStage.Failed)
+            return
+
+        /* Step 2 - Poll GitHub access token */
+        const response2 = await this.pollGitHubAccessToken()
+        const [stage2] = response2
+
+        this.dispatchEventsFromResponse(response2)
+
+        if (stage2 === GitHubDeviceFlowAuthStage.Failed)
+            return
+
+        /* Step 3 - Request Minimouli access token */
+        const response3 = await this.requestMinimouliAccessTokenByLoggingIn()
+        this.dispatchEventsFromResponse(response3)
+    }
+
     on<E extends keyof GitHubDeviceFlowAuthEvents>(event: E, listener: GitHubDeviceFlowAuthEvents[E]): void {
         this.eventEmitter.on(event, listener)
     }
@@ -190,6 +215,39 @@ class GitHubDeviceFlowAuth {
 
         try {
             const response = await this.httpClient.post<SignupResDto>('/auth/signup/github/access-token', {
+                body: {
+                    accessToken: this.githubAccessToken,
+                    authTokenName: `Login with ${this.appName}`
+                }
+            })
+
+            const accessToken = response.accessToken
+            const client = new Client({
+                accessToken,
+                baseUrl: this.httpClient.baseUrl
+            })
+            const user = await client.accounts.me()
+
+            return [GitHubDeviceFlowAuthStage.Succeed, {
+                accessToken,
+                client,
+                user
+            }]
+
+        } catch {
+            return [GitHubDeviceFlowAuthStage.Failed, { error: 'Unable to request the Minimouli access token' }]
+        }
+    }
+
+    private async requestMinimouliAccessTokenByLoggingIn(): Promise<GitHubDeviceFlowAuthResponse> {
+
+        if (this.githubAccessToken === undefined)
+            return [GitHubDeviceFlowAuthStage.Failed, {
+                error: 'GitHubDeviceFlowAuth must request GitHub access token before requesting Minimouli access token'
+            }]
+
+        try {
+            const response = await this.httpClient.post<SignupResDto>('/auth/login/github/access-token', {
                 body: {
                     accessToken: this.githubAccessToken,
                     authTokenName: `Login with ${this.appName}`
