@@ -16,7 +16,7 @@ class HttpClient {
 
     constructor(
         private readonly accessToken: string | undefined,
-        private readonly baseUrl: string
+        public readonly baseUrl: string
     ) {}
 
     private async request<T>(method: Method, route: string, options: Partial<RequestOptions> = {}): Promise<T> {

@@ -6,6 +6,7 @@
  */
 
 import { HttpClient } from './http-client.js'
+import { GitHubDeviceFlowAuth } from './auth/github-device-flow.auth.js'
 import { AccountResource } from './resources/account.resource.js'
 import { MoulinetteResource } from './resources/moulinette.resource.js'
 import { OrganizationResource } from './resources/organization.resource.js'
@@ -14,22 +15,28 @@ import type { ClientOptions } from './types/options/client.options.type.js'
 
 class Client {
 
+    private readonly httpClient: HttpClient
+
     public readonly accounts: AccountResource
     public readonly moulinettes: MoulinetteResource
     public readonly organizations: OrganizationResource
     public readonly projects: ProjectResource
 
-    constructor(options: Partial<ClientOptions>) {
+    constructor(options: Partial<ClientOptions> = {}) {
 
-        const httpClient = new HttpClient(
+        this.httpClient = new HttpClient(
             options.accessToken,
             options.baseUrl ?? 'https://api.minimouli.com'
         )
 
-        this.accounts = new AccountResource(httpClient)
-        this.moulinettes = new MoulinetteResource(httpClient)
-        this.organizations = new OrganizationResource(httpClient)
-        this.projects = new ProjectResource(httpClient)
+        this.accounts = new AccountResource(this.httpClient)
+        this.moulinettes = new MoulinetteResource(this.httpClient)
+        this.organizations = new OrganizationResource(this.httpClient)
+        this.projects = new ProjectResource(this.httpClient)
+    }
+
+    GitHubDeviceFlowAuth(appName: string): GitHubDeviceFlowAuth {
+        return new GitHubDeviceFlowAuth(this.httpClient, appName)
     }
 
 }
