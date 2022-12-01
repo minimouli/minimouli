@@ -19,7 +19,13 @@
       "path": "../fs"
     },
     {
+      "path": "../hooks"
+    },
+    {
       "path": "../scanner"
+    },
+    {
+      "path": "../sdk"
     }
   ]
 }

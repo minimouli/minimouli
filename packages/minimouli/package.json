@@ -23,7 +23,9 @@
   "dependencies": {
     "@minimouli/console": "^2.0.0",
     "@minimouli/fs": "^2.0.0",
+    "@minimouli/hooks": "^2.0.0",
     "@minimouli/scanner": "^2.0.0",
+    "@minimouli/sdk": "^2.0.0",
     "core-js": "^3.25.0",
     "deepmerge": "^4.2.2",
     "error-stack-parser": "^2.1.4",
