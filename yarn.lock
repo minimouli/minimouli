@@ -2550,6 +2550,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@minimouli/hooks@workspace:packages/hooks":
+  version: 0.0.0-use.local
+  resolution: "@minimouli/hooks@workspace:packages/hooks"
+  dependencies:
+    "@minimouli/sdk": ^2.0.0
+    "@minimouli/types": ^2.0.0
+    "@types/react": ^17
+    core-js: ^3.25.0
+    react: ^17.0.2
+  languageName: unknown
+  linkType: soft
+
 "@minimouli/io@^2.0.0, @minimouli/io@workspace:packages/io":
   version: 0.0.0-use.local
   resolution: "@minimouli/io@workspace:packages/io"
@@ -2612,7 +2624,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/sdk@workspace:packages/sdk":
+"@minimouli/sdk@^2.0.0, @minimouli/sdk@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@minimouli/sdk@workspace:packages/sdk"
   dependencies:
