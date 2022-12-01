@@ -10,14 +10,12 @@ import { EpitechSelfHostedDecoder } from '../epitech-self-hosted.decoder.js'
 describe('EpitechSelfHostedDecoder', () => {
 
     const result = {
-        keywords: {
-            school: 'epitech',
-            project: 'bistromatic'
+        organization: {
+            name: 'epitech'
         },
         project: {
             name: 'bistromatic',
-            directories: ['CPE'],
-            organization: 'epitech'
+            directories: ['CPE']
         }
     }
 
@@ -57,14 +55,12 @@ describe('EpitechSelfHostedDecoder', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPE_BSQ_2019.git'
 
             expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'bsq'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
-                    name: 'BSQ',
-                    directories: ['CPE'],
-                    organization: 'epitech'
+                    name: 'bsq',
+                    directories: ['CPE']
                 },
                 repository: {
                     host: 'git.epitech.eu',
@@ -77,14 +73,12 @@ describe('EpitechSelfHostedDecoder', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/PSU_42sh_2019.git'
 
             expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: '42sh'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
                     name: '42sh',
-                    directories: ['PSU'],
-                    organization: 'epitech'
+                    directories: ['PSU']
                 },
                 repository: {
                     host: 'git.epitech.eu',
@@ -97,14 +91,12 @@ describe('EpitechSelfHostedDecoder', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/PSU_my_printf_2019.git'
 
             expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'my_printf'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
                     name: 'my_printf',
-                    directories: ['PSU'],
-                    organization: 'epitech'
+                    directories: ['PSU']
                 },
                 repository: {
                     host: 'git.epitech.eu',
@@ -117,14 +109,12 @@ describe('EpitechSelfHostedDecoder', () => {
             const url = 'git@git.epitech.eu:/john.doe@epitech.eu/CPool_match-nmatch_2019.git'
 
             expect(new EpitechSelfHostedDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'match-nmatch'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
                     name: 'match-nmatch',
-                    directories: ['CPool'],
-                    organization: 'epitech'
+                    directories: ['CPool']
                 },
                 repository: {
                     host: 'git.epitech.eu',
@@ -132,7 +122,6 @@ describe('EpitechSelfHostedDecoder', () => {
                 }
             })
         })
-
     })
 
     describe('owner name', () => {
@@ -160,7 +149,5 @@ describe('EpitechSelfHostedDecoder', () => {
                 }
             })
         })
-
     })
-
 })

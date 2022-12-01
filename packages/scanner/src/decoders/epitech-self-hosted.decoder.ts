@@ -6,7 +6,7 @@
  */
 
 import type { Decoder } from './decoder.js'
-import type { ScanResult } from '../scan-result.js'
+import type { ScanResult } from '../types/scan-result.type.js'
 
 class EpitechSelfHostedDecoder implements Decoder {
 
@@ -22,14 +22,12 @@ class EpitechSelfHostedDecoder implements Decoder {
         const { module, project } = matches.groups
 
         return {
-            keywords: {
-                school: 'epitech',
-                project: project.toLowerCase()
+            organization: {
+                name: 'epitech'
             },
             project: {
-                name: project,
-                directories: [module],
-                organization: 'epitech'
+                name: project.toLowerCase(),
+                directories: [module]
             },
             repository: {
                 host: 'git.epitech.eu',

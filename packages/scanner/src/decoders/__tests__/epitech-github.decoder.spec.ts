@@ -10,14 +10,12 @@ import { EpitechGitHubDecoder } from '../epitech-github.decoder.js'
 describe('EpitechGitHubDecoder', () => {
 
     const result = {
-        keywords: {
-            school: 'epitech',
-            project: 'bistromatic'
+        organization: {
+            name: 'epitech'
         },
         project: {
             name: 'bistromatic',
-            directories: ['B-CPE-000'],
-            organization: 'epitech'
+            directories: ['B-CPE-000']
         }
     }
 
@@ -100,7 +98,6 @@ describe('EpitechGitHubDecoder', () => {
                 }
             })
         })
-
     })
 
     describe('project name', () => {
@@ -109,14 +106,12 @@ describe('EpitechGitHubDecoder', () => {
             const url = 'git@github.com:Epitech/B-CPE-000-CITY-1-1-BSQ-john.doe.git'
 
             expect(new EpitechGitHubDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'bsq'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
-                    name: 'BSQ',
-                    directories: ['B-CPE-000'],
-                    organization: 'epitech'
+                    name: 'bsq',
+                    directories: ['B-CPE-000']
                 },
                 repository: {
                     host: 'github.com',
@@ -129,14 +124,12 @@ describe('EpitechGitHubDecoder', () => {
             const url = 'git@github.com:Epitech/B-CPE-000-CITY-1-1-cpoolday01-john.doe.git'
 
             expect(new EpitechGitHubDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'cpoolday01'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
                     name: 'cpoolday01',
-                    directories: ['B-CPE-000'],
-                    organization: 'epitech'
+                    directories: ['B-CPE-000']
                 },
                 repository: {
                     host: 'github.com',
@@ -149,14 +142,12 @@ describe('EpitechGitHubDecoder', () => {
             const url = 'git@github.com:Epitech/B-CPE-000-CITY-1-1-eval_expr-john.doe.git'
 
             expect(new EpitechGitHubDecoder().decode(url)).toStrictEqual({
-                keywords: {
-                    school: 'epitech',
-                    project: 'eval_expr'
+                organization: {
+                    name: 'epitech'
                 },
                 project: {
                     name: 'eval_expr',
-                    directories: ['B-CPE-000'],
-                    organization: 'epitech'
+                    directories: ['B-CPE-000']
                 },
                 repository: {
                     host: 'github.com',
@@ -164,7 +155,6 @@ describe('EpitechGitHubDecoder', () => {
                 }
             })
         })
-
     })
 
     describe('owner name', () => {
@@ -192,7 +182,5 @@ describe('EpitechGitHubDecoder', () => {
                 }
             })
         })
-
     })
-
 })

@@ -10,7 +10,7 @@ import { Descriptor } from '@minimouli/types/stream'
 import { EpitechGitHubDecoder } from './decoders/epitech-github.decoder.js'
 import { EpitechSelfHostedDecoder } from './decoders/epitech-self-hosted.decoder.js'
 import type { Path } from '@minimouli/fs'
-import type { ScanResult } from './scan-result.js'
+import type { ScanResult } from './types/scan-result.type.js'
 
 type ScanResponse =
     | {

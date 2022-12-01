@@ -6,4 +6,4 @@
  */
 
 export * from './scanner.js'
-export * from './scan-result.js'
+export * from './types/scan-result.type.js'
