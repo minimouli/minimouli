@@ -11,6 +11,7 @@ import { Application } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
 import { LoginCommand } from './commands/login.command.js'
 import { LogoutCommand } from './commands/logout.command.js'
+import { MeCommand } from './commands/me.command.js'
 import { ScanCommand } from './commands/scan.command.js'
 import { VersionCommand } from './commands/version.command.js'
 import { AuthConfigService } from './services/auth-config.service.js'
@@ -33,6 +34,7 @@ const run = async (args: string[]): Promise<void> => {
     app.addCommands([
         LoginCommand,
         LogoutCommand,
+        MeCommand,
         ScanCommand,
         VersionCommand
     ])
