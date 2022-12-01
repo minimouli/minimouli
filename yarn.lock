@@ -2516,7 +2516,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@minimouli/console@workspace:packages/console":
+"@minimouli/console@^2.0.0, @minimouli/console@workspace:packages/console":
   version: 0.0.0-use.local
   resolution: "@minimouli/console@workspace:packages/console"
   dependencies:
@@ -2613,7 +2613,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/scanner@workspace:packages/scanner":
+"@minimouli/scanner@^2.0.0, @minimouli/scanner@workspace:packages/scanner":
   version: 0.0.0-use.local
   resolution: "@minimouli/scanner@workspace:packages/scanner"
   dependencies:
@@ -4423,6 +4423,15 @@ __metadata:
   dependencies:
     is-arrayish: ^0.2.1
   checksum: c1c2b8b65f9c91b0f9d75f0debaa7ec5b35c266c2cac5de412c1a6de86d4cbae04ae44e510378cb14d032d0645a36925d0186f8bb7367bcc629db256b743a001
+  languageName: node
+  linkType: hard
+
+"error-stack-parser@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "error-stack-parser@npm:2.1.4"
+  dependencies:
+    stackframe: ^1.3.4
+  checksum: 3b916d2d14c6682f287c8bfa28e14672f47eafe832701080e420e7cdbaebb2c50293868256a95706ac2330fe078cf5664713158b49bc30d7a5f2ac229ded0e18
   languageName: node
   linkType: hard
 
@@ -6702,6 +6711,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lowdb@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "lowdb@npm:5.0.5"
+  dependencies:
+    steno: ^3.0.0
+  checksum: c9c3b8f4da14a1aeae85c96b2c04f6459bac95ecea63ab3444dfdb1ced257fc78609a6fb7b156e36958987ed77a5fc5415116a4122777c2dd5f1ede4bf9691ff
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^6.0.0":
   version: 6.0.0
   resolution: "lru-cache@npm:6.0.0"
@@ -6906,6 +6924,26 @@ __metadata:
   checksum: d15428cd1e11eb14e1233bcfb88ae07ed7a147de251441d61158619dfb32c4d7e9061d09cab4825fdee18ecd6fce323228c8c47b5ba7cd20af378ca4048fb3fb
   languageName: node
   linkType: hard
+
+"minimouli@workspace:packages/minimouli":
+  version: 0.0.0-use.local
+  resolution: "minimouli@workspace:packages/minimouli"
+  dependencies:
+    "@minimouli/console": ^2.0.0
+    "@minimouli/fs": ^2.0.0
+    "@minimouli/scanner": ^2.0.0
+    "@types/react": ^17
+    core-js: ^3.25.0
+    deepmerge: ^4.2.2
+    error-stack-parser: ^2.1.4
+    ink: ^3.2.0
+    joi: ^17.6.0
+    lowdb: ^5.0.5
+    react: ^17.0.2
+  bin:
+    minimouli: ./bin/minimouli.js
+  languageName: unknown
+  linkType: soft
 
 "minipass-collect@npm:^1.0.2":
   version: 1.0.2
@@ -8219,6 +8257,20 @@ __metadata:
   dependencies:
     escape-string-regexp: ^2.0.0
   checksum: 052bf4d25bbf5f78e06c1d5e67de2e088b06871fa04107ca8d3f0e9d9263326e2942c8bedee3545795fc77d787d443a538345eef74db2f8e35db3558c6f91ff7
+  languageName: node
+  linkType: hard
+
+"stackframe@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "stackframe@npm:1.3.4"
+  checksum: bae1596873595c4610993fa84f86a3387d67586401c1816ea048c0196800c0646c4d2da98c2ee80557fd9eff05877efe33b91ba6cd052658ed96ddc85d19067d
+  languageName: node
+  linkType: hard
+
+"steno@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "steno@npm:3.0.0"
+  checksum: fb928451a4f96342b496b71147fbca0a20a5daf7bfd23a4a1cec8640d3c6c67176809169e9a5801ea44490d448b5b7ecb151b9fba434872c2d65549847f39460
   languageName: node
   linkType: hard
 
