@@ -7,7 +7,15 @@
 
 import Joi from 'joi'
 
-const preferencesSchema = Joi.object({})
+const preferencesSchema = Joi.object({
+    api: Joi.object()
+        .keys({
+            baseUrl: Joi.string()
+                .uri({
+                    scheme: ['http', 'https']
+                })
+        })
+})
 
 export {
     preferencesSchema

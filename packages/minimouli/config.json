@@ -11,5 +11,8 @@
       },
       "issues": "https://github.com/minimouli/minimouli/issues"
     }
+  },
+  "api": {
+    "baseUrl": "https://api.minimouli.com"
   }
 }

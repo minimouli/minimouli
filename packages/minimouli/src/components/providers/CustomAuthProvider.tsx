@@ -10,6 +10,7 @@ import { AuthProvider } from '@minimouli/hooks'
 import { isMinimouliClientError } from '@minimouli/sdk'
 import React from 'react'
 import { AuthConfigService } from '../../services/auth-config.service.js'
+import { ConfigService } from '../../services/config.service.js'
 import type { ReactNode } from 'react'
 
 interface CustomAuthProviderProps {
@@ -19,6 +20,7 @@ interface CustomAuthProviderProps {
 const CustomAuthProvider = ({ children }: CustomAuthProviderProps) => {
 
     const authConfigService = useInjectable(AuthConfigService)
+    const configService = useInjectable(ConfigService)
 
     const handleLogin = async ({ accessToken }: { accessToken: string }) => {
 
@@ -57,6 +59,9 @@ const CustomAuthProvider = ({ children }: CustomAuthProviderProps) => {
             onLogout={handleLogout}
             onAccessTokenRequest={handleAccessTokenRequest}
             onError={handleError}
+            options={{
+                baseUrl: configService.config.api.baseUrl
+            }}
         >
             {children}
         </AuthProvider>

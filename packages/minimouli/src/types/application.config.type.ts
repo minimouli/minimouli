@@ -21,6 +21,9 @@ interface ApplicationConfig {
             issues: string
         }
     }
+    api: {
+        baseUrl: string
+    }
 }
 
 export type {

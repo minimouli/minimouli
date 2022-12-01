@@ -50,6 +50,16 @@ const configSchema = Joi.object({
                 })
                 .required()
         })
+        .required(),
+
+    api: Joi.object()
+        .keys({
+            baseUrl: Joi.string()
+                .uri({
+                    scheme: ['http', 'https']
+                })
+                .required()
+        })
         .required()
 })
 
