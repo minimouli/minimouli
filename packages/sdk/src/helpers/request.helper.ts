@@ -29,6 +29,7 @@ const request = async <T>(
         url: url.href,
         headers,
         data,
+        signal: options.signal,
         validateStatus
     })
 

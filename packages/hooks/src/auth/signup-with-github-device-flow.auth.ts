@@ -32,8 +32,8 @@ class SignupWithGitHubDeviceFlowAuth {
         return this
     }
 
-    stopRequestingAccessToken(): void {
-        this.auth.stopRequestingAccessToken()
+    abortAllRequests(): void {
+        this.auth.abortAllRequests()
     }
 
     signup(): this {

@@ -39,6 +39,10 @@ class Client {
         return new GitHubDeviceFlowAuth(this.httpClient, appName)
     }
 
+    abortAllRequests(): void {
+        this.httpClient.abortAllRequests()
+    }
+
 }
 
 export {

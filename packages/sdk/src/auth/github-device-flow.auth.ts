@@ -24,6 +24,8 @@ class GitHubDeviceFlowAuth {
     private static PollingIntervalAdjustment = 500
 
     private eventEmitter = new EventEmitter()
+    private abortController = new AbortController()
+    private client: Client | undefined
 
     private deviceCode: string | undefined
     private githubAccessToken: string | undefined
@@ -98,8 +100,10 @@ class GitHubDeviceFlowAuth {
         this.eventEmitter.removeListener(event, listener)
     }
 
-    stopRequestingAccessToken(): void {
+    abortAllRequests(): void {
         clearTimeout(this.pollingTimer)
+        this.client?.abortAllRequests()
+        this.abortController.abort()
     }
 
     private dispatchEventsFromResponse(response: GitHubDeviceFlowAuthResponse): void {
@@ -132,6 +136,7 @@ class GitHubDeviceFlowAuth {
                 client_id: GitHubConfig.OAuthAppClientID,
                 scope: GitHubConfig.OAuthAppScopes.join(' ')
             },
+            signal: this.abortController.signal,
             validateStatus: () => true
         })
 
@@ -165,7 +170,9 @@ class GitHubDeviceFlowAuth {
                             client_id: GitHubConfig.OAuthAppClientID,
                             device_code: this.deviceCode,
                             grant_type: 'urn:ietf:params:oauth:grant-type:device_code'
-                        }
+                        },
+                        signal: this.abortController.signal,
+                        validateStatus: () => true
                     })
 
                     this.pollingTimer = undefined
@@ -226,7 +233,9 @@ class GitHubDeviceFlowAuth {
                 accessToken,
                 baseUrl: this.httpClient.baseUrl
             })
+            this.client = client
             const user = await client.accounts.me()
+            this.client = undefined
 
             return [GitHubDeviceFlowAuthStage.Succeed, {
                 accessToken,
@@ -259,7 +268,9 @@ class GitHubDeviceFlowAuth {
                 accessToken,
                 baseUrl: this.httpClient.baseUrl
             })
+            this.client = client
             const user = await client.accounts.me()
+            this.client = undefined
 
             return [GitHubDeviceFlowAuthStage.Succeed, {
                 accessToken,

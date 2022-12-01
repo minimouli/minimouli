@@ -48,6 +48,8 @@ const useAuthProvider = ({
     const [stateValue, setStateValue] = useState<AuthContextStateValue>({ loading: true })
 
     useEffect(() => {
+        let client: Client | undefined
+
         void (async () => {
 
             const accessToken = await onAccessTokenRequest()
@@ -57,7 +59,7 @@ const useAuthProvider = ({
 
             try {
 
-                const client = new Client({
+                client = new Client({
                     ...options,
                     accessToken
                 })
@@ -78,6 +80,8 @@ const useAuthProvider = ({
                     onError(new Error('An error occurs during the login'))
             }
         })()
+
+        return () => client?.abortAllRequests()
     }, [])
 
     const handleLogin = ({ client, user, accessToken }: LoginParameters) => {

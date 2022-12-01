@@ -10,6 +10,7 @@ import type { Callable } from '@minimouli/types'
 interface RequestOptions {
     headers: Record<string, string>
     body: Record<string, unknown>
+    signal: AbortSignal
     validateStatus: Callable<[number], boolean>
 }
 

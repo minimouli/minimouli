@@ -14,6 +14,8 @@ import type { RequestOptions } from './types/options/request.options.type.js'
 
 class HttpClient {
 
+    private readonly abortController = new AbortController()
+
     constructor(
         private readonly accessToken: string | undefined,
         public readonly baseUrl: string
@@ -31,7 +33,11 @@ class HttpClient {
             },
             validateStatus: () => true
         }
-        const requestOptions = deepmerge(requestOptionsBase, options)
+        const requestOptions = {
+            ...deepmerge(requestOptionsBase, options),
+            // AbortSignal cannot be merged by deepmerge
+            signal: this.abortController.signal
+        }
         const url = new URL(route, this.baseUrl)
 
         const response = await request<BaseResDto<T>>(method, url, requestOptions)
@@ -60,6 +66,10 @@ class HttpClient {
 
     async delete<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
         return this.request(Method.Delete, route, options)
+    }
+
+    abortAllRequests(): void {
+        this.abortController.abort()
     }
 
 }
