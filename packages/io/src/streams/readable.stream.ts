@@ -97,11 +97,11 @@ class ReadableStream implements NativeReadable {
 
         switch (this.stream.readableFlowing) {
             case true:
-                return ReadableMode.FLOW
+                return ReadableMode.Flow
             case false:
-                return ReadableMode.PAUSE
+                return ReadableMode.Pause
             default:
-                return ReadableMode.NULL
+                return ReadableMode.Null
         }
     }
 

@@ -55,7 +55,7 @@ class Scanner {
         if (error1 !== undefined)
             return { error: 'Cannot perform a directory scan, please check if git is correctly installed' }
 
-        const { code, output, error: error2 } = await git.wait({ descriptor: Descriptor.STDOUT })
+        const { code, output, error: error2 } = await git.wait({ descriptor: Descriptor.Stdout })
 
         if (code !== 0)
             return { error: 'The scanned directory is probably not a git repository' }

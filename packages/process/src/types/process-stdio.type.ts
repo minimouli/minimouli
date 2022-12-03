@@ -9,9 +9,9 @@ import type { Descriptor, NativeReadable, NativeWritable } from '@minimouli/type
 
 type FileDescriptorInstruction = 'pipe' | 'ignore' | 'inherit'
 
-type Stdin = Descriptor.STDIN | FileDescriptorInstruction | NativeReadable | null
-type Stdout = Descriptor.STDOUT | FileDescriptorInstruction | NativeWritable | null
-type Stderr = Descriptor.STDERR | FileDescriptorInstruction | NativeWritable | null
+type Stdin = Descriptor.Stdin | FileDescriptorInstruction | NativeReadable | null
+type Stdout = Descriptor.Stdout | FileDescriptorInstruction | NativeWritable | null
+type Stderr = Descriptor.Stderr | FileDescriptorInstruction | NativeWritable | null
 type StdioValue = Stdin | Stdout | Stderr
 
 interface ProcessStdioType {

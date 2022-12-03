@@ -95,9 +95,9 @@ class Process {
 
                 let stream: NativeReadable | undefined
 
-                if (options.descriptor === Descriptor.STDOUT)
+                if (options.descriptor === Descriptor.Stdout)
                     stream = this.stdout
-                if (options.descriptor === Descriptor.STDERR)
+                if (options.descriptor === Descriptor.Stderr)
                     stream = this.stderr
 
                 if (stream === undefined) {

@@ -8,9 +8,9 @@
 import type { Stream, ReadableContent } from './stream.js'
 
 enum ReadableMode {
-    NULL = 0,
-    FLOW = 1,
-    PAUSE = 2
+    Null = 'ReadableMode.Null',
+    Flow = 'ReadableMode.Flow',
+    Pause = 'ReadableMode.Pause'
 }
 
 interface Readable extends Stream {

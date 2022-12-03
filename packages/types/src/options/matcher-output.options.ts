@@ -8,7 +8,7 @@
 import type { Descriptor } from '../stream/index.js'
 
 interface MatcherOutputOptions {
-    descriptor: Descriptor.STDOUT | Descriptor.STDERR
+    descriptor: Descriptor.Stdout | Descriptor.Stderr
     start: number
     end: number
 }

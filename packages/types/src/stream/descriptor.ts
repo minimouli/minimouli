@@ -6,9 +6,9 @@
  */
 
 enum Descriptor {
-    STDIN = 0,
-    STDOUT = 1,
-    STDERR = 2
+    Stdin = 0,
+    Stdout = 1,
+    Stderr = 2
 }
 
 export {

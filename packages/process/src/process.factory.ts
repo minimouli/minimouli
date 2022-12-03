@@ -45,9 +45,9 @@ class ProcessFactory {
     private _cwd: Path | undefined = undefined
 
     private _stdio: ProcessStdioType = {
-        stdin: Descriptor.STDIN,
-        stdout: Descriptor.STDOUT,
-        stderr: Descriptor.STDERR
+        stdin: Descriptor.Stdin,
+        stdout: Descriptor.Stdout,
+        stderr: Descriptor.Stderr
     }
 
     private _ipc = false
