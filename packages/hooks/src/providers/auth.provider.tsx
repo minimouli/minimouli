@@ -6,6 +6,7 @@
  */
 
 import { Client } from '@minimouli/sdk'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { LoginWithGitHubDeviceFlowAuth } from '../auth/login-with-github-device-flow.auth.js'
 import { SignupWithGitHubDeviceFlowAuth } from '../auth/signup-with-github-device-flow.auth.js'
@@ -72,6 +73,11 @@ const useAuthProvider = ({
                 })
 
             } catch (error: unknown) {
+
+                // eslint-disable-next-line import/no-named-as-default-member
+                if (axios.isCancel(error))
+                    return
+
                 setStateValue({ loading: false })
 
                 if (error instanceof Error)
