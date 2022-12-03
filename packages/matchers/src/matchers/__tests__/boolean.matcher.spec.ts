@@ -27,15 +27,15 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBe(true, true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 expected: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -53,15 +53,15 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBe(true, false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 expected: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -83,11 +83,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeTruthy(true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -105,11 +105,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeTruthy(false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -131,11 +131,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeFalsy(false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -153,11 +153,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeFalsy(true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -178,11 +178,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeNull(true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -199,11 +199,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeNull(false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -224,11 +224,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeDefined(true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -245,11 +245,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeDefined(false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -270,11 +270,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeUndefined(true)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -291,11 +291,11 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeUndefined(false)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -316,12 +316,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeNaN(true)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -338,12 +338,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeNaN(false)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -364,12 +364,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeLessThan(true, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -386,12 +386,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeLessThan(false, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -412,12 +412,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual(true, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -434,12 +434,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual(false, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -460,12 +460,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeGreaterThan(true, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -482,12 +482,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeGreaterThan(false, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -508,12 +508,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual(true, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -530,12 +530,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual(false, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -556,12 +556,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toExitWith(true, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -578,12 +578,12 @@ describe('BooleanMatcher', () => {
             const hint = matcher.toExitWith(false, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -604,12 +604,12 @@ describe('BooleanMatcher', () => {
             const hint = await matcher.toOutput(true, 0, {})
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'true',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {
@@ -626,12 +626,12 @@ describe('BooleanMatcher', () => {
             const hint = await matcher.toOutput(false, 0, {})
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'false',
-                    type: ObjectType.BOOLEAN
+                    type: ObjectType.Boolean
                 },
                 snippet: {
                     arguments: {

@@ -12,8 +12,8 @@ class MatcherError extends FrameworkError {
 
     constructor(message: string) {
         super({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message
         })
     }

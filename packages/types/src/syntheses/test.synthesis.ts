@@ -9,9 +9,9 @@ import type { ms } from '../unit.js'
 import type { Hint } from '../hints/index.js'
 
 enum TestStatus {
-    SUCCESS = 'Status.SUCCESS',
-    FAILURE = 'Status.FAILURE',
-    UNDEFINED = 'Status.UNDEFINED'
+    Success = 'Status.Success',
+    Failure = 'Status.Failure',
+    Undefined = 'Status.Undefined'
 }
 
 interface TestSynthesis {

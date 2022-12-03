@@ -7,8 +7,8 @@
 
 import type { HintBase, HintType, ObjectType } from './hint.js'
 
-interface EqualHint extends HintBase {
-    type: HintType.EQUAL
+interface EqualityHint extends HintBase {
+    type: HintType.Equality
     received: {
         value: string
         type: ObjectType
@@ -20,5 +20,5 @@ interface EqualHint extends HintBase {
 }
 
 export type {
-    EqualHint
+    EqualityHint
 }

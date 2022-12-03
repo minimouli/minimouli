@@ -7,19 +7,19 @@
 
 import type { HintBase, HintCategory, HintType, ObjectType } from './hint.js'
 
-interface StringDiffHint extends HintBase {
-    type: HintType.STRING_DIFF
-    category?: HintCategory.OUTPUT
+interface StringDifferenceHint extends HintBase {
+    type: HintType.StringDifference
+    category?: HintCategory.Output
     received: {
         value: string[]
-        type: ObjectType.STRING
+        type: ObjectType.String
     }
     expected: {
         value: string[]
-        type: ObjectType.STRING
+        type: ObjectType.String
     }
 }
 
 export type {
-    StringDiffHint
+    StringDifferenceHint
 }

@@ -45,7 +45,7 @@ const createMatcherFn = <R, A extends unknown[]>(received: R, fn: (received: R, 
 
     const hint = fn(received, ...args)
 
-    if (hint.status === HintStatus.FAILURE)
+    if (hint.status === HintStatus.Failure)
         throw new AssertionError(hint)
 }
 
@@ -53,7 +53,7 @@ const createConcurrentMatcherFn = <R, A extends unknown[]>(received: R, fn: (rec
 
     const hint = await fn(received, ...args)
 
-    if (hint.status === HintStatus.FAILURE)
+    if (hint.status === HintStatus.Failure)
         throw new AssertionError(hint)
 }
 
@@ -61,13 +61,13 @@ const createNotMatcherFn = <R, A extends unknown[]>(received: R, fn: (received: 
 
     const hint = fn(received, ...args)
 
-    if (hint.type !== HintType.MATCHER_ERROR)
-        hint.status = hint.status === HintStatus.SUCCESS ? HintStatus.FAILURE : HintStatus.SUCCESS
+    if (hint.type !== HintType.MatcherError)
+        hint.status = hint.status === HintStatus.Success ? HintStatus.Failure : HintStatus.Success
 
     if (hint.snippet)
         hint.snippet.method = `not.${hint.snippet.method}`
 
-    if (hint.status === HintStatus.FAILURE)
+    if (hint.status === HintStatus.Failure)
         throw new AssertionError(hint)
 }
 
@@ -75,13 +75,13 @@ const createConcurrentNotMatcherFn = <R, A extends unknown[]>(received: R, fn: (
 
     const hint = await fn(received, ...args)
 
-    if (hint.type !== HintType.MATCHER_ERROR)
-        hint.status = hint.status === HintStatus.SUCCESS ? HintStatus.FAILURE : HintStatus.SUCCESS
+    if (hint.type !== HintType.MatcherError)
+        hint.status = hint.status === HintStatus.Success ? HintStatus.Failure : HintStatus.Success
 
     if (hint.snippet)
         hint.snippet.method = `not.${hint.snippet.method}`
 
-    if (hint.status === HintStatus.FAILURE)
+    if (hint.status === HintStatus.Failure)
         throw new AssertionError(hint)
 }
 

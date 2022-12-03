@@ -15,17 +15,16 @@ import type { TestFn } from '@minimouli/types/blocks'
 import type { Hint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Context } from './tree/contexts/context.js'
 
-interface ExecuteTestSuccessResponse {
-    status: TestStatus.SUCCESS
-    hint: undefined
-}
+type ExecuteTestResponse =
+    | {
+        status: TestStatus.Success
+        hint?: undefined
+    }
+    | {
+        status: TestStatus.Failure
+        hint: Hint
+    }
 
-interface ExecuteTestFailureResponse {
-    status: TestStatus.FAILURE
-    hint: Hint
-}
-
-type ExecuteTestResponse = ExecuteTestSuccessResponse | ExecuteTestFailureResponse
 type ExecuteResponse = ExecuteTestResponse & {
     duration: Unit.ms
 }
@@ -46,19 +45,19 @@ class TextExecutor {
             const hint = error instanceof FrameworkError
                 ? error.hint
                 : {
-                    type: HintType.MATCHER_ERROR,
-                    status: HintStatus.FAILURE,
+                    type: HintType.MatcherError,
+                    status: HintStatus.Failure,
                     message: 'Unknown error returned'
                 } as MatcherErrorHint
 
             return {
-                status: TestStatus.FAILURE,
+                status: TestStatus.Failure,
                 hint
             }
         }
 
         return {
-            status: TestStatus.SUCCESS,
+            status: TestStatus.Success,
             hint: undefined
         }
     }

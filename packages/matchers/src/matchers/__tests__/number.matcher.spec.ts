@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import { ComparisonSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { NumberMatcher } from '../number.matcher.js'
 import {
     assert,
@@ -35,15 +35,15 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBe(0, 0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -61,15 +61,15 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBe(0, 1)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -91,11 +91,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeTruthy(1)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -113,11 +113,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeTruthy(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -139,11 +139,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeFalsy(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -161,11 +161,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeFalsy(1)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -186,11 +186,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeNull(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -211,11 +211,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeDefined(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -236,11 +236,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeUndefined(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -262,11 +262,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeNaN(Number.NaN)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'NaN',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -284,11 +284,11 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeNaN(0)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -310,16 +310,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeLessThan(1, 2)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.SUCCESS,
-                symbol: CompSymbol.LESS_THAN,
+                type: HintType.Comparison,
+                status: HintStatus.Success,
+                symbol: ComparisonSymbol.LessThan,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '2',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -337,16 +337,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeLessThan(1, 0)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.FAILURE,
-                symbol: CompSymbol.LESS_THAN,
+                type: HintType.Comparison,
+                status: HintStatus.Failure,
+                symbol: ComparisonSymbol.LessThan,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -368,16 +368,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual(1, 1)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.SUCCESS,
-                symbol: CompSymbol.LESS_THAN_OR_EQUAL,
+                type: HintType.Comparison,
+                status: HintStatus.Success,
+                symbol: ComparisonSymbol.LessThanOrEqual,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -395,16 +395,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual(1, 0)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.FAILURE,
-                symbol: CompSymbol.LESS_THAN_OR_EQUAL,
+                type: HintType.Comparison,
+                status: HintStatus.Failure,
+                symbol: ComparisonSymbol.LessThanOrEqual,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -426,16 +426,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeGreaterThan(1, 0)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.SUCCESS,
-                symbol: CompSymbol.GREATER_THAN,
+                type: HintType.Comparison,
+                status: HintStatus.Success,
+                symbol: ComparisonSymbol.GreaterThan,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -453,16 +453,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeGreaterThan(1, 2)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.FAILURE,
-                symbol: CompSymbol.GREATER_THAN,
+                type: HintType.Comparison,
+                status: HintStatus.Failure,
+                symbol: ComparisonSymbol.GreaterThan,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '2',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -484,16 +484,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual(1, 1)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.SUCCESS,
-                symbol: CompSymbol.GREATER_THAN_OR_EQUAL,
+                type: HintType.Comparison,
+                status: HintStatus.Success,
+                symbol: ComparisonSymbol.GreaterThanOrEqual,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -511,16 +511,16 @@ describe('NumberMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual(1, 2)
 
             expect(hint).toEqual({
-                type: HintType.COMP,
-                status: HintStatus.FAILURE,
-                symbol: CompSymbol.GREATER_THAN_OR_EQUAL,
+                type: HintType.Comparison,
+                status: HintStatus.Failure,
+                symbol: ComparisonSymbol.GreaterThanOrEqual,
                 received: {
                     value: '1',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 expected: {
                     value: '2',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -541,12 +541,12 @@ describe('NumberMatcher', () => {
             const hint = matcher.toExitWith(0, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {
@@ -567,12 +567,12 @@ describe('NumberMatcher', () => {
             const hint = await matcher.toOutput(0, 0, {})
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: '0',
-                    type: ObjectType.NUMBER
+                    type: ObjectType.Number
                 },
                 snippet: {
                     arguments: {

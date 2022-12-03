@@ -7,27 +7,27 @@
 
 import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../helpers/assert.helper.js'
-import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { EqualityHint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class BooleanMatcher implements Matcher<boolean> {
 
-    toBe(received: boolean, expected: boolean): EqualHint {
+    toBe(received: boolean, expected: boolean): EqualityHint {
 
         const pass = assertToBe(received, expected)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -39,16 +39,16 @@ class BooleanMatcher implements Matcher<boolean> {
         }
     }
 
-    toBeTruthy(received: boolean): EqualHint {
+    toBeTruthy(received: boolean): EqualityHint {
 
         const pass = assertToBeTruthy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -60,16 +60,16 @@ class BooleanMatcher implements Matcher<boolean> {
         }
     }
 
-    toBeFalsy(received: boolean): EqualHint {
+    toBeFalsy(received: boolean): EqualityHint {
 
         const pass = assertToBeFalsy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -81,13 +81,13 @@ class BooleanMatcher implements Matcher<boolean> {
         }
     }
 
-    toBeNull(received: boolean): EqualHint {
+    toBeNull(received: boolean): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -99,13 +99,13 @@ class BooleanMatcher implements Matcher<boolean> {
         }
     }
 
-    toBeDefined(received: boolean): EqualHint {
+    toBeDefined(received: boolean): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -117,13 +117,13 @@ class BooleanMatcher implements Matcher<boolean> {
         }
     }
 
-    toBeUndefined(received: boolean): EqualHint {
+    toBeUndefined(received: boolean): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -137,12 +137,12 @@ class BooleanMatcher implements Matcher<boolean> {
 
     toBeNaN(received: boolean): MatcherErrorHint {
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -158,12 +158,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -179,12 +179,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -200,12 +200,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -221,12 +221,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -242,12 +242,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {
@@ -264,12 +264,12 @@ class BooleanMatcher implements Matcher<boolean> {
         void options
 
         return Promise.resolve({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received.toString(),
-                type: ObjectType.BOOLEAN
+                type: ObjectType.Boolean
             },
             snippet: {
                 arguments: {

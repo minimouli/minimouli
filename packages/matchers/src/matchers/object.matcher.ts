@@ -7,14 +7,14 @@
 
 import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBeFalsy, assertToBeNull, assertToBeTruthy, assertToEqual } from '../helpers/assert.helper.js'
-import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { EqualityHint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class ObjectMatcher implements Matcher<object | null> {
 
-    toBe(received: object | null, expected: object | null): EqualHint {
+    toBe(received: object | null, expected: object | null): EqualityHint {
 
         const pass = assertToEqual(received, expected)
 
@@ -22,15 +22,15 @@ class ObjectMatcher implements Matcher<object | null> {
         const isExpectedNull = expected === null
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: isReceivedNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             expected: {
                 value: isExpectedNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -42,17 +42,17 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toBeTruthy(received: object | null): EqualHint {
+    toBeTruthy(received: object | null): EqualityHint {
 
         const pass = assertToBeTruthy(received)
         const isNull = received === null
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -64,17 +64,17 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toBeFalsy(received: object | null): EqualHint {
+    toBeFalsy(received: object | null): EqualityHint {
 
         const pass = assertToBeFalsy(received)
         const isNull = received === null
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -86,16 +86,16 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toBeNull(received: object | null): EqualHint {
+    toBeNull(received: object | null): EqualityHint {
 
         const pass = assertToBeNull(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: pass ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -107,16 +107,16 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toBeDefined(received: object | null): EqualHint {
+    toBeDefined(received: object | null): EqualityHint {
 
         const isNull = received === null
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -128,16 +128,16 @@ class ObjectMatcher implements Matcher<object | null> {
         }
     }
 
-    toBeUndefined(received: object | null): EqualHint {
+    toBeUndefined(received: object | null): EqualityHint {
 
         const isNull = received === null
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -154,12 +154,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -177,12 +177,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -200,12 +200,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -223,12 +223,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -246,12 +246,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -269,12 +269,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {
@@ -293,12 +293,12 @@ class ObjectMatcher implements Matcher<object | null> {
         const isNull = received === null
 
         return Promise.resolve({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: isNull ? 'null' : 'object',
-                type: ObjectType.OBJECT
+                type: ObjectType.Object
             },
             snippet: {
                 arguments: {

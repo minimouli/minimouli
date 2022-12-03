@@ -6,31 +6,31 @@
  */
 
 enum HintType {
-    COMP = 'Hint.COMP',
-    EQUAL = 'Hint.EQUAL',
-    STREAM_DIFF = 'Hint.STREAM.DIFF',
-    STRING_DIFF = 'Hint.STRING_DIFF',
-    TIMEOUT = 'Hint.TIMEOUT',
-    MATCHER_ERROR = 'Hint.MATCHER_ERROR'
+    Comparison = 'HintType.Comparison',
+    Equality = 'HintType.Equality',
+    StreamDifference = 'HintType.StreamDifference',
+    StringDifference = 'HintType.StringDifference',
+    Timeout = 'HintType.Timeout',
+    MatcherError = 'HintType.MatcherError'
 }
 
 enum HintStatus {
-    SUCCESS = 'Status.SUCCESS',
-    FAILURE = 'Status.FAILURE'
+    Success = 'Status.Success',
+    Failure = 'Status.Failure'
 }
 
 enum HintCategory {
-    OUTPUT = 'Category.OUTPUT',
-    EXIT_CODE = 'Category.EXIT_CODE',
-    TIMEOUT = 'Category.TIMEOUT'
+    Output = 'Category.Output',
+    ExitCode = 'Category.ExitCode',
+    Timeout = 'Category.Timeout'
 }
 
 enum ObjectType {
-    BOOLEAN = 'boolean',
-    NUMBER = 'number',
-    OBJECT = 'object',
-    STRING = 'string',
-    UNDEFINED = 'undefined'
+    Boolean = 'boolean',
+    Number = 'number',
+    Object = 'object',
+    String = 'string',
+    Undefined = 'undefined'
 }
 
 interface HintBase {

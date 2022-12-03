@@ -9,8 +9,8 @@ import type { HintBase, HintCategory, HintType } from './hint.js'
 import type { ms } from '../unit.js'
 
 interface TimeoutHint extends HintBase {
-    type: HintType.TIMEOUT
-    category?: HintCategory.TIMEOUT
+    type: HintType.Timeout
+    category?: HintCategory.Timeout
     timeout: ms
 }
 

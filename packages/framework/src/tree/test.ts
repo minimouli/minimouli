@@ -22,7 +22,7 @@ interface IssuedEvents extends EventDescriptions {
 
 class Test {
 
-    private status: TestStatus = TestStatus.UNDEFINED
+    private status: TestStatus = TestStatus.Undefined
     private hint: Hint | undefined = undefined
     private duration: Unit.ms = Number.NaN
 

@@ -7,27 +7,27 @@
 
 import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../helpers/assert.helper.js'
-import type { EqualHint, MatcherErrorHint, StringDiffHint } from '@minimouli/types/hints'
+import type { EqualityHint, MatcherErrorHint, StringDifferenceHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class StringMatcher implements Matcher<string> {
 
-    toBe(received: string, expected: string): StringDiffHint {
+    toBe(received: string, expected: string): StringDifferenceHint {
 
         const pass = assertToBe(received, expected)
 
         return {
-            type: HintType.STRING_DIFF,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.StringDifference,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.split('\n'),
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             expected: {
                 value: expected.split('\n'),
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -39,16 +39,16 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toBeTruthy(received: string): EqualHint {
+    toBeTruthy(received: string): EqualityHint {
 
         const pass = assertToBeTruthy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -60,16 +60,16 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toBeFalsy(received: string): EqualHint {
+    toBeFalsy(received: string): EqualityHint {
 
         const pass = assertToBeFalsy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -81,13 +81,13 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toBeNull(received: string): EqualHint {
+    toBeNull(received: string): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -99,13 +99,13 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toBeDefined(received: string): EqualHint {
+    toBeDefined(received: string): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -117,13 +117,13 @@ class StringMatcher implements Matcher<string> {
         }
     }
 
-    toBeUndefined(received: string): EqualHint {
+    toBeUndefined(received: string): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -137,12 +137,12 @@ class StringMatcher implements Matcher<string> {
 
     toBeNaN(received: string): MatcherErrorHint {
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -158,12 +158,12 @@ class StringMatcher implements Matcher<string> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -179,12 +179,12 @@ class StringMatcher implements Matcher<string> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -200,12 +200,12 @@ class StringMatcher implements Matcher<string> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -221,12 +221,12 @@ class StringMatcher implements Matcher<string> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -242,12 +242,12 @@ class StringMatcher implements Matcher<string> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {
@@ -264,12 +264,12 @@ class StringMatcher implements Matcher<string> {
         void options
 
         return Promise.resolve({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received,
-                type: ObjectType.STRING
+                type: ObjectType.String
             },
             snippet: {
                 arguments: {

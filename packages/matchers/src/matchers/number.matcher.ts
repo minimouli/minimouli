@@ -5,29 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CompSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import { ComparisonSymbol, HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
 import { assert, assertToBe, assertToBeFalsy, assertToBeNaN, assertToBeTruthy } from '../helpers/assert.helper.js'
-import type { CompHint, EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { ComparisonHint, EqualityHint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class NumberMatcher implements Matcher<number> {
 
-    toBe(received: number, expected: number): EqualHint {
+    toBe(received: number, expected: number): EqualityHint {
 
         const pass = assertToBe(received, expected)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -39,16 +39,16 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeTruthy(received: number): EqualHint {
+    toBeTruthy(received: number): EqualityHint {
 
         const pass = assertToBeTruthy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -60,16 +60,16 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeFalsy(received: number): EqualHint {
+    toBeFalsy(received: number): EqualityHint {
 
         const pass = assertToBeFalsy(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -81,13 +81,13 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeNull(received: number): EqualHint {
+    toBeNull(received: number): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -99,13 +99,13 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeDefined(received: number): EqualHint {
+    toBeDefined(received: number): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -117,13 +117,13 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeUndefined(received: number): EqualHint {
+    toBeUndefined(received: number): EqualityHint {
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -135,16 +135,16 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeNaN(received: number): EqualHint {
+    toBeNaN(received: number): EqualityHint {
 
         const pass = assertToBeNaN(received)
 
         return {
-            type: HintType.EQUAL,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -156,21 +156,21 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeLessThan(received: number, expected: number): CompHint {
+    toBeLessThan(received: number, expected: number): ComparisonHint {
 
         const pass = assert(received < expected)
 
         return {
-            type: HintType.COMP,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
-            symbol: CompSymbol.LESS_THAN,
+            type: HintType.Comparison,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            symbol: ComparisonSymbol.LessThan,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -182,21 +182,21 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeLessThanOrEqual(received: number, expected: number): CompHint {
+    toBeLessThanOrEqual(received: number, expected: number): ComparisonHint {
 
         const pass = assert(received <= expected)
 
         return {
-            type: HintType.COMP,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
-            symbol: CompSymbol.LESS_THAN_OR_EQUAL,
+            type: HintType.Comparison,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            symbol: ComparisonSymbol.LessThanOrEqual,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -208,21 +208,21 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeGreaterThan(received: number, expected: number): CompHint {
+    toBeGreaterThan(received: number, expected: number): ComparisonHint {
 
         const pass = assert(received > expected)
 
         return {
-            type: HintType.COMP,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
-            symbol: CompSymbol.GREATER_THAN,
+            type: HintType.Comparison,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            symbol: ComparisonSymbol.GreaterThan,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -234,21 +234,21 @@ class NumberMatcher implements Matcher<number> {
         }
     }
 
-    toBeGreaterThanOrEqual(received: number, expected: number): CompHint {
+    toBeGreaterThanOrEqual(received: number, expected: number): ComparisonHint {
 
         const pass = assert(received >= expected)
 
         return {
-            type: HintType.COMP,
-            status: pass ? HintStatus.SUCCESS : HintStatus.FAILURE,
-            symbol: CompSymbol.GREATER_THAN_OR_EQUAL,
+            type: HintType.Comparison,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            symbol: ComparisonSymbol.GreaterThanOrEqual,
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             expected: {
                 value: expected.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -264,12 +264,12 @@ class NumberMatcher implements Matcher<number> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {
@@ -286,12 +286,12 @@ class NumberMatcher implements Matcher<number> {
         void options
 
         return Promise.resolve({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: received.toString(),
-                type: ObjectType.NUMBER
+                type: ObjectType.Number
             },
             snippet: {
                 arguments: {

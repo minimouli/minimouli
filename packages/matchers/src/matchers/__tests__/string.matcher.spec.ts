@@ -27,15 +27,15 @@ describe('StringMatcher', () => {
             const hint = matcher.toBe('hello', 'hello')
 
             expect(hint).toEqual({
-                type: HintType.STRING_DIFF,
-                status: HintStatus.SUCCESS,
+                type: HintType.StringDifference,
+                status: HintStatus.Success,
                 received: {
                     value: ['hello'],
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 expected: {
                     value: ['hello'],
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -53,15 +53,15 @@ describe('StringMatcher', () => {
             const hint = matcher.toBe('hello', 'bonjour')
 
             expect(hint).toEqual({
-                type: HintType.STRING_DIFF,
-                status: HintStatus.FAILURE,
+                type: HintType.StringDifference,
+                status: HintStatus.Failure,
                 received: {
                     value: ['hello'],
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 expected: {
                     value: ['bonjour'],
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -83,11 +83,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeTruthy('hello')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'hello',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -105,11 +105,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeTruthy('')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -131,11 +131,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeFalsy('')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -153,11 +153,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeFalsy('hello')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'hello',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -178,11 +178,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeNull('')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -203,11 +203,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeDefined('')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -228,11 +228,11 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeUndefined('')
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -253,12 +253,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeNaN('')
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -279,12 +279,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeLessThan('', 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -305,12 +305,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual('', 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -331,12 +331,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeGreaterThan('', 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -357,12 +357,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual('', 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -383,12 +383,12 @@ describe('StringMatcher', () => {
             const hint = matcher.toExitWith('', 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {
@@ -409,12 +409,12 @@ describe('StringMatcher', () => {
             const hint = await matcher.toOutput('', 0, {})
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: '',
-                    type: ObjectType.STRING
+                    type: ObjectType.String
                 },
                 snippet: {
                     arguments: {

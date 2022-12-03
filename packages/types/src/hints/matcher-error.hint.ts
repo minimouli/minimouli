@@ -8,8 +8,8 @@
 import type { HintBase, HintStatus, HintType, ObjectType } from './hint.js'
 
 interface MatcherErrorHint extends HintBase {
-    type: HintType.MATCHER_ERROR
-    status: HintStatus.FAILURE
+    type: HintType.MatcherError
+    status: HintStatus.Failure
     message: string
     received?: {
         value: string

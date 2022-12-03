@@ -7,29 +7,30 @@
 
 import type { HintBase, HintType, ObjectType } from './hint.js'
 
-enum CompSymbol {
-    LESS_THAN = '<',
-    LESS_THAN_OR_EQUAL = '<=',
-    GREATER_THAN = '>',
-    GREATER_THAN_OR_EQUAL = '>='
+enum ComparisonSymbol {
+    LessThan = '<',
+    LessThanOrEqual = '<=',
+    GreaterThan = '>',
+    GreaterThanOrEqual = '>='
 }
 
-interface CompHint extends HintBase {
-    type: HintType.COMP
-    symbol: CompSymbol
+interface ComparisonHint extends HintBase {
+    type: HintType.Comparison
+
+    symbol: ComparisonSymbol
     received: {
         value: string
-        type: ObjectType.NUMBER
+        type: ObjectType.Number
     }
     expected: {
         value: string
-        type: ObjectType.NUMBER
+        type: ObjectType.Number
     }
 }
 
 export {
-    CompSymbol
+    ComparisonSymbol
 }
 export type {
-    CompHint
+    ComparisonHint
 }

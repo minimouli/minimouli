@@ -8,27 +8,27 @@
 /* eslint-disable @typescript-eslint/no-meaningless-void-operator */
 
 import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
-import type { EqualHint, MatcherErrorHint } from '@minimouli/types/hints'
+import type { EqualityHint, MatcherErrorHint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 import type { PathInterface } from '@minimouli/types/interfaces'
 import type { MatcherOutputOptions } from '@minimouli/types/options'
 
 class UndefinedMatcher implements Matcher<undefined> {
 
-    toBe(received: undefined, expected: undefined): EqualHint {
+    toBe(received: undefined, expected: undefined): EqualityHint {
         void received
         void expected
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             expected: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -40,15 +40,15 @@ class UndefinedMatcher implements Matcher<undefined> {
         }
     }
 
-    toBeTruthy(received: undefined): EqualHint {
+    toBeTruthy(received: undefined): EqualityHint {
         void received
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -60,15 +60,15 @@ class UndefinedMatcher implements Matcher<undefined> {
         }
     }
 
-    toBeFalsy(received: undefined): EqualHint {
+    toBeFalsy(received: undefined): EqualityHint {
         void received
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -80,15 +80,15 @@ class UndefinedMatcher implements Matcher<undefined> {
         }
     }
 
-    toBeNull(received: undefined): EqualHint {
+    toBeNull(received: undefined): EqualityHint {
         void received
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -100,15 +100,15 @@ class UndefinedMatcher implements Matcher<undefined> {
         }
     }
 
-    toBeDefined(received: undefined): EqualHint {
+    toBeDefined(received: undefined): EqualityHint {
         void received
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.FAILURE,
+            type: HintType.Equality,
+            status: HintStatus.Failure,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -120,15 +120,15 @@ class UndefinedMatcher implements Matcher<undefined> {
         }
     }
 
-    toBeUndefined(received: undefined): EqualHint {
+    toBeUndefined(received: undefined): EqualityHint {
         void received
 
         return {
-            type: HintType.EQUAL,
-            status: HintStatus.SUCCESS,
+            type: HintType.Equality,
+            status: HintStatus.Success,
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -144,12 +144,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void received
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -166,12 +166,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -188,12 +188,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -210,12 +210,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -232,12 +232,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be a number',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -254,12 +254,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void expected
 
         return {
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {
@@ -277,12 +277,12 @@ class UndefinedMatcher implements Matcher<undefined> {
         void options
 
         return Promise.resolve({
-            type: HintType.MATCHER_ERROR,
-            status: HintStatus.FAILURE,
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
             message: 'received must be an executable',
             received: {
                 value: 'undefined',
-                type: ObjectType.UNDEFINED
+                type: ObjectType.Undefined
             },
             snippet: {
                 arguments: {

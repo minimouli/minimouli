@@ -21,15 +21,15 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBe(undefined, undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 expected: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -50,11 +50,11 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeTruthy(undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -75,11 +75,11 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeFalsy(undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -100,11 +100,11 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeNull(undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -125,11 +125,11 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeDefined(undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.FAILURE,
+                type: HintType.Equality,
+                status: HintStatus.Failure,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -150,11 +150,11 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeUndefined(undefined)
 
             expect(hint).toEqual({
-                type: HintType.EQUAL,
-                status: HintStatus.SUCCESS,
+                type: HintType.Equality,
+                status: HintStatus.Success,
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -175,12 +175,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeNaN(undefined)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -201,12 +201,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeLessThan(undefined, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -227,12 +227,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeLessThanOrEqual(undefined, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -253,12 +253,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeGreaterThan(undefined, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -279,12 +279,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toBeGreaterThanOrEqual(undefined, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be a number',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -305,12 +305,12 @@ describe('UndefinedMatcher', () => {
             const hint = matcher.toExitWith(undefined, 0)
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {
@@ -331,12 +331,12 @@ describe('UndefinedMatcher', () => {
             const hint = await matcher.toOutput(undefined, 0, {})
 
             expect(hint).toEqual({
-                type: HintType.MATCHER_ERROR,
-                status: HintStatus.FAILURE,
+                type: HintType.MatcherError,
+                status: HintStatus.Failure,
                 message: 'received must be an executable',
                 received: {
                     value: 'undefined',
-                    type: ObjectType.UNDEFINED
+                    type: ObjectType.Undefined
                 },
                 snippet: {
                     arguments: {

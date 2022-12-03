@@ -7,11 +7,11 @@
 
 import type { HintBase, HintCategory, HintType } from './hint.js'
 
-interface StreamDiffHint extends HintBase {
-    type: HintType.STREAM_DIFF
-    category?: HintCategory.OUTPUT
+interface StreamDifferenceHint extends HintBase {
+    type: HintType.StreamDifference
+    category?: HintCategory.Output
 }
 
 export type {
-    StreamDiffHint
+    StreamDifferenceHint
 }

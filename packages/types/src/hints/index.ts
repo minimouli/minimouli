@@ -5,27 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CompHint } from './comp.hint.js'
-import type { EqualHint } from './equal.hint.js'
+import type { ComparisonHint } from './comparison.hint.js'
+import type { EqualityHint } from './equality.hint.js'
 import type { MatcherErrorHint } from './matcher-error.hint.js'
-import type { StreamDiffHint } from './stream-diff.hint.js'
-import type { StringDiffHint } from './string-diff.hint.js'
+import type { StreamDifferenceHint } from './stream-difference.hint.js'
+import type { StringDifferenceHint } from './string-difference.hint.js'
 import type { TimeoutHint } from './timeout.hint.js'
 
 type Hint =
-    | CompHint
-    | EqualHint
+    | ComparisonHint
+    | EqualityHint
     | MatcherErrorHint
-    | StreamDiffHint
-    | StringDiffHint
+    | StreamDifferenceHint
+    | StringDifferenceHint
     | TimeoutHint
 
-export * from './comp.hint.js'
-export * from './equal.hint.js'
+export * from './comparison.hint.js'
+export * from './equality.hint.js'
 export * from './hint.js'
 export * from './matcher-error.hint.js'
-export * from './stream-diff.hint.js'
-export * from './string-diff.hint.js'
+export * from './stream-difference.hint.js'
+export * from './string-difference.hint.js'
 export * from './timeout.hint.js'
 export type {
     Hint
