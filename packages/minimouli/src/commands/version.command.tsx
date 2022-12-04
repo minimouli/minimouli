@@ -21,7 +21,7 @@ class VersionCommand extends Command {
     public readonly description = ['Display the current version of the CLI.']
     public readonly shortDescription = 'Display the current version of the CLI'
 
-    private format = this.arg(
+    private format = this.opt(
         new EnumArgument('format')
             .setDescription('The display format of the version')
             .setDefault(DisplayFormat.Text)
@@ -30,7 +30,6 @@ class VersionCommand extends Command {
                 DisplayFormat.PrettyJson,
                 DisplayFormat.MinifiedJson
             ])
-            .optional()
     )
 
     constructor(

@@ -33,7 +33,7 @@ class ScanCommand extends Command {
             .optional()
     )
 
-    private format = this.arg(
+    private format = this.opt(
         new EnumArgument('format')
             .setDescription('The display format of the result')
             .setDefault(DisplayFormat.Object)
@@ -42,7 +42,6 @@ class ScanCommand extends Command {
                 DisplayFormat.PrettyJson,
                 DisplayFormat.MinifiedJson
             ])
-            .optional()
     )
 
     execute(): ReactElement {

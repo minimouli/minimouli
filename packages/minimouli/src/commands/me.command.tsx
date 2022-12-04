@@ -28,7 +28,7 @@ class MeCommand extends Command {
     ]
     public readonly shortDescription = 'Display information about your user profile'
 
-    private format = this.arg(
+    private format = this.opt(
         new EnumArgument('format')
             .setDescription('The display format of the user profile')
             .setDefault(DisplayFormat.Object)
@@ -37,7 +37,6 @@ class MeCommand extends Command {
                 DisplayFormat.PrettyJson,
                 DisplayFormat.MinifiedJson
             ])
-            .optional()
     )
 
     execute(): ReactElement {
