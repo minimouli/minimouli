@@ -46,7 +46,10 @@ const useAuthProvider = ({
     options
 }: UseAuthProviderParameters) => {
 
-    const [stateValue, setStateValue] = useState<AuthContextStateValue>({ loading: true })
+    const [stateValue, setStateValue] = useState<AuthContextStateValue>({
+        loading: true,
+        client: new Client(options)
+    })
 
     useEffect(() => {
         let client: Client | undefined
@@ -56,7 +59,10 @@ const useAuthProvider = ({
             const accessToken = await onAccessTokenRequest()
 
             if (accessToken === undefined)
-                setStateValue({ loading: false })
+                setStateValue({
+                    loading: false,
+                    client: new Client(options)
+                })
 
             try {
 
@@ -78,7 +84,10 @@ const useAuthProvider = ({
                 if (axios.isCancel(error))
                     return
 
-                setStateValue({ loading: false })
+                setStateValue({
+                    loading: false,
+                    client: new Client(options)
+                })
 
                 if (error instanceof Error)
                     onError(error)
@@ -130,7 +139,10 @@ const useAuthProvider = ({
             const isLoggedOut = await onLogout()
 
             if (isLoggedOut)
-                setStateValue({ loading: false })
+                setStateValue({
+                    loading: false,
+                    client: new Client(options)
+                })
         })()
     }
 
