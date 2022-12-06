@@ -17,6 +17,7 @@ import { ScanCommand } from './commands/scan.command.js'
 import { VersionCommand } from './commands/version.command.js'
 import { AuthConfigService } from './services/auth-config.service.js'
 import { ConfigService } from './services/config.service.js'
+import { RegistryService } from './services/registry.service.js'
 import { ScanService } from './services/scan.service.js'
 
 const run = async (args: string[]): Promise<void> => {
@@ -29,6 +30,7 @@ const run = async (args: string[]): Promise<void> => {
     await app.addInjectables([
         AuthConfigService.setup(),
         ConfigService.setup(configPath),
+        RegistryService.setup(),
         ScanService
     ])
 
