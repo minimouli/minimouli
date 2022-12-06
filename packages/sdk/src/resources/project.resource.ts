@@ -10,7 +10,7 @@ import { ProjectEntity } from '../entities/project.entity.js'
 import type { HttpClient } from '../http-client.js'
 import type { PagingResultResDto } from '../dto/paging-result.res.dto.js'
 import type { ProjectResDto } from '../dto/project.res.dto.js'
-import type { PagingParameter } from '../types/parameters/paging.parameter.type.js'
+import type { PagingParameters } from '../types/parameters/paging.parameters.type.js'
 
 class ProjectResource {
 
@@ -23,7 +23,7 @@ class ProjectResource {
         return new ProjectEntity(this.httpClient, response)
     }
 
-    async list(parameters: Partial<PagingParameter> = {}): Promise<PagingResult<ProjectResDto, ProjectEntity>> {
+    async list(parameters: Partial<PagingParameters> = {}): Promise<PagingResult<ProjectResDto, ProjectEntity>> {
 
         const route = '/projects'
         const limit = parameters.limit ?? 20

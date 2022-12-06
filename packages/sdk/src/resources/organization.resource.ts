@@ -10,7 +10,7 @@ import { OrganizationEntity } from '../entities/organization.entity.js'
 import type { HttpClient } from '../http-client.js'
 import type { OrganizationResDto } from '../dto/organization.res.dto.js'
 import type { PagingResultResDto } from '../dto/paging-result.res.dto.js'
-import type { PagingParameter } from '../types/parameters/paging.parameter.type.js'
+import type { PagingParameters } from '../types/parameters/paging.parameters.type.js'
 
 class OrganizationResource {
 
@@ -23,7 +23,7 @@ class OrganizationResource {
         return new OrganizationEntity(this.httpClient, response)
     }
 
-    async list(parameters: Partial<PagingParameter> = {}): Promise<PagingResult<OrganizationResDto, OrganizationEntity>> {
+    async list(parameters: Partial<PagingParameters> = {}): Promise<PagingResult<OrganizationResDto, OrganizationEntity>> {
 
         const route = '/organizations'
         const limit = parameters.limit ?? 20

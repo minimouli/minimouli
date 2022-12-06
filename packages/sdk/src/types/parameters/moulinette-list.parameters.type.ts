@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-interface MoulinetteListParameter {
+interface MoulinetteListParameters {
     isOfficial: boolean
     projectName: string
     projectCycle: number
@@ -13,5 +13,5 @@ interface MoulinetteListParameter {
 }
 
 export type {
-    MoulinetteListParameter
+    MoulinetteListParameters
 }

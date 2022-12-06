@@ -10,8 +10,8 @@ import { MoulinetteEntity } from '../entities/moulinette.entity.js'
 import type { HttpClient } from '../http-client.js'
 import type { MoulinetteResDto } from '../dto/moulinette.res.dto.js'
 import type { PagingResultResDto } from '../dto/paging-result.res.dto.js'
-import type { MoulinetteListParameter } from '../types/parameters/moulinette-list.parameter.type.js'
-import type { PagingParameter } from '../types/parameters/paging.parameter.type.js'
+import type { MoulinetteListParameters } from '../types/parameters/moulinette-list.parameters.type.js'
+import type { PagingParameters } from '../types/parameters/paging.parameters.type.js'
 
 class MoulinetteResource {
 
@@ -24,7 +24,7 @@ class MoulinetteResource {
         return new MoulinetteEntity(this.httpClient, response)
     }
 
-    async list(parameters: Partial<MoulinetteListParameter & PagingParameter> = {}): Promise<PagingResult<MoulinetteResDto, MoulinetteEntity>> {
+    async list(parameters: Partial<MoulinetteListParameters & PagingParameters> = {}): Promise<PagingResult<MoulinetteResDto, MoulinetteEntity>> {
 
         const route = '/moulinettes'
         const limit = parameters.limit ?? 20

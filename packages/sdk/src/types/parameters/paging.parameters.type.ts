@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-interface PagingParameter {
+interface PagingParameters {
     limit: number
     beforeCursor: string
     afterCursor: string
 }
 
 export type {
-    PagingParameter
+    PagingParameters
 }
