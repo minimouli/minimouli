@@ -108,8 +108,18 @@ const IntegerArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<Integ
         {argument.defaultContent !== undefined && (
             <Text>Default: <Text color="yellowBright" >{argument.defaultContent}</Text></Text>
         )}
-        <Text>Maximum: <Text color="yellowBright" >{argument.maximum}</Text></Text>
-        <Text>Minimum: <Text color="yellowBright" >{argument.minimum}</Text></Text>
+        <Text>
+            <Text>Maximum: </Text>
+            <Text color="yellowBright" >
+                {argument.maximum === Number.MAX_SAFE_INTEGER ? 'Number.MAX_SAFE_INTEGER' : argument.maximum}
+            </Text>
+        </Text>
+        <Text>
+            <Text>Minimum: </Text>
+            <Text color="yellowBright" >
+                {argument.minimum === Number.MIN_SAFE_INTEGER ? 'Number.MIN_SAFE_INTEGER' : argument.minimum}
+            </Text>
+        </Text>
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
             <Text color="yellowBright" >Optional</Text>
         )}
@@ -122,8 +132,18 @@ const NumberArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<Number
         {argument.defaultContent !== undefined && (
             <Text>Default: <Text color="yellowBright" >{argument.defaultContent}</Text></Text>
         )}
-        <Text>Maximum: <Text color="yellowBright" >{argument.maximum}</Text></Text>
-        <Text>Minimum: <Text color="yellowBright" >{argument.minimum}</Text></Text>
+        <Text>
+            <Text>Maximum: </Text>
+            <Text color="yellowBright" >
+                {argument.maximum === Number.POSITIVE_INFINITY ? 'Number.POSITIVE_INFINITY' : argument.maximum}
+            </Text>
+        </Text>
+        <Text>
+            <Text>Minimum: </Text>
+            <Text color="yellowBright" >
+                {argument.minimum === Number.NEGATIVE_INFINITY ? 'Number.NEGATIVE_INFINITY' : argument.minimum}
+            </Text>
+        </Text>
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
             <Text color="yellowBright" >Optional</Text>
         )}
