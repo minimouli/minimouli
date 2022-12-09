@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url'
 import { Application } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
 import { HelpCommand } from './commands/help.command.js'
+import { InstallCommand } from './commands/install.command.js'
 import { LoginCommand } from './commands/login.command.js'
 import { LogoutCommand } from './commands/logout.command.js'
 import { MeCommand } from './commands/me.command.js'
@@ -36,6 +37,7 @@ const run = async (args: string[]): Promise<void> => {
 
     app.addCommands([
         HelpCommand,
+        InstallCommand,
         LoginCommand,
         LogoutCommand,
         MeCommand,

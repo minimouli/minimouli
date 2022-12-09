@@ -16,11 +16,17 @@ interface RegistryEntry {
     version: Version
     path: string
     rules: string[]
+    checksum: string
     information: {
-        organizationName: string
-        projectName: string
-        projectCycle: number
+        organization: {
+            name: string
+        }
+        project: {
+            name: string
+            cycle: number
+        }
     }
+    installedAt: string
 }
 
 export type {

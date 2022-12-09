@@ -24,16 +24,31 @@ const registrySchema = Joi.object({
                     .items(Joi.string())
                     .required(),
 
+                checksum: Joi.string()
+                    .required(),
+
                 information: Joi.object()
                     .keys({
-                        projectName: Joi.string().required(),
-
-                        projectCycle: Joi.number()
-                            .integer()
+                        organization: Joi.object()
+                            .keys({
+                                name: Joi.string().required()
+                            })
                             .required(),
 
-                        organizationName: Joi.string().required()
+                        project: Joi.object()
+                            .keys({
+                                name: Joi.string().required(),
+
+                                cycle: Joi.number()
+                                    .integer()
+                                    .required()
+                            })
+                            .required()
                     })
+                    .required(),
+
+                installedAt: Joi.string()
+                    .isoDate()
                     .required()
             })
         )

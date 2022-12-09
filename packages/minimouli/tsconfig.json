@@ -22,6 +22,9 @@
       "path": "../hooks"
     },
     {
+      "path": "../process"
+    },
+    {
       "path": "../scanner"
     },
     {
