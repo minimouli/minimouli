@@ -30,9 +30,21 @@ const compare = ([major1, minor1, patch1]: Version, [major2, minor2, patch2]: Ve
     return 0
 }
 
+const fromString = (version: string): Version => {
+
+    const parts = version.split('.')
+
+    if (parts.length !== 3)
+        return [Number.NaN, Number.NaN, Number.NaN]
+
+    // @ts-expect-error Parts length was checked before
+    return parts.map((part) => Number.parseInt(part))
+}
+
 const toString = ([major, minor, patch]: Version): string => `${major}.${minor}.${patch}`
 
 export {
     compare,
+    fromString,
     toString
 }

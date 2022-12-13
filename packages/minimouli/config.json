@@ -14,5 +14,8 @@
   },
   "api": {
     "baseUrl": "https://api.minimouli.com"
+  },
+  "package": {
+    "name": "minimouli"
   }
 }

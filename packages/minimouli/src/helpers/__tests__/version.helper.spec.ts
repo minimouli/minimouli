@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { compare, toString } from '../version.helper.js'
+import { compare, fromString, toString } from '../version.helper.js'
 
 describe('version.helper', () => {
 
@@ -37,6 +37,30 @@ describe('version.helper', () => {
 
         it('should 0 if the versions are identical', () => {
             expect(compare([1, 0, 0], [1, 0, 0])).toBe(0)
+        })
+
+    })
+
+    describe('fromString', () => {
+
+        it('should return the correct version', () => {
+            const version = '1.2.3'
+            expect(fromString(version)).toStrictEqual([1, 2, 3])
+        })
+
+        it('should return a NaN version if the version does not contain numbers', () => {
+            const version = 'a.b.c'
+            expect(fromString(version)).toStrictEqual([Number.NaN, Number.NaN, Number.NaN])
+        })
+
+        it('should return a NaN version if the version contains less than 3 numbers', () => {
+            const version = '1.2'
+            expect(fromString(version)).toStrictEqual([Number.NaN, Number.NaN, Number.NaN])
+        })
+
+        it('should return a NaN version if the version contains more than 3 numbers', () => {
+            const version = '1.2.3.4'
+            expect(fromString(version)).toStrictEqual([Number.NaN, Number.NaN, Number.NaN])
         })
 
     })

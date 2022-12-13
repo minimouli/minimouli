@@ -60,6 +60,12 @@ const configSchema = Joi.object({
                 })
                 .required()
         })
+        .required(),
+
+    package: Joi.object()
+        .keys({
+            name: Joi.string().required()
+        })
         .required()
 })
 

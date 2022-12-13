@@ -7,16 +7,30 @@
 
 import { useInjectable } from '@minimouli/console'
 import { Box, Text } from 'ink'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { compare, toString } from '../helpers/version.helper.js'
 import { ConfigService } from '../services/config.service.js'
+import { UpgradeCheckService } from '../services/upgrade-check.service.js'
 import type { Version } from '@minimouli/types'
 
 const Upgradable = () => {
 
     const { config } = useInjectable(ConfigService)
+    const upgradeCheckService = useInjectable(UpgradeCheckService, {
+        createNewInstance: true
+    })
+
+    const [latestVersion, setLatestVersion] = useState<Version>([Number.NaN, Number.NaN, Number.NaN])
     const currentVersion = config.app.version
-    const latestVersion: Version = [2, 0, 0]
+
+    useEffect(() => {
+        void (async () => {
+            const version = await upgradeCheckService.getAppLatestVersion()
+            setLatestVersion(version)
+        })()
+
+        return () => upgradeCheckService.abortAllRequests()
+    }, [])
 
     if (compare(currentVersion, latestVersion) >= 0)
         // eslint-disable-next-line unicorn/no-null

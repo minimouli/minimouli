@@ -24,6 +24,9 @@ interface ApplicationConfig {
     api: {
         baseUrl: string
     }
+    package: {
+        name: string
+    }
 }
 
 export type {
