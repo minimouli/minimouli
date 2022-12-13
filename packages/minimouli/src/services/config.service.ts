@@ -10,7 +10,7 @@ import deepmerge from 'deepmerge'
 import { configSchema } from '../schemas/config.schema.js'
 import { preferencesSchema } from '../schemas/preferences.schema.js'
 import type { InjectableFactory } from '@minimouli/console'
-import type { ApplicationConfig } from '../types/application.config.type.js'
+import type { ApplicationConfig } from '../types/configs/application.config.type.js'
 
 type ReadConfigResponse =
     | {

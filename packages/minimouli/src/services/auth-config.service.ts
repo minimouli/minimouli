@@ -10,7 +10,7 @@ import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
 import { authConfigSchema } from '../schemas/auth-config.schema.js'
 import type { InjectableFactory } from '@minimouli/console'
-import type { AuthConfig } from '../types/auth.config.type.js'
+import type { AuthConfig } from '../types/configs/auth.config.type.js'
 
 type ReadConfigResponse =
     | {
