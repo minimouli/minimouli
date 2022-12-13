@@ -7,95 +7,83 @@
 
 import { EventEmitter } from 'node:events'
 import { isMinimouliClientError } from '@minimouli/sdk'
-import { Stage } from '../enums/stage.enum.js'
-import type { Client, MoulinetteEntity, MoulinetteListParameters, MoulinetteSourceEntity } from '@minimouli/sdk'
-import type { Callable } from '@minimouli/types'
-import type { ServicesResponse } from '../types/services-response.type.js'
+import { ResolveStage } from '../enums/resolve-stage.enum.js'
+import type {
+    Client,
+    MoulinetteEntity,
+    MoulinetteListParameters,
+    MoulinetteSourceEntity
+} from '@minimouli/sdk'
 import type { ResolveServiceEvents } from '../types/events/resolve-service.events.type.js'
-
-type SelectMoulinetteFn = Callable<[MoulinetteEntity]>
-type SelectMoulinetteSourceFn = Callable<[MoulinetteSourceEntity]>
-type InformFn = Callable<[string]>
-type AbortFn = Callable<[string]>
+import type { ResolveServiceResponse } from '../types/responses/resolve-service.response.type.js'
 
 class ResolveService {
 
     private eventEmitter = new EventEmitter()
 
-    private inform = (message: string) => this.handleInform(message)
-    private abort = (message: string) => this.handleAbort(message)
+    private abort = (message: string) => this.dispatchFromResponse([ResolveStage.Failed, { error: message }])
 
-    async resolveMoulinette(
-        client: Client,
-        parameters: MoulinetteListParameters
-    ): Promise<void> {
+    async resolveMoulinetteByListParameters(client: Client, parameters: MoulinetteListParameters): Promise<void> {
 
         const select = (moulinette: MoulinetteEntity) => {
             void (async () => {
-                this.eventEmitter.emit('moulinetteResolved', { moulinette })
-                await this.resolveMoulinetteSource(client, moulinette)
+                await this.resolveMoulinetteSourceByMoulinetteEntity(client, moulinette)
             })()
         }
 
-        const response = await this.doResolveMoulinette(client, parameters, select, this.inform, this.abort)
-        this.dispatchEventsFromResponse(response)
-    }
+        const resolve = async (): Promise<ResolveServiceResponse> => {
+            try {
+                const pagingResult = await client.moulinettes.list(parameters)
+                return [ResolveStage.ResolvingMoulinette, { pagingResult, select, abort: this.abort }]
+            } catch (error: unknown) {
 
-    async resolveMoulinetteSource(
-        client: Client,
-        moulinette: MoulinetteEntity
-    ): Promise<void> {
+                if (isMinimouliClientError(error))
+                    return [ResolveStage.Failed, { error: `Unable to retrieve the moulinette list (status: ${error.statusCode})` }]
 
-        const select = (moulinetteSource: MoulinetteSourceEntity) => {
-            this.eventEmitter.emit('moulinetteSourceResolved', { moulinette, moulinetteSource })
+                return [ResolveStage.Failed, { error: 'Unable to retrieve the moulinette list' }]
+            }
         }
 
-        const response = await this.doResolveMoulinetteSource(client, moulinette, select, this.inform, this.abort)
-        this.dispatchEventsFromResponse(response)
+        const response = await resolve()
+        this.dispatchFromResponse(response)
     }
 
-    private async doResolveMoulinette(
-        client: Client,
-        parameters: MoulinetteListParameters,
-        select: SelectMoulinetteFn,
-        inform: InformFn,
-        abort: AbortFn
-    ): Promise<ServicesResponse> {
-        try {
-            const pagingResult = await client.moulinettes.list(parameters)
-            return [Stage.ResolvingMoulinette, { pagingResult, select, inform, abort }]
-        } catch (error: unknown) {
+    async resolveMoulinetteSourceByMoulinetteId(client: Client, id: string): Promise<void> {
 
-            if (isMinimouliClientError(error))
-                return [Stage.Failed, { error: `Unable to retrieve the moulinette list (status: ${error.statusCode})` }]
-
-            return [Stage.Failed, { error: 'Unable to retrieve the moulinette list' }]
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        const select = (moulinette: MoulinetteEntity) => (moulinetteSource: MoulinetteSourceEntity) => {
+            this.dispatchFromResponse([ResolveStage.Resolved, {
+                moulinette,
+                moulinetteSource
+            }])
         }
+
+        const resolve = async (): Promise<ResolveServiceResponse> => {
+            try {
+                const moulinette = await client.moulinettes.get(id)
+                const { sources } = moulinette
+
+                if (sources === undefined)
+                    return [ResolveStage.Failed, { error: 'Unable to retrieve the moulinette sources' }]
+
+                return [ResolveStage.ResolvingMoulinetteSource, {
+                    moulinette, sources, select: select(moulinette), abort: this.abort
+                }]
+            } catch (error: unknown) {
+
+                if (isMinimouliClientError(error))
+                    return [ResolveStage.Failed, { error: `Unable to retrieve the moulinette sources (status: ${error.statusCode})` }]
+
+                return [ResolveStage.Failed, { error: 'Unable to retrieve the moulinette sources' }]
+            }
+        }
+
+        const response = await resolve()
+        this.dispatchFromResponse(response)
     }
 
-    private async doResolveMoulinetteSource(
-        client: Client,
-        moulinette: MoulinetteEntity,
-        select: SelectMoulinetteSourceFn,
-        inform: InformFn,
-        abort: AbortFn
-    ): Promise<ServicesResponse> {
-        try {
-            const { sources } = await client.moulinettes.get(moulinette.id)
-
-            if (sources === undefined)
-                return [Stage.Failed, { error: 'Unable to retrieve the moulinette sources' }]
-
-            return [Stage.ResolvingMoulinetteSource, {
-                moulinette, sources, select, inform, abort
-            }]
-        } catch (error: unknown) {
-
-            if (isMinimouliClientError(error))
-                return [Stage.Failed, { error: `Unable to retrieve the moulinette sources (status: ${error.statusCode})` }]
-
-            return [Stage.Failed, { error: 'Unable to retrieve the moulinette sources' }]
-        }
+    async resolveMoulinetteSourceByMoulinetteEntity(client: Client, moulinette: MoulinetteEntity): Promise<void> {
+        await this.resolveMoulinetteSourceByMoulinetteId(client, moulinette.id)
     }
 
     on<E extends keyof ResolveServiceEvents>(event: E, listener: ResolveServiceEvents[E]): void {
@@ -110,31 +98,13 @@ class ResolveService {
         this.eventEmitter.removeListener(event, listener)
     }
 
-    private dispatchEventsFromResponse(response: ServicesResponse): void {
+    private dispatchFromResponse(response: ResolveServiceResponse): void {
 
         const [stage, data] = response
         this.eventEmitter.emit('change', response)
 
-        switch (stage) {
-            case Stage.ResolvingMoulinette:
-                this.eventEmitter.emit('resolvingMoulinette', data)
-                break
-            case Stage.ResolvingMoulinetteSource:
-                this.eventEmitter.emit('resolvingMoulinetteSource', data)
-                break
-            case Stage.Failed:
-                this.eventEmitter.emit('error', new Error(data.error))
-                break
-            default:
-        }
-    }
-
-    private handleInform(message: string): void {
-        this.eventEmitter.emit('info', { message })
-    }
-
-    private handleAbort(message: string): void {
-        this.dispatchEventsFromResponse([Stage.Failed, { error: message }])
+        if (stage === ResolveStage.Failed)
+            this.eventEmitter.emit('error', new Error(data.error))
     }
 
 }

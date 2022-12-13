@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-enum InstallSource {
+enum ResolveSource {
     Manual = 'manual',
+    Parameters = 'params',
     Scan = 'scan'
 }
 
 export {
-    InstallSource
+    ResolveSource
 }

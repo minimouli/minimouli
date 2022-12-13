@@ -8,13 +8,7 @@
 import type { Path } from '@minimouli/fs'
 import type { MoulinetteEntity, MoulinetteSourceEntity } from '@minimouli/sdk'
 import type { Callable } from '@minimouli/types'
-import type { ServicesResponse } from '../services-response.type.js'
-
-interface DownloadingEvent {
-    loaded: number
-    completed: number | undefined
-    total: number | undefined
-}
+import type { InstallServiceResponse } from '../responses/install-service.response.type.js'
 
 interface InstalledEvent {
     moulinette: MoulinetteEntity
@@ -23,16 +17,12 @@ interface InstalledEvent {
 }
 
 interface InstallServiceEvents {
-    downloading: Callable<[DownloadingEvent]>
-    installing: Callable
+    change: Callable<[InstallServiceResponse]>
     installed: Callable<[InstalledEvent]>
-    change: Callable<[ServicesResponse]>
-    info: Callable<[{ message: string }]>
     error: Callable<[Error]>
 }
 
 export type {
     InstallServiceEvents,
-    DownloadingEvent,
     InstalledEvent
 }

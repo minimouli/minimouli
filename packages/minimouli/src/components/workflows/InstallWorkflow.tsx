@@ -8,147 +8,103 @@
 import { useInjectable } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
 import { useAuth } from '@minimouli/hooks'
+import { isMinimouliClientError } from '@minimouli/sdk'
 import { Box, Text } from 'ink'
 import React, { useEffect, useState } from 'react'
 import { ErrorOverview } from '../ErrorOverview.js'
 import { Loader } from '../Loader.js'
-import { Stage } from '../../enums/stage.enum.js'
-import { ConfigService } from '../../services/config.service.js'
+import { InstallStage } from '../../enums/install-stage.enum.js'
 import { InstallService } from '../../services/install.service.js'
 import { RegistryService } from '../../services/registry.service.js'
-import { ResolveService } from '../../services/resolve.service.js'
-import type { ServicesResponse } from '../../types/services-response.type.js'
 import type { InstalledEvent } from '../../types/events/install-service.events.type.js'
-import type {
-    MoulinetteSourceResolvedEvent,
-    ResolvingMoulinetteEvent,
-    ResolvingMoulinetteSourceEvent
-} from '../../types/events/resolve-service.events.type.js'
+import type { MoulinetteEntity, MoulinetteSourceEntity } from '@minimouli/sdk'
+import type { InstallServiceResponse } from '../../types/responses/install-service.response.type.js'
 
 interface InstallWorkflowProps {
-    organizationName: string
-    projectName: string
-    projectCycle: number
-    isOfficial: boolean
+    moulinette: MoulinetteEntity
+    moulinetteSource: MoulinetteSourceEntity
 }
 
-const InstallWorkflow = ({
-    organizationName,
-    projectName,
-    projectCycle,
-    isOfficial
-}: InstallWorkflowProps) => {
+const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps) => {
 
     const { client } = useAuth()
 
-    const configService = useInjectable(ConfigService)
     const registryService = useInjectable(RegistryService)
-    const resolveService = useInjectable(ResolveService, {
-        createNewInstance: true
-    })
     const installService = useInjectable(InstallService, {
         createNewInstance: true
     })
 
     const [info, setInfo] = useState<string | undefined>()
-    const [response, setResponse] = useState<ServicesResponse>([Stage.Loading, {}])
+    const [error, setError] = useState<string | undefined>()
+    const [response, setResponse] = useState<InstallServiceResponse>([InstallStage.Loading, {}])
     const [stage, data] = response
 
-    const handleResolvingMoulinette = ({
-        pagingResult, select, abort
-    }: ResolvingMoulinetteEvent) => {
-
-        const firstMoulinette = pagingResult.items.at(0)
-
-        if (firstMoulinette === undefined) {
-            abort(`The ${projectName} project does not seem to be supported by ${configService.config.app.name}`)
-            return
-        }
-
-        select(firstMoulinette)
-    }
-
-    const handleResolvingMoulinetteSource = ({
-        moulinette, sources, select, inform, abort
-    }: ResolvingMoulinetteSourceEvent) => {
-
-        const lastMoulinetteSource = sources.at(0)
-
-        if (lastMoulinetteSource === undefined) {
-            abort(`The ${projectName} project does not seem to be supported by ${configService.config.app.name}`)
-            return
-        }
-
-        const entry = registryService.findByIdAndVersion(moulinette.id, lastMoulinetteSource.version)
-
-        if (entry !== undefined) {
-            inform(`The ${projectName} moulinette is already installed`)
-            setResponse([Stage.Installed, {
-                moulinette,
-                moulinetteSource: lastMoulinetteSource,
-                moulinettePath: Path.fromAbsolute(entry.path)
-            }])
-            return
-        }
-
-        select(lastMoulinetteSource)
-    }
-
-    const handleMoulinetteSourceResolved = ({ moulinette, moulinetteSource }: MoulinetteSourceResolvedEvent) => {
+    const handleInstalled = ({ moulinettePath }: InstalledEvent) => {
         void (async () => {
-            await installService.install(moulinette, moulinetteSource)
-        })()
-    }
+            try {
 
-    const handleInstalled = ({ moulinette, moulinetteSource, moulinettePath }: InstalledEvent) => {
-        void (async () => {
-            registryService.insert({
-                id: moulinette.id,
-                version: moulinetteSource.version,
-                path: moulinettePath.toString(),
-                rules: moulinetteSource.rules,
-                checksum: moulinetteSource.checksum,
-                information: {
-                    organization: {
-                        name: organizationName
+                const project = await client.projects.get(moulinette.project.id)
+                const organization = project.organization
+
+                if (organization === undefined) {
+                    setError('Unable to retrieve the organization')
+                    return
+                }
+
+                const entry = {
+                    id: moulinette.id,
+                    version: moulinetteSource.version,
+                    path: moulinettePath.toString(),
+                    rules: moulinetteSource.rules,
+                    checksum: moulinetteSource.checksum,
+                    information: {
+                        organization: {
+                            name: organization.name
+                        },
+                        project: {
+                            name: project.name,
+                            cycle: project.cycle
+                        }
                     },
-                    project: {
-                        name: projectName,
-                        cycle: projectCycle
-                    }
-                },
-                installedAt: new Date().toISOString()
-            })
-            await registryService.save()
+                    installedAt: new Date().toISOString()
+                }
+
+                registryService.insert(entry)
+                await registryService.save()
+
+            } catch (error_: unknown) {
+
+                if (isMinimouliClientError(error_)) {
+                    setError(`Unable to retrieve the project (status: ${error_.statusCode})`)
+                    return
+                }
+
+                setError('Unable to save the moulinette in the local registry')
+            }
         })()
     }
 
     useEffect(() => {
 
-        if (projectName === '' || organizationName === '')
-            return
-
-        resolveService.on('resolvingMoulinette', handleResolvingMoulinette)
-        resolveService.on('resolvingMoulinetteSource', handleResolvingMoulinetteSource)
-        resolveService.on('moulinetteSourceResolved', handleMoulinetteSourceResolved)
-
         installService.on('installed', handleInstalled)
-
-        resolveService.on('info', ({ message }) => setInfo(message))
-
-        resolveService.on('change', setResponse)
         installService.on('change', setResponse)
-
-        resolveService.on('error', () => {})
         installService.on('error', () => {})
 
         void (async () => {
-            await resolveService.resolveMoulinette(client, {
-                organizationName,
-                projectName,
-                projectCycle,
-                isOfficial
-            })
+
+            const entry = registryService.findByIdAndVersion(moulinette.id, moulinetteSource.version)
+
+            if (entry !== undefined) {
+                setInfo('The moulinette is already installed')
+                setResponse([InstallStage.Installed, {
+                    moulinette,
+                    moulinetteSource,
+                    moulinettePath: Path.fromAbsolute(entry.path)
+                }])
+                return
+            }
+
+            await installService.install(moulinette, moulinetteSource)
         })()
 
         return () => {
@@ -159,25 +115,17 @@ const InstallWorkflow = ({
 
     return (
         <Box>
-            {stage === Stage.ResolvingMoulinette && (
-                <Loader message="🔍 Resolving" />
-            )}
-
-            {stage === Stage.ResolvingMoulinetteSource && (
-                <Loader message="🔍 Resolving" />
-            )}
-
-            {stage === Stage.Downloading && (
+            {stage === InstallStage.Downloading && (
                 data.completed !== undefined
                     ? <Loader message={`🚚 Downloading ${Math.round(data.completed * 100)}%`} />
                     : <Loader message="🚚 Downloading" />
             )}
 
-            {stage === Stage.Installing && (
+            {stage === InstallStage.Installing && (
                 <Loader message="🔨 Installing" />
             )}
 
-            {stage === Stage.Installed && (
+            {stage === InstallStage.Installed && (
                 <Text>
                     <Text>
                         { info !== undefined ? info : `Successfully installed the ${data.moulinette.project.name} moulinette` }
@@ -187,12 +135,12 @@ const InstallWorkflow = ({
                 </Text>
             )}
 
-            {stage === Stage.Failed && (
+            {stage === InstallStage.Failed && (
                 <ErrorOverview error={data.error} />
             )}
 
-            {(projectName === '' || organizationName === '') && (
-                <ErrorOverview error="The specified project name or organization name is empty" />
+            {error !== undefined && (
+                <ErrorOverview error={error} />
             )}
         </Box>
     )
