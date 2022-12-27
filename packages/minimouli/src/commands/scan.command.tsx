@@ -9,11 +9,10 @@ import { Command, EnumArgument, PathArgument } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
 import React from 'react'
 import { AppProvider } from '../components/providers/AppProvider.js'
-import { ErrorBoundary } from '../components/ErrorBoundary.js'
 import { JsonPrinter } from '../components/printers/JsonPrinter.js'
 import { ObjectPrinter } from '../components/printers/ObjectPrinter.js'
-import { ScanWorkflow } from '../components/workflows/ScanWorkflow.js'
 import { DisplayFormat } from '../enums/display-format.enum.js'
+import { withScan } from '../workflows/scan.workflow.js'
 import type { ReactElement } from 'react'
 
 class ScanCommand extends Command {
@@ -46,45 +45,26 @@ class ScanCommand extends Command {
 
     execute(): ReactElement {
 
-        switch (this.format.content) {
-            case DisplayFormat.PrettyJson:
-                return this.displayPrettyJsonFormat()
+        const ScanWorkflow = withScan((result) => {
 
-            case DisplayFormat.MinifiedJson:
-                return this.displayMinifiedJsonFormat()
+            if (this.format.content === DisplayFormat.PrettyJson)
+                return <JsonPrinter content={result} />
 
-            default:
-                return this.displayObjectFormat()
-        }
-    }
+            if (this.format.content === DisplayFormat.MinifiedJson)
+                return <JsonPrinter content={result} minified />
 
-    private displayObjectFormat(): ReactElement {
+            if (this.format.content === DisplayFormat.Object)
+                return <ObjectPrinter object={result} />
+
+            // eslint-disable-next-line unicorn/no-null
+            return null
+        })
+        const headless = this.format.content !== DisplayFormat.Object
+
         return (
-            <AppProvider command={this.name} >
-                <ScanWorkflow directory={this.directory.content} >
-                    {(result) => <ObjectPrinter object={result} />}
-                </ScanWorkflow>
+            <AppProvider command={this.name} headless={headless} >
+                <ScanWorkflow directory={this.directory.content} />
             </AppProvider>
-        )
-    }
-
-    private displayPrettyJsonFormat(): ReactElement {
-        return (
-            <ErrorBoundary>
-                <ScanWorkflow directory={this.directory.content} >
-                    {(result) => <JsonPrinter content={result} />}
-                </ScanWorkflow>
-            </ErrorBoundary>
-        )
-    }
-
-    private displayMinifiedJsonFormat(): ReactElement {
-        return (
-            <ErrorBoundary>
-                <ScanWorkflow directory={this.directory.content} >
-                    {(result) => <JsonPrinter content={result} minified />}
-                </ScanWorkflow>
-            </ErrorBoundary>
         )
     }
 
