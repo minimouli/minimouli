@@ -27,22 +27,21 @@ const registrySchema = Joi.object({
                 checksum: Joi.string()
                     .required(),
 
-                information: Joi.object()
+                isOfficial: Joi.boolean()
+                    .required(),
+
+                organization: Joi.object()
                     .keys({
-                        organization: Joi.object()
-                            .keys({
-                                name: Joi.string().required()
-                            })
-                            .required(),
+                        name: Joi.string().required()
+                    })
+                    .required(),
 
-                        project: Joi.object()
-                            .keys({
-                                name: Joi.string().required(),
+                project: Joi.object()
+                    .keys({
+                        name: Joi.string().required(),
 
-                                cycle: Joi.number()
-                                    .integer()
-                                    .required()
-                            })
+                        cycle: Joi.number()
+                            .integer()
                             .required()
                     })
                     .required(),

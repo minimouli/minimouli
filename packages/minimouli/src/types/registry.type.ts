@@ -17,14 +17,13 @@ interface RegistryEntry {
     path: string
     rules: string[]
     checksum: string
-    information: {
-        organization: {
-            name: string
-        }
-        project: {
-            name: string
-            cycle: number
-        }
+    isOfficial: boolean
+    organization: {
+        name: string
+    }
+    project: {
+        name: string
+        cycle: number
     }
     installedAt: string
 }
