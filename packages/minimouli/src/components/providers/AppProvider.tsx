@@ -15,14 +15,15 @@ import type { ReactNode } from 'react'
 
 interface AppProviderProps {
     command: string
+    headless?: boolean
     children: ReactNode
 }
 
-const AppProvider = ({ command, children }: AppProviderProps) => (
+const AppProvider = ({ command, children, headless = false }: AppProviderProps) => (
     <Box flexDirection="column" >
-        <Header command={command} />
-        <Upgradable />
+        {!headless && (<Header command={command} />)}
         <ErrorBoundary>
+            {!headless && (<Upgradable />)}
             <CustomAuthProvider>
                 {children}
             </CustomAuthProvider>
