@@ -8,6 +8,9 @@
 import { useInjectable } from '@minimouli/console'
 import { Box, Text } from 'ink'
 import React, { useEffect, useState } from 'react'
+import { Alert } from './Alert.js'
+import { Snippet } from './Snippet.js'
+import { Severity } from '../enums/severity.enum.js'
 import { compare, toString } from '../helpers/version.helper.js'
 import { ConfigService } from '../services/config.service.js'
 import { UpgradeCheckService } from '../services/upgrade-check.service.js'
@@ -26,7 +29,9 @@ const Upgradable = () => {
     useEffect(() => {
         void (async () => {
             const version = await upgradeCheckService.getAppLatestVersion()
-            setLatestVersion(version)
+
+            if (!version.includes(Number.NaN))
+                setLatestVersion(version)
         })()
 
         return () => upgradeCheckService.abortAllRequests()
@@ -37,12 +42,23 @@ const Upgradable = () => {
         return null
 
     return (
-        <Box>
-            <Box paddingX={1} borderStyle="round" flexDirection="column" >
-                <Text>A new update is available: <Text color="red" >{toString(currentVersion)}</Text> ➔ <Text color="green" >{toString(latestVersion)}</Text></Text>
-                <Text>Run <Text color="blue" >npm i -g minimouli@{toString(latestVersion)}</Text> to update.</Text>
+        <Alert severity={Severity.Warning} >
+            <Text>
+                <Text>A new update is available: </Text>
+                <Text color="red" >{toString(currentVersion)}</Text>
+                <Text> ➔ </Text>
+                <Text color="green" >{toString(latestVersion)}</Text>
+            </Text>
+            <Box>
+                <Box marginTop={1} marginRight={1} >
+                    <Text>Run</Text>
+                </Box>
+                <Snippet command={`npm i -g ${config.package.name}@${toString(latestVersion)}`} />
+                <Box marginTop={1} marginLeft={1} >
+                    <Text>to update</Text>
+                </Box>
             </Box>
-        </Box>
+        </Alert>
     )
 }
 
