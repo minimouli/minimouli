@@ -2601,7 +2601,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/runner@workspace:packages/runner":
+"@minimouli/runner@^2.0.0, @minimouli/runner@workspace:packages/runner":
   version: 0.0.0-use.local
   resolution: "@minimouli/runner@workspace:packages/runner"
   dependencies:
@@ -6944,6 +6944,7 @@ __metadata:
     "@minimouli/fs": ^2.0.0
     "@minimouli/hooks": ^2.0.0
     "@minimouli/process": ^2.0.0
+    "@minimouli/runner": ^2.0.0
     "@minimouli/scanner": ^2.0.0
     "@minimouli/sdk": ^2.0.0
     "@types/react": ^17

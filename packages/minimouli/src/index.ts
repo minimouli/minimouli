@@ -14,6 +14,7 @@ import { InstallCommand } from './commands/install.command.js'
 import { LoginCommand } from './commands/login.command.js'
 import { LogoutCommand } from './commands/logout.command.js'
 import { MeCommand } from './commands/me.command.js'
+import { RunCommand } from './commands/run.command.js'
 import { ScanCommand } from './commands/scan.command.js'
 import { VersionCommand } from './commands/version.command.js'
 import { AuthConfigService } from './services/auth-config.service.js'
@@ -41,6 +42,7 @@ const run = async (args: string[]): Promise<void> => {
         LoginCommand,
         LogoutCommand,
         MeCommand,
+        RunCommand,
         ScanCommand,
         VersionCommand
     ])
