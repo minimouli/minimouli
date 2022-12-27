@@ -107,6 +107,34 @@ class RegistryService {
         })
     }
 
+    findByParameters(
+        organizationName: string,
+        projectName: string,
+        projectCycle?: number,
+        isOfficial?: boolean
+    ): RegistryEntry | undefined {
+
+        if (this.database.data === null)
+            return undefined
+
+        return this.database.data.moulinettes.find((moulinette) => {
+
+            if (moulinette.organization.name !== organizationName)
+                return false
+
+            if (moulinette.project.name !== projectName)
+                return false
+
+            if (projectCycle !== undefined && moulinette.project.cycle !== projectCycle)
+                return false
+
+            if (isOfficial !== undefined && moulinette.isOfficial !== isOfficial)
+                return false
+
+            return true
+        })
+    }
+
     insert(entry: RegistryEntry): void {
 
         if (this.database.data === null)

@@ -6,10 +6,10 @@
  */
 
 interface MoulinetteListParameters {
-    isOfficial: boolean
-    projectName: string
-    projectCycle: number
     organizationName: string
+    projectName: string
+    projectCycle?: number
+    isOfficial?: boolean
 }
 
 export type {
