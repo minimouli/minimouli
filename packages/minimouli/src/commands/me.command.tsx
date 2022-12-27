@@ -7,15 +7,12 @@
 
 import { Command, EnumArgument } from '@minimouli/console'
 import React from 'react'
-import { ErrorBoundary } from '../components/ErrorBoundary.js'
 import { ErrorOverview } from '../components/ErrorOverview.js'
-import { Loader } from '../components/Loader.js'
 import { JsonPrinter } from '../components/printers/JsonPrinter.js'
 import { ObjectPrinter } from '../components/printers/ObjectPrinter.js'
 import { AppProvider } from '../components/providers/AppProvider.js'
-import { CustomAuthProvider } from '../components/providers/CustomAuthProvider.js'
-import { MeWorkflow } from '../components/workflows/MeWorkflow.js'
 import { DisplayFormat } from '../enums/display-format.enum.js'
+import { withMe } from '../workflows/me.workflow.js'
 import type { ReactElement } from 'react'
 
 class MeCommand extends Command {
@@ -41,58 +38,40 @@ class MeCommand extends Command {
 
     execute(): ReactElement {
 
-        switch (this.format.content) {
-            case DisplayFormat.PrettyJson:
-                return this.displayPrettyJsonFormat()
+        const MeWorkflow = withMe(({ user }) => {
 
-            case DisplayFormat.MinifiedJson:
-                return this.displayMinifiedJsonFormat()
+            if (user === undefined) {
 
-            default:
-                return this.displayObjectFormat()
-        }
-    }
+                if (this.format.content === DisplayFormat.PrettyJson)
+                    return <JsonPrinter content={{ error: 'You are not logged in' }} />
 
-    private displayObjectFormat(): ReactElement {
+                if (this.format.content === DisplayFormat.MinifiedJson)
+                    return <JsonPrinter content={{ error: 'You are not logged in' }} minified />
+
+                return <ErrorOverview error="You are not logged in" />
+            }
+
+            if (this.format.content === DisplayFormat.PrettyJson)
+                return <JsonPrinter content={user} />
+
+            if (this.format.content === DisplayFormat.MinifiedJson)
+                return <JsonPrinter content={user} minified />
+
+            if (this.format.content === DisplayFormat.Object)
+                return <ObjectPrinter object={user} />
+
+            // eslint-disable-next-line unicorn/no-null
+            return null
+        })
+        const headless = this.format.content !== DisplayFormat.Object
+
         return (
-            <AppProvider command={this.name} >
-                <MeWorkflow
-                    loadingFallback={() => <Loader message="Loading" />}
-                    notLoggedFallback={() => <ErrorOverview error="You are not logged in" />}
-                >
-                    {(user) => <ObjectPrinter object={user} />}
-                </MeWorkflow>
+            <AppProvider command={this.name} headless={headless} >
+                <MeWorkflow silent={headless} />
             </AppProvider>
         )
     }
 
-    private displayPrettyJsonFormat(): ReactElement {
-        return (
-            <ErrorBoundary>
-                <CustomAuthProvider>
-                    <MeWorkflow
-                        notLoggedFallback={() => <JsonPrinter content={{ error: 'You are not logged in' }} />}
-                    >
-                        {(user) => <JsonPrinter content={user} />}
-                    </MeWorkflow>
-                </CustomAuthProvider>
-            </ErrorBoundary>
-        )
-    }
-
-    private displayMinifiedJsonFormat(): ReactElement {
-        return (
-            <ErrorBoundary>
-                <CustomAuthProvider>
-                    <MeWorkflow
-                        notLoggedFallback={() => <JsonPrinter content={{ error: 'You are not logged in' }} minified />}
-                    >
-                        {(user) => <JsonPrinter content={user} minified />}
-                    </MeWorkflow>
-                </CustomAuthProvider>
-            </ErrorBoundary>
-        )
-    }
 }
 
 export {
