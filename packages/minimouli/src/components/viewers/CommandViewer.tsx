@@ -21,9 +21,9 @@ const CommandViewer = ({ command }: CommandViewerProps) => {
 
     return (
         <Box key={command.name} flexDirection="column" marginLeft={2} marginBottom={1} >
-            <Text bold>{configService.config.app.cli} {command.name}</Text>
-            <Box marginLeft={2}>
-                <Text>{command.shortDescription}</Text>
+            <Text bold >{configService.config.app.cli} {command.name}</Text>
+            <Box marginLeft={2} >
+                <Text dimColor >{command.shortDescription}</Text>
             </Box>
         </Box>
     )

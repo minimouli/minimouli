@@ -53,7 +53,7 @@ const ArgumentViewer = ({ argument, option = false }: ArgumentViewerProps) => {
             <Box flexDirection="column" >
                 <Text>Type: <Text color="cyan" >Unknown</Text></Text>
                 {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-                    <Text color="yellowBright" >Optional</Text>
+                    <Text color="yellow" >Optional</Text>
                 )}
             </Box>
         )
@@ -74,10 +74,10 @@ const BooleanArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<Boole
     <Box flexDirection="column" >
         <Text>Type: <Text color="cyan" >Boolean</Text></Text>
         {argument.defaultContent !== undefined && (
-            <Text>Default: <Text color="yellowBright" >{argument.defaultContent ? 'true' : 'false'}</Text></Text>
+            <Text>Default: <Text color="yellow" >{argument.defaultContent ? 'true' : 'false'}</Text></Text>
         )}
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
@@ -97,7 +97,7 @@ const EnumArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<EnumArgu
             </Box>
         </Box>
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
@@ -106,22 +106,22 @@ const IntegerArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<Integ
     <Box flexDirection="column" >
         <Text>Type: <Text color="cyan" >Integer</Text></Text>
         {argument.defaultContent !== undefined && (
-            <Text>Default: <Text color="yellowBright" >{argument.defaultContent}</Text></Text>
+            <Text>Default: <Text color="yellow" >{argument.defaultContent}</Text></Text>
         )}
         <Text>
             <Text>Maximum: </Text>
-            <Text color="yellowBright" >
+            <Text color="yellow" >
                 {argument.maximum === Number.MAX_SAFE_INTEGER ? 'Number.MAX_SAFE_INTEGER' : argument.maximum}
             </Text>
         </Text>
         <Text>
             <Text>Minimum: </Text>
-            <Text color="yellowBright" >
+            <Text color="yellow" >
                 {argument.minimum === Number.MIN_SAFE_INTEGER ? 'Number.MIN_SAFE_INTEGER' : argument.minimum}
             </Text>
         </Text>
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
@@ -130,22 +130,22 @@ const NumberArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<Number
     <Box flexDirection="column" >
         <Text>Type: <Text color="cyan" >Number</Text></Text>
         {argument.defaultContent !== undefined && (
-            <Text>Default: <Text color="yellowBright" >{argument.defaultContent}</Text></Text>
+            <Text>Default: <Text color="yellow" >{argument.defaultContent}</Text></Text>
         )}
         <Text>
             <Text>Maximum: </Text>
-            <Text color="yellowBright" >
+            <Text color="yellow" >
                 {argument.maximum === Number.POSITIVE_INFINITY ? 'Number.POSITIVE_INFINITY' : argument.maximum}
             </Text>
         </Text>
         <Text>
             <Text>Minimum: </Text>
-            <Text color="yellowBright" >
+            <Text color="yellow" >
                 {argument.minimum === Number.NEGATIVE_INFINITY ? 'Number.NEGATIVE_INFINITY' : argument.minimum}
             </Text>
         </Text>
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
@@ -157,7 +157,7 @@ const PathArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<PathArgu
             <Text>Default: <Text color="white" >{argument.defaultContent.toString()}</Text></Text>
         )}
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
@@ -169,7 +169,7 @@ const StringArgumentSpecsViewer = ({ argument }: ArgumentViewerSpecsProps<String
             <Text>Default: <Text color="green" >"{argument.defaultContent}"</Text></Text>
         )}
         {argument.hasFlags(ArgumentFlag.OPTIONAL) && (
-            <Text color="yellowBright" >Optional</Text>
+            <Text color="yellow" >Optional</Text>
         )}
     </Box>
 )
