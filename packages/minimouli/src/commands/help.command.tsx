@@ -66,7 +66,7 @@ class HelpCommand extends Command {
                     </Box>
                 </Section>
 
-                <Section title="Commands" >
+                <Section title="Subcommands" >
                     {this.commandManager.commands.map((command, index) => (
                         <CommandViewer key={index} command={command} />
                     ))}
@@ -74,7 +74,7 @@ class HelpCommand extends Command {
 
                 <Box flexDirection="column" >
                     <Text>You can print more information about a command by running:</Text>
-                    <Snippet command={`${config.app.cli} ${this.name} <command>`} />
+                    <Snippet command={`${config.app.cli} ${this.name} <subcommand>`} />
                 </Box>
             </AppProvider>
         )
