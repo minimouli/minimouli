@@ -8,7 +8,7 @@
 import { Command } from '@minimouli/console'
 import React from 'react'
 import { AppProvider } from '../components/providers/AppProvider.js'
-import { LogoutWorkflow } from '../components/workflows/LogoutWorkflow.js'
+import { withLogout } from '../workflows/logout.workflow.js'
 import type { ReactNode } from 'react'
 
 class LogoutCommand extends Command {
@@ -19,6 +19,9 @@ class LogoutCommand extends Command {
     public readonly shortDescription = 'Logout from this device'
 
     execute(): ReactNode {
+
+        const LogoutWorkflow = withLogout()
+
         return (
             <AppProvider command={this.name} >
                 <LogoutWorkflow />

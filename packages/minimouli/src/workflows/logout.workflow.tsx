@@ -9,11 +9,15 @@ import { useInjectable } from '@minimouli/console'
 import { useAuth } from '@minimouli/hooks'
 import { Box, Text } from 'ink'
 import React, { useEffect } from 'react'
-import { Loader } from '../Loader.js'
-import { Snippet } from '../Snippet.js'
-import { ConfigService } from '../../services/config.service.js'
+import { Loader } from '../components/Loader.js'
+import { Snippet } from '../components/Snippet.js'
+import { ConfigService } from '../services/config.service.js'
+import type { CompletedWith } from '../types/with.type.js'
 
-const LogoutWorkflow = () => {
+type LogoutWorkflowProps = Record<string, never>
+type WithLogout = CompletedWith<LogoutWorkflowProps>
+
+const withLogout: WithLogout = () => () => {
 
     const { loading, user, logout } = useAuth()
     const { config } = useInjectable(ConfigService)
@@ -42,5 +46,5 @@ const LogoutWorkflow = () => {
 }
 
 export {
-    LogoutWorkflow
+    withLogout
 }
