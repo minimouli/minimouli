@@ -5,16 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { BooleanArgument, Command, EnumArgument, IntegerArgument, PathArgument, StringArgument } from '@minimouli/console'
+import {
+    BooleanArgument,
+    Command,
+    EnumArgument,
+    IntegerArgument,
+    PathArgument,
+    StringArgument,
+    VersionedPackageArgument
+} from '@minimouli/console'
 import { Path } from '@minimouli/fs'
+import { Box, Text } from 'ink'
 import React from 'react'
 import { AppProvider } from '../components/providers/AppProvider.js'
-import { InstallWorkflow } from '../components/workflows/InstallWorkflow.js'
-import { ResolveWorkflow } from '../components/workflows/ResolveWorkflow.js'
-import { ScanWorkflow } from '../components/workflows/ScanWorkflow.js'
+import { MoulinetteOrigin } from '../enums/moulinette-origin.enum.js'
 import { ResolveSource } from '../enums/resolve-source.enum.js'
 import { getCurrentCycle } from '../helpers/cycle.helper.js'
-import type { MoulinetteEntity, MoulinetteSourceEntity } from '@minimouli/sdk'
+import { withInstall } from '../workflows/install.workflow.js'
+import { withResolve } from '../workflows/resolve.workflow.js'
 import type { ReactElement } from 'react'
 
 class InstallCommand extends Command {
@@ -37,9 +45,8 @@ class InstallCommand extends Command {
     )
 
     private moulinette = this.arg(
-        new StringArgument('moulinette')
+        new VersionedPackageArgument('moulinette')
             .setDescription(`Id of the desired moulinette. Used when source is set to '${ResolveSource.Manual}'`)
-            .setDefault('')
             .optional()
     )
 
@@ -84,76 +91,60 @@ class InstallCommand extends Command {
 
     execute(): ReactElement {
 
-        switch (this.source.content) {
-            case ResolveSource.Manual:
-                return this.installFromManualInformation()
-            case ResolveSource.Parameters:
-                return this.installFromParameters()
-            default:
-                return this.installFromScanning()
-        }
-    }
+        const InstallWorkflow = withInstall(({ moulinette, moulinetteSource }) => (
+            <Box>
+                <Text>Successfully installed the {moulinette.project.name} moulinette</Text>
+                <Text> </Text>
+                <Text dimColor >({moulinette.id}@{moulinetteSource.version.join('.')})</Text>
+            </Box>
+        ))
 
-    private installFromManualInformation(): ReactElement {
+        const ResolveWorkflow = withResolve((props) => {
+
+            if (props.origin === MoulinetteOrigin.Local)
+                return (
+                    <Box>
+                        <Text>The {props.registryEntry.project.name} moulinette is already installed</Text>
+                        <Text> </Text>
+                        <Text dimColor >({props.registryEntry.id}@{props.registryEntry.version.join('.')})</Text>
+                    </Box>
+                )
+
+            /* The origin is MoulinetteOrigin.Remote */
+            return (
+                <InstallWorkflow
+                    moulinette={props.moulinette}
+                    moulinetteSource={props.moulinetteSource}
+                />
+            )
+        })
+
         return (
             <AppProvider command={this.name} >
-                <ResolveWorkflow
-                    source={ResolveSource.Manual}
-                    moulinetteId={this.moulinette.content}
-                >
-                    {(moulinette: MoulinetteEntity, moulinetteSource: MoulinetteSourceEntity) => (
-                        <InstallWorkflow
-                            moulinette={moulinette}
-                            moulinetteSource={moulinetteSource}
-                        />
-                    )}
-                </ResolveWorkflow>
-            </AppProvider>
-        )
-    }
+                {this.source.content === ResolveSource.Manual && (
+                    <ResolveWorkflow
+                        source={ResolveSource.Manual}
+                        moulinetteId={this.moulinette.content.name}
+                        moulinetteVersion={this.moulinette.content.version}
+                    />
+                )}
 
-    private installFromParameters(): ReactElement {
-        return (
-            <AppProvider command={this.name} >
-                <ResolveWorkflow
-                    source={ResolveSource.Parameters}
-                    organizationName={this.organizationName.content}
-                    projectName={this.projectName.content}
-                    projectCycle={this.projectCycle.content}
-                    isOfficial={this.isOfficial.content}
-                >
-                    {(moulinette: MoulinetteEntity, moulinetteSource: MoulinetteSourceEntity) => (
-                        <InstallWorkflow
-                            moulinette={moulinette}
-                            moulinetteSource={moulinetteSource}
-                        />
-                    )}
-                </ResolveWorkflow>
-            </AppProvider>
-        )
-    }
+                {this.source.content === ResolveSource.Parameters && (
+                    <ResolveWorkflow
+                        source={ResolveSource.Parameters}
+                        organizationName={this.organizationName.content}
+                        projectName={this.projectName.content}
+                        projectCycle={this.projectCycle.content}
+                        isOfficial={this.isOfficial.content}
+                    />
+                )}
 
-    private installFromScanning(): ReactElement {
-        return (
-            <AppProvider command={this.name} >
-                <ScanWorkflow directory={this.directory.content} >
-                    {(scanResult) => (
-                        <ResolveWorkflow
-                            source={ResolveSource.Scan}
-                            organizationName={scanResult.organization.name}
-                            projectName={scanResult.project.name}
-                            projectCycle={this.projectCycle.content}
-                            isOfficial={this.isOfficial.content}
-                        >
-                            {(moulinette: MoulinetteEntity, moulinetteSource: MoulinetteSourceEntity) => (
-                                <InstallWorkflow
-                                    moulinette={moulinette}
-                                    moulinetteSource={moulinetteSource}
-                                />
-                            )}
-                        </ResolveWorkflow>
-                    )}
-                </ScanWorkflow>
+                {this.source.content === ResolveSource.Scan && (
+                    <ResolveWorkflow
+                        source={ResolveSource.Scan}
+                        directory={this.directory.content}
+                    />
+                )}
             </AppProvider>
         )
     }

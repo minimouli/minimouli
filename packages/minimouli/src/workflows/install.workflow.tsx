@@ -6,26 +6,34 @@
  */
 
 import { useInjectable } from '@minimouli/console'
-import { Path } from '@minimouli/fs'
 import { useAuth } from '@minimouli/hooks'
 import { isMinimouliClientError } from '@minimouli/sdk'
-import { Box, Text } from 'ink'
+import { Box } from 'ink'
 import React, { useEffect, useState } from 'react'
-import { ErrorOverview } from '../ErrorOverview.js'
-import { Loader } from '../Loader.js'
-import { InstallStage } from '../../enums/install-stage.enum.js'
-import { InstallService } from '../../services/install.service.js'
-import { RegistryService } from '../../services/registry.service.js'
-import type { InstalledEvent } from '../../types/events/install-service.events.type.js'
+import { InstallStage } from '../enums/install-stage.enum.js'
+import { Loader } from '../components/Loader.js'
+import { InstallService } from '../services/install.service.js'
+import { RegistryService } from '../services/registry.service.js'
 import type { MoulinetteEntity, MoulinetteSourceEntity } from '@minimouli/sdk'
-import type { InstallServiceResponse } from '../../types/responses/install-service.response.type.js'
+import type { Path } from '@minimouli/fs'
+import type { With } from '../types/with.type.js'
+import type { InstalledEvent } from '../types/events/install-service.events.type.js'
+import type { InstallServiceResponse } from '../types/responses/install-service.response.type.js'
 
 interface InstallWorkflowProps {
     moulinette: MoulinetteEntity
     moulinetteSource: MoulinetteSourceEntity
 }
 
-const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps) => {
+interface InstallChildProps {
+    moulinette: MoulinetteEntity
+    moulinetteSource: MoulinetteSourceEntity
+    moulinettePath: Path
+}
+
+type WithInstall = With<InstallWorkflowProps, InstallChildProps>
+
+const withInstall: WithInstall = (Child) => ({ moulinette, moulinetteSource }) => {
 
     const { client } = useAuth()
 
@@ -34,7 +42,6 @@ const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps)
         createNewInstance: true
     })
 
-    const [info, setInfo] = useState<string | undefined>()
     const [error, setError] = useState<string | undefined>()
     const [response, setResponse] = useState<InstallServiceResponse>([InstallStage.Loading, {}])
     const [stage, data] = response
@@ -57,14 +64,13 @@ const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps)
                     path: moulinettePath.toString(),
                     rules: moulinetteSource.rules,
                     checksum: moulinetteSource.checksum,
-                    information: {
-                        organization: {
-                            name: organization.name
-                        },
-                        project: {
-                            name: project.name,
-                            cycle: project.cycle
-                        }
+                    isOfficial: moulinette.isOfficial,
+                    organization: {
+                        name: organization.name
+                    },
+                    project: {
+                        name: project.name,
+                        cycle: project.cycle
                     },
                     installedAt: new Date().toISOString()
                 }
@@ -91,19 +97,6 @@ const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps)
         installService.on('error', () => {})
 
         void (async () => {
-
-            const entry = registryService.findByIdAndVersion(moulinette.id, moulinetteSource.version)
-
-            if (entry !== undefined) {
-                setInfo('The moulinette is already installed')
-                setResponse([InstallStage.Installed, {
-                    moulinette,
-                    moulinetteSource,
-                    moulinettePath: Path.fromAbsolute(entry.path)
-                }])
-                return
-            }
-
             await installService.install(moulinette, moulinetteSource)
         })()
 
@@ -112,6 +105,12 @@ const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps)
             installService.abortAllRequests()
         }
     }, [])
+
+    if (stage === InstallStage.Failed)
+        throw new Error(data.error)
+
+    if (error !== undefined)
+        throw new Error(error)
 
     return (
         <Box>
@@ -126,26 +125,12 @@ const InstallWorkflow = ({ moulinette, moulinetteSource }: InstallWorkflowProps)
             )}
 
             {stage === InstallStage.Installed && (
-                <Text>
-                    <Text>
-                        { info !== undefined ? info : `Successfully installed the ${data.moulinette.project.name} moulinette` }
-                    </Text>
-                    <Text> </Text>
-                    <Text dimColor >({data.moulinette.id}@{data.moulinetteSource.version.join('.')})</Text>
-                </Text>
-            )}
-
-            {stage === InstallStage.Failed && (
-                <ErrorOverview error={data.error} />
-            )}
-
-            {error !== undefined && (
-                <ErrorOverview error={error} />
+                <Child {...data} />
             )}
         </Box>
     )
 }
 
 export {
-    InstallWorkflow
+    withInstall
 }
