@@ -37,9 +37,9 @@ class Test {
         const executor = new TextExecutor(context, this.fn)
         const channel = Channel.fromCurrentProcess<IssuedEvents, EventDescriptions>()
 
-        channel.emit('test:perform', this.name, this.path)
+        channel.emit('test:launched', this.name, this.path)
         const { status, hint, duration } = await executor.execute()
-        channel.emit('test:complete', this.name, this.path, status, duration)
+        channel.emit('test:completed', this.name, this.path, status, duration)
 
         this.status = status
         this.hint = hint

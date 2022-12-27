@@ -9,8 +9,18 @@ import type { Callable, Unit } from '@minimouli/types'
 import type { TestStatus } from '@minimouli/types/syntheses'
 
 interface WorkerEvents {
-    'test:perform': Callable<[number, string, string[]]>
-    'test:complete': Callable<[number, string, string[], TestStatus, Unit.ms]>
+    'test:launched': Callable<[{
+        workerId: number
+        name: string
+        path: string[]
+    }]>
+    'test:completed': Callable<[{
+        workerId: number
+        name: string
+        path: string[]
+        status: TestStatus
+        duration: Unit.ms
+    }]>
 }
 
 export type {

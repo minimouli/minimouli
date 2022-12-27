@@ -29,8 +29,8 @@ interface ReceivedEvents extends EventDescriptions {
     'init:success': []
     'plan:result': [SuitePlanSynthesis[]]
     'run:result': [SuiteSynthesis[]]
-    'test:perform': [string, string[]]
-    'test:complete': [string, string[], TestStatus, Unit.ms]
+    'test:launched': [string, string[]]
+    'test:completed': [string, string[], TestStatus, Unit.ms]
 }
 
 class Worker {
@@ -69,11 +69,21 @@ class Worker {
         this.childProcess = node
         this.channel = Channel.fromChildProcess<IssuedEvents, ReceivedEvents>(node)
 
-        this.channel.on('test:perform', (...args) => {
-            this.emitter.emit('test:perform', this.id, ...args)
+        this.channel.on('test:launched', (name, path) => {
+            this.emitter.emit('test:launched', {
+                id: this.id,
+                name,
+                path
+            })
         })
-        this.channel.on('test:complete', (...args) => {
-            this.emitter.emit('test:complete', this.id, ...args)
+        this.channel.on('test:completed', (name, path, status, duration) => {
+            this.emitter.emit('test:completed', {
+                id: this.id,
+                name,
+                path,
+                status,
+                duration
+            })
         })
 
         return { error: undefined }
