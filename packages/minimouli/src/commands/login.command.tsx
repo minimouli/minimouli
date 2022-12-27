@@ -8,7 +8,7 @@
 import { Command } from '@minimouli/console'
 import React from 'react'
 import { AppProvider } from '../components/providers/AppProvider.js'
-import { LoginWorkflow } from '../components/workflows/LoginWorkflow.js'
+import { withLogin } from '../workflows/login.workflow.js'
 import type { ReactElement } from 'react'
 
 class LoginCommand extends Command {
@@ -22,6 +22,9 @@ class LoginCommand extends Command {
     public readonly shortDescription = 'Authenticate yourself with a GitHub account'
 
     execute(): ReactElement {
+
+        const LoginWorkflow = withLogin()
+
         return (
             <AppProvider command={this.name} >
                 <LoginWorkflow />

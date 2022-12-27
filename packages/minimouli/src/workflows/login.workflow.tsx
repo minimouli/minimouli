@@ -10,14 +10,18 @@ import { useAuth } from '@minimouli/hooks'
 import { GitHubDeviceFlowAuthStage } from '@minimouli/sdk'
 import { Box, Text } from 'ink'
 import React, { useEffect, useState } from 'react'
-import { ErrorOverview } from '../ErrorOverview.js'
-import { Link } from '../Link.js'
-import { Loader } from '../Loader.js'
-import { Snippet } from '../Snippet.js'
-import { ConfigService } from '../../services/config.service.js'
+import { ErrorOverview } from '../components/ErrorOverview.js'
+import { Link } from '../components/Link.js'
+import { Loader } from '../components/Loader.js'
+import { Snippet } from '../components/Snippet.js'
+import { ConfigService } from '../services/config.service.js'
 import type { GitHubDeviceFlowAuthResponse } from '@minimouli/sdk'
+import type { CompletedWith } from '../types/with.type.js'
 
-const LoginWorkflow = () => {
+type LoginWorkflowProps = Record<string, never>
+type WithLogin = CompletedWith<LoginWorkflowProps>
+
+const withLogin: WithLogin = () => () => {
 
     const { config } = useInjectable(ConfigService)
     const { signupWithGitHubDeviceFlow } = useAuth()
@@ -43,8 +47,8 @@ const LoginWorkflow = () => {
                         <Text>To authenticate yourself, we invite you to login with your GitHub account</Text>
 
                         <Box marginTop={1} flexDirection="column" >
-                            <Text>1. Open the login page in your favorite browser <Link href={data.verificationUri} /></Text>
-                            <Text>2. Enter the following code: <Text bold >{data.userCode}</Text></Text>
+                            <Text>1. Open the login page in your favorite browser ➔ <Link href={data.verificationUri} /></Text>
+                            <Text>2. Enter the following code ➔ <Text bold >{data.userCode}</Text></Text>
                             <Text>3. That's all, we take care of the rest!</Text>
                         </Box>
                     </Box>
@@ -67,9 +71,6 @@ const LoginWorkflow = () => {
                     <Box marginTop={1} flexDirection="column" >
                         <Text>You now have access to our amazing website and more</Text>
                         <Text>To get started, run the following command in one of your project directories:</Text>
-                    </Box>
-
-                    <Box marginTop={1} >
                         <Snippet command={`${config.app.cli} run`} />
                     </Box>
                 </Box>
@@ -83,5 +84,5 @@ const LoginWorkflow = () => {
 }
 
 export {
-    LoginWorkflow
+    withLogin
 }
