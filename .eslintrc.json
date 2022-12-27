@@ -383,6 +383,7 @@
           ".*.res.dto",
           ".*SearchParams$",
           "Props$",
+          "Ref$",
           "rootDir"
         ]
       }
