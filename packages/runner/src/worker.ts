@@ -12,7 +12,7 @@ import type { Path } from '@minimouli/fs'
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Process } from '@minimouli/process'
 import type { Unit } from '@minimouli/types'
-import type { MoulinetteConfig } from '@minimouli/types/config'
+import type { FrameworkConfig } from '@minimouli/types/config'
 import type { SuiteSynthesis, SuitePlanSynthesis, TestStatus } from '@minimouli/types/syntheses'
 import type { ErrorCatcherResponse } from './types/error-catcher-response.type.js'
 import type { PlanResponse } from './types/plan-response.type.js'
@@ -20,7 +20,7 @@ import type { RunResponse } from './types/run-response.type.js'
 import type { WorkerEvents } from './types/worker-events.type.js'
 
 interface IssuedEvents extends EventDescriptions {
-    init: [MoulinetteConfig]
+    init: [FrameworkConfig]
     plan: []
     run: []
 }
@@ -89,7 +89,7 @@ class Worker {
         return { error: undefined }
     }
 
-    async prepare(config: MoulinetteConfig): Promise<ErrorCatcherResponse> {
+    async prepare(config: FrameworkConfig): Promise<ErrorCatcherResponse> {
 
         if (this.channel === undefined)
             return { error: 'The worker must be loaded before being prepared' }

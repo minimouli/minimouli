@@ -7,6 +7,7 @@
 
 import {
     BooleanMatcher,
+    ExecutableMatcher,
     NumberMatcher,
     ObjectMatcher,
     StringMatcher,
@@ -15,11 +16,17 @@ import {
 import { HintStatus, HintType } from '@minimouli/types/hints'
 import { AssertionError } from '../errors/assertion.error.js'
 import { MatcherError } from '../errors/matcher.error.js'
+import { Executable } from '../objects/executable.js'
 import type { Expect } from '@minimouli/types/blocks'
 import type { Hint } from '@minimouli/types/hints'
 import type { Matcher } from '@minimouli/types/matchers'
 
 const getMatcher = <R>(received: R): Matcher<R> => {
+
+    if (received instanceof Executable)
+        // @ts-expect-error ExecutableMatcher implements Matcher<Executable>
+        return new ExecutableMatcher()
+
     switch (typeof received) {
         case 'boolean':
             // @ts-expect-error BooleanMatcher implements Matcher<boolean>

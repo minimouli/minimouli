@@ -6,12 +6,14 @@
  */
 
 import { Channel } from '@minimouli/ipc'
+import { setConfig } from './config.js'
 import { Tree } from './tree/tree.js'
 import type { IssuedEvents, ReceivedEvents } from './types/events/framework.event.type.js'
 
 const channel = Channel.fromCurrentProcess<IssuedEvents, ReceivedEvents>()
 
-channel.on('init', () => {
+channel.on('init', (config) => {
+    setConfig(config)
     channel.emit('init:success')
 })
 
@@ -40,3 +42,5 @@ export * from './blocks/expect.block.js'
 export * from './blocks/sleep.block.js'
 export * from './blocks/suite.block.js'
 export * from './blocks/test.block.js'
+export * from './objects/executable.js'
+export * from './objects/path.js'

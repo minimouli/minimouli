@@ -11,7 +11,13 @@
   ],
   "references": [
     {
+      "path": "../fs"
+    },
+    {
       "path": "../ipc"
+    },
+    {
+      "path": "../process"
     },
     {
       "path": "../matchers"

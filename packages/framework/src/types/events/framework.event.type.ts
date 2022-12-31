@@ -7,7 +7,7 @@
 
 import type { EventDescriptions } from '@minimouli/ipc'
 import type { Unit } from '@minimouli/types'
-import type { MoulinetteConfig } from '@minimouli/types/config'
+import type { FrameworkConfig } from '@minimouli/types/config'
 import type { SuitePlanSynthesis, SuiteSynthesis, TestStatus } from '@minimouli/types/syntheses'
 
 interface IssuedEvents extends EventDescriptions {
@@ -19,7 +19,7 @@ interface IssuedEvents extends EventDescriptions {
 }
 
 interface ReceivedEvents extends EventDescriptions {
-    init: [MoulinetteConfig]
+    init: [FrameworkConfig]
     plan: []
     run: []
 }

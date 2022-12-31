@@ -7,7 +7,7 @@
 
 import { Worker } from './worker.js'
 import type { Path } from '@minimouli/fs'
-import type { MoulinetteConfig } from '@minimouli/types/config'
+import type { FrameworkConfig } from '@minimouli/types/config'
 import type { SuiteSynthesis, SuitePlanSynthesis } from '@minimouli/types/syntheses'
 import type { ErrorCatcherResponse } from './types/error-catcher-response.type.js'
 import type { PlanResponse } from './types/plan-response.type.js'
@@ -43,7 +43,7 @@ class Orchestrator {
         return { error: undefined }
     }
 
-    async prepare(config: MoulinetteConfig): Promise<ErrorCatcherResponse> {
+    async prepare(config: FrameworkConfig): Promise<ErrorCatcherResponse> {
 
         const results = await Promise.all(this.workers.map((worker) => worker.prepare(config)))
 

@@ -81,7 +81,11 @@ class Runner {
         if (error3 !== undefined)
             return { error: error3 }
 
-        const { error: error4 } = await this.orchestrator.prepare(config)
+        const { error: error4 } = await this.orchestrator.prepare({
+            projectPath: this.projectPath.toString(),
+            moulinettePath: this.moulinettePath.toString(),
+            binaries: config.binaries
+        })
         if (error4 !== undefined)
             return { error: error4 }
 
