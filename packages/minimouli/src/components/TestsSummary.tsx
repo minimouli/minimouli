@@ -25,11 +25,11 @@ const TestsSummary = ({ passed, failed }: TestsSummaryProps) => {
             <Text>Tests summary</Text>
             <Text>
                 <Text color="green" > ✓ </Text>
-                <Text dimColor >{passed} test{passed !== 0 && 's'} passed</Text>
+                <Text dimColor >{passed} test{passed !== 1 && 's'} passed</Text>
             </Text>
             <Text>
                 <Text color="red" > ✕ </Text>
-                <Text dimColor >{failed} test{failed !== 0 && 's'} failed</Text>
+                <Text dimColor >{failed} test{failed !== 1 && 's'} failed</Text>
             </Text>
             <Box marginLeft={3} >
                 <ResultProgressBar value={value} />
