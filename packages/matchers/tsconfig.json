@@ -10,6 +10,9 @@
   ],
   "references": [
     {
+      "path": "../fs"
+    },
+    {
       "path": "../types"
     }
   ]

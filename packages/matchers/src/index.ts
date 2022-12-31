@@ -6,6 +6,7 @@
  */
 
 export * from './matchers/boolean.matcher.js'
+export * from './matchers/executable.matcher.js'
 export * from './matchers/number.matcher.js'
 export * from './matchers/object.matcher.js'
 export * from './matchers/string.matcher.js'
