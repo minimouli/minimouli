@@ -20,8 +20,8 @@ class AfterAllHook implements Hook {
         private fn: HookFn
     ) {}
 
-    execute(): void {
-        this.fn()
+    async execute(): Promise<void> {
+        await this.fn()
     }
 
 }

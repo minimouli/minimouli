@@ -14,7 +14,7 @@ enum Trigger {
 
 interface Hook {
 
-    execute(): void
+    execute(): Promise<void>
 
     get triggers(): Trigger[]
     get isAppliedOnChildren(): boolean

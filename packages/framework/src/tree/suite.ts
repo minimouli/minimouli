@@ -17,9 +17,9 @@ class Suite {
     ) {}
 
     async execute(): Promise<void> {
-        this.context.emit(Trigger.BEFORE_SUITE_IS_EXECUTED)
+        await this.context.emit(Trigger.BEFORE_SUITE_IS_EXECUTED)
         await this.context.execute()
-        this.context.emit(Trigger.AFTER_SUITE_IS_EXECUTED)
+        await this.context.emit(Trigger.AFTER_SUITE_IS_EXECUTED)
     }
 
     plan(): SuitePlanSynthesis {

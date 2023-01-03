@@ -66,9 +66,9 @@ class TextExecutor {
 
         const startTime = performance.now()
 
-        this.context.emit(Trigger.BEFORE_TEST_IS_EXECUTED)
+        await this.context.emit(Trigger.BEFORE_TEST_IS_EXECUTED)
         const result = await this.executeTest()
-        this.context.emit(Trigger.AFTER_TEST_IS_EXECUTED)
+        await this.context.emit(Trigger.AFTER_TEST_IS_EXECUTED)
 
         const duration = performance.now() - startTime
 

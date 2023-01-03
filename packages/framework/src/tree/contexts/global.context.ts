@@ -8,7 +8,7 @@
 import type { Context } from './context.js'
 import type { Suite } from '../suite.js'
 import type { Test } from '../test.js'
-import type { Hook, Trigger } from '../../hooks/hook.js'
+import type { Hook } from '../../hooks/hook.js'
 
 class GlobalContext implements Context {
 
@@ -35,8 +35,8 @@ class GlobalContext implements Context {
             await suite.execute()
     }
 
-    emit(trigger: Trigger): void {
-        void trigger
+    emit(): Promise<void> {
+        return Promise.resolve()
     }
 
     get path(): string[] {

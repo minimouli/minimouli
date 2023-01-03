@@ -13,7 +13,7 @@ type ConcurrentBlockFn = () => Promise<void>
 
 type SuiteFn = BlockFn
 type TestFn = ConcurrentBlockFn | BlockFn
-type HookFn = BlockFn
+type HookFn = ConcurrentBlockFn | BlockFn
 
 type Suite = (name: string, fn: SuiteFn) => void
 type Test = (name: string, fn: TestFn) => void

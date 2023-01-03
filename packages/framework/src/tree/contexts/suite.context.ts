@@ -44,8 +44,8 @@ class SuiteContext implements Context {
             await suite.execute()
     }
 
-    emit(trigger: Trigger, depth = 0): void {
-        this.parentContext.emit(trigger, depth + 1)
+    async emit(trigger: Trigger, depth = 0): Promise<void> {
+        await this.parentContext.emit(trigger, depth + 1)
 
         for (const hook of this.hooks) {
 
@@ -55,7 +55,8 @@ class SuiteContext implements Context {
             if (!hook.triggers.includes(trigger))
                 continue
 
-            hook.execute()
+            // eslint-disable-next-line no-await-in-loop
+            await hook.execute()
         }
     }
 

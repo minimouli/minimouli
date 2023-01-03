@@ -16,7 +16,7 @@ interface Context {
     addHook(hook: Hook): void
 
     execute(): Promise<void>
-    emit(trigger: Trigger, depth?: number): void
+    emit(trigger: Trigger, depth?: number): Promise<void>
 
     get tests(): Test[]
     get suites(): Suite[]
