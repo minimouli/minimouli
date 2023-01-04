@@ -49,23 +49,23 @@ class HttpClient {
     }
 
     async get<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
-        return this.request(Method.Get, route, options)
+        return this.request<T>(Method.Get, route, options)
     }
 
     async post<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
-        return this.request(Method.Post, route, options)
+        return this.request<T>(Method.Post, route, options)
     }
 
     async put<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
-        return this.request(Method.Put, route, options)
+        return this.request<T>(Method.Put, route, options)
     }
 
     async patch<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
-        return this.request(Method.Patch, route, options)
+        return this.request<T>(Method.Patch, route, options)
     }
 
     async delete<T>(route: string, options: Partial<RequestOptions> = {}): Promise<T> {
-        return this.request(Method.Delete, route, options)
+        return this.request<T>(Method.Delete, route, options)
     }
 
     abortAllRequests(): void {

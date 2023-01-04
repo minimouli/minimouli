@@ -11,6 +11,7 @@ import { AccountResource } from './resources/account.resource.js'
 import { MoulinetteResource } from './resources/moulinette.resource.js'
 import { OrganizationResource } from './resources/organization.resource.js'
 import { ProjectResource } from './resources/project.resource.js'
+import { RunResource } from './resources/run.resource.js'
 import type { ClientOptions } from './types/options/client.options.type.js'
 
 class Client {
@@ -21,6 +22,7 @@ class Client {
     public readonly moulinettes: MoulinetteResource
     public readonly organizations: OrganizationResource
     public readonly projects: ProjectResource
+    public readonly runs: RunResource
 
     constructor(options: Partial<ClientOptions> = {}) {
 
@@ -33,6 +35,7 @@ class Client {
         this.moulinettes = new MoulinetteResource(this.httpClient)
         this.organizations = new OrganizationResource(this.httpClient)
         this.projects = new ProjectResource(this.httpClient)
+        this.runs = new RunResource(this.httpClient)
     }
 
     GitHubDeviceFlowAuth(appName: string): GitHubDeviceFlowAuth {

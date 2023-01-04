@@ -17,9 +17,9 @@ class MoulinetteEntity {
     public readonly repository: URL
     public readonly isOfficial: boolean
     public readonly use: number
-    public readonly project: ProjectEntity
+    public readonly project: ProjectEntity | undefined
     public readonly sources: MoulinetteSourceEntity[] | undefined
-    public readonly maintainers: AccountEntity[]
+    public readonly maintainers: AccountEntity[] | undefined
     public readonly uri: string
     public readonly updatedAt: Date
     public readonly createdAt: Date
@@ -29,10 +29,12 @@ class MoulinetteEntity {
         this.repository = new URL(response.repository)
         this.isOfficial = response.isOfficial
         this.use = response.use
-        this.project = new ProjectEntity(httpClient, response.project)
+        if (response.project !== undefined)
+            this.project = new ProjectEntity(httpClient, response.project)
         if (response.sources !== undefined)
             this.sources = response.sources.map((source) => new MoulinetteSourceEntity(httpClient, source))
-        this.maintainers = response.maintainers.map((maintainer) => new AccountEntity(httpClient, maintainer))
+        if (response.maintainers !== undefined)
+            this.maintainers = response.maintainers.map((maintainer) => new AccountEntity(httpClient, maintainer))
         this.uri = response.uri
         this.updatedAt = new Date(response.updatedAt)
         this.createdAt = new Date(response.createdAt)

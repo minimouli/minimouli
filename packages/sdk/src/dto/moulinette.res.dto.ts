@@ -16,9 +16,9 @@ interface MoulinetteResDto {
     repository: string
     isOfficial: boolean
     use: number
-    project: ProjectResDto
+    project?: ProjectResDto
     sources?: MoulinetteSourceResDto[]
-    maintainers: AccountResDto[]
+    maintainers?: AccountResDto[]
     uri: string
     updatedAt: string
     createdAt: string
