@@ -15,17 +15,20 @@ import type { With } from '../types/with.type.js'
 
 interface RunWorkflowProps {
     projectPath: Path
+    moulinette: string
     moulinettePath: Path
 }
 
 interface RunChildProps {
     suites: SuiteSynthesis[]
+    moulinette: string
 }
 
 type WithRun = With<RunWorkflowProps, RunChildProps>
 
 const withRun: WithRun = (Child) => ({
     projectPath,
+    moulinette,
     moulinettePath
 }) => {
 
@@ -75,7 +78,7 @@ const withRun: WithRun = (Child) => ({
     if (result === undefined)
         return <ProgressBar message={message} value={value} />
 
-    return <Child suites={result} />
+    return <Child suites={result} moulinette={moulinette} />
 }
 
 export {

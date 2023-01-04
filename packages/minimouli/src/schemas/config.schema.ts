@@ -62,6 +62,11 @@ const configSchema = Joi.object({
         })
         .required(),
 
+    website: Joi.object()
+        .keys({
+            run: Joi.string().required()
+        }),
+
     package: Joi.object()
         .keys({
             name: Joi.string().required()

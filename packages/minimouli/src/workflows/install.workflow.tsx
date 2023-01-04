@@ -50,6 +50,11 @@ const withInstall: WithInstall = (Child) => ({ moulinette, moulinetteSource }) =
         void (async () => {
             try {
 
+                if (moulinette.project === undefined) {
+                    setError('Unable to retrieve the project')
+                    return
+                }
+
                 const project = await client.projects.get(moulinette.project.id)
                 const organization = project.organization
 

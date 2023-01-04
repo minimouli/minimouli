@@ -7,7 +7,9 @@
 
 import { Command, EnumArgument, PathArgument, VersionedPackageArgument } from '@minimouli/console'
 import { Path } from '@minimouli/fs'
+import { Box } from 'ink'
 import React from 'react'
+import { Upload } from '../components/Upload.js'
 import { AppProvider } from '../components/providers/AppProvider.js'
 import { SuitesViewer } from '../components/viewers/SuitesViewer.js'
 import { MoulinetteOrigin } from '../enums/moulinette-origin.enum.js'
@@ -53,13 +55,19 @@ class RunCommand extends Command {
 
     execute(): ReactElement {
 
-        const RunWorkflow = withRun(({ suites }) => (
-            <SuitesViewer suites={suites} />
+        const RunWorkflow = withRun(({ suites, moulinette }) => (
+            <Box flexDirection="column" >
+                <SuitesViewer suites={suites} />
+                <Box marginTop={1} >
+                    <Upload suites={suites} moulinette={moulinette} />
+                </Box>
+            </Box>
         ))
 
-        const InstallWorkflow = withInstall(({ moulinettePath }) => (
+        const InstallWorkflow = withInstall(({ moulinette, moulinetteSource, moulinettePath }) => (
             <RunWorkflow
                 projectPath={this.directory.content}
+                moulinette={`${moulinette.id}@${moulinetteSource.version.join('.')}`}
                 moulinettePath={moulinettePath}
             />
         ))
@@ -70,6 +78,7 @@ class RunCommand extends Command {
                 return (
                     <RunWorkflow
                         projectPath={this.directory.content}
+                        moulinette={`${props.registryEntry.id}@${props.registryEntry.version.join('.')}`}
                         moulinettePath={Path.fromAbsolute(props.registryEntry.path)}
                     />
                 )

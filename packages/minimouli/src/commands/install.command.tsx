@@ -93,7 +93,7 @@ class InstallCommand extends Command {
 
         const InstallWorkflow = withInstall(({ moulinette, moulinetteSource }) => (
             <Box>
-                <Text>Successfully installed the {moulinette.project.name} moulinette</Text>
+                <Text>Successfully installed {moulinette.project !== undefined ? `the ${moulinette.project.name}` : ''} moulinette</Text>
                 <Text> </Text>
                 <Text dimColor >({moulinette.id}@{moulinetteSource.version.join('.')})</Text>
             </Box>

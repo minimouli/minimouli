@@ -24,6 +24,9 @@ interface ApplicationConfig {
     api: {
         baseUrl: string
     }
+    website: {
+        run: string
+    }
     package: {
         name: string
     }

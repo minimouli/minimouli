@@ -15,6 +15,9 @@
   "api": {
     "baseUrl": "https://api.minimouli.com"
   },
+  "website": {
+    "run": "https://minimouli.com/run/${runId}"
+  },
   "package": {
     "name": "minimouli"
   }
