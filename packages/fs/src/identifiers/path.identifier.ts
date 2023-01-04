@@ -6,6 +6,7 @@
  */
 
 import os from 'node:os'
+import glob from 'fast-glob'
 import { randomString } from '../helpers/random.helper.js'
 
 class Path {
@@ -60,6 +61,16 @@ class Path {
 
     join(segments: string): Path {
         return Path.fromRelative(this, segments)
+    }
+
+    async glob(segments: string): Promise<Path[]> {
+
+        const entries = await glob(segments, {
+            dot: true,
+            cwd: this.toString()
+        })
+
+        return entries.map((entry) => Path.fromAbsolute(entry))
     }
 
     random(length = 16): Path {

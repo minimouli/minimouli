@@ -12,7 +12,6 @@ const configSchema = Joi.object({
 
     binaries: Joi.object()
         .pattern(Joi.string(), Joi.string())
-        .min(1)
         .required(),
 
     suites: Joi.object()
