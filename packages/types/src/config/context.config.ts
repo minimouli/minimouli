@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './context.config.js'
-export * from './framework.config.js'
-export * from './moulinette.config.js'
+interface ContextConfig {
+    attempts: number
+}
+
+export type {
+    ContextConfig
+}

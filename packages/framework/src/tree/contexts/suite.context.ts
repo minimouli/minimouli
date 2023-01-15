@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ContextConfig } from '@minimouli/types/config'
 import type { Context } from './context.js'
 import type { Suite } from '../suite.js'
 import type { Test } from '../test.js'
@@ -15,6 +16,9 @@ class SuiteContext implements Context {
     public readonly tests: Test[] = []
     public readonly suites: Suite[] = []
     private hooks: Hook[] = []
+    private currentConfiguration: ContextConfig = {
+        attempts: 1
+    }
 
     constructor(
         private parentContext: Context,
@@ -31,6 +35,13 @@ class SuiteContext implements Context {
 
     addHook(hook: Hook): void {
         this.hooks.push(hook)
+    }
+
+    setConfiguration(config: Partial<ContextConfig>) {
+        this.currentConfiguration = {
+            ...this.currentConfiguration,
+            ...config
+        }
     }
 
     async execute(): Promise<void> {
@@ -58,6 +69,10 @@ class SuiteContext implements Context {
             // eslint-disable-next-line no-await-in-loop
             await hook.execute()
         }
+    }
+
+    get configuration(): ContextConfig {
+        return this.currentConfiguration
     }
 
     get path(): string[] {

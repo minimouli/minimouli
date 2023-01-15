@@ -62,14 +62,31 @@ class TextExecutor {
         }
     }
 
+    private async executeAttempt(): Promise<ExecuteTestResponse> {
+
+        let result: ExecuteTestResponse
+        let { attempts } = this.context.configuration
+
+        do {
+
+            /* eslint-disable no-await-in-loop */
+            await this.context.emit(Trigger.BEFORE_TEST_IS_EXECUTED)
+            result = await this.executeTest()
+            await this.context.emit(Trigger.AFTER_TEST_IS_EXECUTED)
+            /* eslint-enable no-await-in-loop */
+
+            if (result.status === TestStatus.Success)
+                return result
+
+        } while (--attempts > 0)
+
+        return result
+    }
+
     async execute(): Promise<ExecuteResponse> {
 
         const startTime = performance.now()
-
-        await this.context.emit(Trigger.BEFORE_TEST_IS_EXECUTED)
-        const result = await this.executeTest()
-        await this.context.emit(Trigger.AFTER_TEST_IS_EXECUTED)
-
+        const result = await this.executeAttempt()
         const duration = performance.now() - startTime
 
         return { ...result, duration }

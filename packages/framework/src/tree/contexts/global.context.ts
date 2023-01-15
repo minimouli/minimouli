@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { ContextConfig } from '@minimouli/types/config'
 import type { Context } from './context.js'
 import type { Suite } from '../suite.js'
 import type { Test } from '../test.js'
@@ -14,6 +15,9 @@ class GlobalContext implements Context {
 
     public readonly tests: Test[] = []
     public readonly suites: Suite[] = []
+    private currentConfiguration: ContextConfig = {
+        attempts: 1
+    }
 
     addSuite(suite: Suite): void {
         this.suites.push(suite)
@@ -29,6 +33,13 @@ class GlobalContext implements Context {
         throw new Error('Cannot add hook inside global context. Use a suite block first')
     }
 
+    setConfiguration(config: Partial<ContextConfig>) {
+        this.currentConfiguration = {
+            ...this.currentConfiguration,
+            ...config
+        }
+    }
+
     async execute(): Promise<void> {
         for (const suite of this.suites)
             // eslint-disable-next-line no-await-in-loop
@@ -37,6 +48,10 @@ class GlobalContext implements Context {
 
     emit(): Promise<void> {
         return Promise.resolve()
+    }
+
+    get configuration(): ContextConfig {
+        return this.currentConfiguration
     }
 
     get path(): string[] {
