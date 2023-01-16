@@ -55,6 +55,11 @@ class Executable implements ExecutableInterface {
             .setTimeout(5000)
     }
 
+    setArguments(args: string[]): this {
+        this.processFactory.setArguments(args)
+        return this
+    }
+
     setTimeout(timeout: Unit.ms): this {
         this.processFactory.setTimeout(timeout)
         return this

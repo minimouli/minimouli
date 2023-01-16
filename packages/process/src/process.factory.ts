@@ -40,7 +40,7 @@ const normalizeStdioValue = (value: StdioValue): ValidStdioValue => {
 class ProcessFactory {
 
     private readonly name: string
-    private readonly args: string[]
+    private args: string[]
 
     private _cwd: Path | undefined = undefined
 
@@ -70,6 +70,11 @@ class ProcessFactory {
 
     ipc(): this {
         this._ipc = true
+        return this
+    }
+
+    setArguments(args: string[]): this {
+        this.args = args
         return this
     }
 
