@@ -13,7 +13,7 @@ import type { EntityType } from '../enums/entity-type.enum.js'
 interface RunResDto {
     object: EntityType.Run
     id: string
-    suites: SuiteSynthesis
+    suites: SuiteSynthesis[]
     moulinette: MoulinetteResDto
     moulinetteVersion: string
     owner?: AccountResDto

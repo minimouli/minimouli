@@ -14,7 +14,7 @@ import type { RunResDto } from '../dto/run.res.dto.js'
 class RunEntity {
 
     public readonly id: string
-    public readonly suites: SuiteSynthesis
+    public readonly suites: SuiteSynthesis[]
     public readonly moulinette: MoulinetteEntity
     public readonly moulinetteVersion: string
     public readonly owner: AccountEntity | undefined
