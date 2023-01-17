@@ -1,4 +1,48 @@
 {
   "files": [],
-  "references": []
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true
+  },
+  "references": [
+    {
+      "path": "./packages/console"
+    },
+    {
+      "path": "./packages/framework"
+    },
+    {
+      "path": "./packages/fs"
+    },
+    {
+      "path": "./packages/hooks"
+    },
+    {
+      "path": "./packages/io"
+    },
+    {
+      "path": "./packages/ipc"
+    },
+    {
+      "path": "./packages/matchers"
+    },
+    {
+      "path": "./packages/minimouli"
+    },
+    {
+      "path": "./packages/process"
+    },
+    {
+      "path": "./packages/runner"
+    },
+    {
+      "path": "./packages/scanner"
+    },
+    {
+      "path": "./packages/sdk"
+    },
+    {
+      "path": "./packages/types"
+    }
+  ]
 }

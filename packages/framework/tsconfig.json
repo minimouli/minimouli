@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"]
+  },
+  "exclude": [
+    "./dist",
+    "./src/**/__tests__"
+  ],
+  "references": [
+    {
+      "path": "../fs"
+    },
+    {
+      "path": "../ipc"
+    },
+    {
+      "path": "../process"
+    },
+    {
+      "path": "../matchers"
+    },
+    {
+      "path": "../types"
+    }
+  ]
+}

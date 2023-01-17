@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "experimentalDecorators": true,
+    "jsx": "react"
+  },
+  "exclude": [
+    "./dist",
+    "./src/**/__tests__"
+  ],
+  "references": [
+    {
+      "path": "../console"
+    },
+    {
+      "path": "../fs"
+    },
+    {
+      "path": "../hooks"
+    },
+    {
+      "path": "../process"
+    },
+    {
+      "path": "../runner"
+    },
+    {
+      "path": "../scanner"
+    },
+    {
+      "path": "../sdk"
+    }
+  ]
+}

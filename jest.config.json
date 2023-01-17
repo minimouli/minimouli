@@ -1,0 +1,9 @@
+{
+  "testMatch": [
+    "**/__tests__/**/*.spec.ts"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "resolver": "ts-jest-resolver"
+}

@@ -1,0 +1,10 @@
+{
+  "include": [
+    "./packages/**/__tests__",
+    "./packages/types/*.d.ts"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "strictNullChecks": true
+  }
+}

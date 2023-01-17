@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "exclude": [
+    "./dist",
+    "./src/**/__tests__"
+  ],
+  "references": [
+    {
+      "path": "../fs"
+    },
+    {
+      "path": "../process"
+    },
+    {
+      "path": "../types"
+    }
+  ]
+}

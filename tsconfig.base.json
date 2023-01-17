@@ -3,7 +3,7 @@
     "target": "es2022",
     "lib": ["es2022"],
     "module": "es2022",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
 
     "strict": true,
     "esModuleInterop": true,
@@ -11,6 +11,7 @@
 
     "composite": true,
     "declaration": true,
+    "sourceMap": true,
 
     "noImplicitOverride": true,
     "noImplicitReturns": true,

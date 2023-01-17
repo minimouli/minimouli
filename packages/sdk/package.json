@@ -1,0 +1,31 @@
+{
+  "name": "@minimouli/sdk",
+  "version": "2.0.1",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/sdk",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@minimouli/types": "^2.0.0",
+    "axios": "1.1.3",
+    "browserify-events": "npm:events@^3.3.0",
+    "core-js": "^3.25.0",
+    "deepmerge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/browserify-events": "npm:@types/events@^3.0.0",
+    "@types/deepmerge": "^2.2.0"
+  }
+}

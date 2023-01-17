@@ -1,0 +1,34 @@
+{
+  "name": "@minimouli/types",
+  "version": "2.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/types",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "core-js": "^3.25.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./blocks": "./dist/blocks/index.js",
+    "./config": "./dist/config/index.js",
+    "./hints": "./dist/hints/index.js",
+    "./interfaces": "./dist/interfaces/index.js",
+    "./matchers": "./dist/matchers/index.js",
+    "./options": "./dist/options/index.js",
+    "./stream": "./dist/stream/index.js",
+    "./syntheses": "./dist/syntheses/index.js"
+  }
+}

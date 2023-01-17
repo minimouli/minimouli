@@ -1,0 +1,288 @@
+/**
+ * Copyright (c) Minimouli
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { HintStatus, HintType, ObjectType } from '@minimouli/types/hints'
+import { assertToBe, assertToBeFalsy, assertToBeTruthy } from '../helpers/assert.helper.js'
+import type { EqualityHint, MatcherErrorHint, StringDifferenceHint } from '@minimouli/types/hints'
+import type { Matcher } from '@minimouli/types/matchers'
+import type { PathInterface } from '@minimouli/types/interfaces'
+import type { MatcherOutputOptions } from '@minimouli/types/options'
+
+class StringMatcher implements Matcher<string> {
+
+    toBe(received: string, expected: string): StringDifferenceHint {
+
+        const pass = assertToBe(received, expected)
+
+        return {
+            type: HintType.StringDifference,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            received: {
+                value: received.split('\n'),
+                type: ObjectType.String
+            },
+            expected: {
+                value: expected.split('\n'),
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toBe'
+            }
+        }
+    }
+
+    toBeTruthy(received: string): EqualityHint {
+
+        const pass = assertToBeTruthy(received)
+
+        return {
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeTruthy'
+            }
+        }
+    }
+
+    toBeFalsy(received: string): EqualityHint {
+
+        const pass = assertToBeFalsy(received)
+
+        return {
+            type: HintType.Equality,
+            status: pass ? HintStatus.Success : HintStatus.Failure,
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeFalsy'
+            }
+        }
+    }
+
+    toBeNull(received: string): EqualityHint {
+        return {
+            type: HintType.Equality,
+            status: HintStatus.Failure,
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeNull'
+            }
+        }
+    }
+
+    toBeDefined(received: string): EqualityHint {
+        return {
+            type: HintType.Equality,
+            status: HintStatus.Success,
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeDefined'
+            }
+        }
+    }
+
+    toBeUndefined(received: string): EqualityHint {
+        return {
+            type: HintType.Equality,
+            status: HintStatus.Failure,
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeUndefined'
+            }
+        }
+    }
+
+    toBeNaN(received: string): MatcherErrorHint {
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be a number',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: []
+                },
+                method: 'toBeNaN'
+            }
+        }
+    }
+
+    toBeLessThan(received: string, expected: number): MatcherErrorHint {
+        void expected
+
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be a number',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toBeLessThan'
+            }
+        }
+    }
+
+    toBeLessThanOrEqual(received: string, expected: number): MatcherErrorHint {
+        void expected
+
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be a number',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toBeLessThanOrEqual'
+            }
+        }
+    }
+
+    toBeGreaterThan(received: string, expected: number): MatcherErrorHint {
+        void expected
+
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be a number',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toBeGreaterThan'
+            }
+        }
+    }
+
+    toBeGreaterThanOrEqual(received: string, expected: number): MatcherErrorHint {
+        void expected
+
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be a number',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toBeGreaterThanOrEqual'
+            }
+        }
+    }
+
+    toExitWith(received: string, expected: number): MatcherErrorHint {
+        void expected
+
+        return {
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be an executable',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected']
+                },
+                method: 'toExitWith'
+            }
+        }
+    }
+
+    toOutput(received: string, expected: string[] | PathInterface, options: Partial<MatcherOutputOptions>): Promise<MatcherErrorHint> {
+        void expected
+        void options
+
+        return Promise.resolve({
+            type: HintType.MatcherError,
+            status: HintStatus.Failure,
+            message: 'received must be an executable',
+            received: {
+                value: received,
+                type: ObjectType.String
+            },
+            snippet: {
+                arguments: {
+                    received: ['received'],
+                    expected: ['expected', 'options']
+                },
+                method: 'toOutput'
+            }
+        })
+    }
+
+}
+
+export {
+    StringMatcher
+}

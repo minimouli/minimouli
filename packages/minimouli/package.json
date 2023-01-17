@@ -1,0 +1,46 @@
+{
+  "name": "minimouli",
+  "version": "2.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "directory": "packages/minimouli",
+    "url": "https://github.com/minimouli/minimouli.git"
+  },
+  "homepage": "https://github.com/minimouli/minimouli",
+  "bugs": {
+    "url": "https://github.com/minimouli/minimouli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "./bin",
+    "./dist",
+    "./config.json"
+  ],
+  "bin": "./bin/minimouli.js",
+  "dependencies": {
+    "@minimouli/console": "^2.0.0",
+    "@minimouli/fs": "^2.0.0",
+    "@minimouli/hooks": "^2.0.0",
+    "@minimouli/process": "^2.0.0",
+    "@minimouli/runner": "^2.0.0",
+    "@minimouli/scanner": "^2.0.0",
+    "@minimouli/sdk": "^2.0.0",
+    "axios": "1.1.3",
+    "chalk": "^5.0.1",
+    "core-js": "^3.25.0",
+    "deepmerge": "^4.2.2",
+    "error-stack-parser": "^2.1.4",
+    "ink": "^3.2.0",
+    "joi": "^17.6.0",
+    "lowdb": "^5.0.5",
+    "react": "^17.0.2",
+    "tar": "^6.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "^17",
+    "@types/tar": "^6.1.3"
+  }
+}
