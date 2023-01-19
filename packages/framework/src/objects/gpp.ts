@@ -16,19 +16,20 @@ class GPP {
         private readonly sources: Path[]
     ) {}
 
-    async execute(): Promise<Executable> {
+    async execute(args: string[] = []): Promise<Executable> {
 
         const executablePath = Path.tmp()
             .join('minimouli')
             .random()
 
-        const args = [
+        const fullArguments = [
             ...this.sources.map((source) => source.toString()),
             '-o',
-            executablePath.toString()
+            executablePath.toString(),
+            ...args
         ]
 
-        const { process: gpp, error } = await new ProcessFactory('g++', args)
+        const { process: gpp, error } = await new ProcessFactory('g++', fullArguments)
             .cwd(Path.fromProject())
             .stdio({
                 stdin: 'pipe',

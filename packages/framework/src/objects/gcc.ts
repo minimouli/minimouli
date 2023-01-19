@@ -16,19 +16,20 @@ class GCC {
         private readonly sources: Path[]
     ) {}
 
-    async execute(): Promise<Executable> {
+    async execute(args: string[] = []): Promise<Executable> {
 
         const executablePath = Path.tmp()
             .join('minimouli')
             .random()
 
-        const args = [
+        const fullArguments = [
             ...this.sources.map((source) => source.toString()),
             '-o',
-            executablePath.toString()
+            executablePath.toString(),
+            ...args
         ]
 
-        const { process: gcc, error } = await new ProcessFactory('gcc', args)
+        const { process: gcc, error } = await new ProcessFactory('gcc', fullArguments)
             .cwd(Path.fromProject())
             .stdio({
                 stdin: 'pipe',
