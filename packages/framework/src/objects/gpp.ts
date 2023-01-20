@@ -18,9 +18,7 @@ class GPP {
 
     async execute(args: string[] = []): Promise<Executable> {
 
-        const executablePath = Path.tmp()
-            .join('minimouli')
-            .random()
+        const executablePath = Path.tmp().random()
 
         const fullArguments = [
             ...this.sources.map((source) => source.toString()),
