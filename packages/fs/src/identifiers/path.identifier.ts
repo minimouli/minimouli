@@ -70,7 +70,7 @@ class Path {
             cwd: this.toString()
         })
 
-        return entries.map((entry) => Path.fromAbsolute(entry))
+        return entries.map((entry) => this.join(entry))
     }
 
     random(length = 16): Path {
