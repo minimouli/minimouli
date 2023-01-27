@@ -7,8 +7,10 @@
 
 import { Directory, File } from '@minimouli/fs'
 import { ProcessFactory } from '@minimouli/process'
+import { HintCategory, HintStatus, HintType } from '@minimouli/types/hints'
 import { Path } from './path.js'
 import { config } from '../config.js'
+import { FrameworkError } from '../errors/framework.error.js'
 import { MatcherError } from '../errors/matcher.error.js'
 import type { Process } from '@minimouli/process'
 import type { Unit } from '@minimouli/types'
@@ -114,6 +116,14 @@ class Executable implements ExecutableInterface {
         const { error: error5 } = await process.wait()
         if (error5 !== undefined)
             throw new MatcherError(error5)
+
+        if (this.process.hasTimedOut)
+            throw new FrameworkError({
+                type: HintType.Timeout,
+                status: HintStatus.Failure,
+                category: HintCategory.Timeout,
+                timeout: this.processFactory.timeout
+            })
     }
 
     get exitCode(): number | null {
