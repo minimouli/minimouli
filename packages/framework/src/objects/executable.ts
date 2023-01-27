@@ -7,12 +7,15 @@
 
 import { Directory, File } from '@minimouli/fs'
 import { ProcessFactory } from '@minimouli/process'
+import { HintCategory, HintStatus, HintType } from '@minimouli/types/hints'
 import { Path } from './path.js'
 import { config } from '../config.js'
+import { FrameworkError } from '../errors/framework.error.js'
 import { MatcherError } from '../errors/matcher.error.js'
 import type { Process } from '@minimouli/process'
 import type { Unit } from '@minimouli/types'
 import type { ExecutableInterface } from '@minimouli/types/interfaces'
+import type { NativeWritable } from '@minimouli/types/stream'
 
 type ValidArguments = (string | Path)[]
 
@@ -39,6 +42,7 @@ class Executable implements ExecutableInterface {
     private outputBasePath = Path.tmp().join('minimouli')
     public readonly savedStdoutPath = this.outputBasePath.random()
     public readonly savedStderrPath = this.outputBasePath.random()
+    private stdinValue: string[] = []
 
     constructor(executable: string | Path, args: ValidArguments = []) {
 
@@ -63,6 +67,19 @@ class Executable implements ExecutableInterface {
     setTimeout(timeout: Unit.ms): this {
         this.processFactory.setTimeout(timeout)
         return this
+    }
+
+    setStdin(stdin: string[]): this {
+        this.stdinValue = stdin
+        return this
+    }
+
+    kill(signal: NodeJS.Signals = 'SIGTERM'): void {
+
+        if (this.process === undefined)
+            throw new MatcherError('The process is not yet spawned')
+
+        this.process.kill(signal)
     }
 
     async execute(): Promise<void> {
@@ -90,6 +107,7 @@ class Executable implements ExecutableInterface {
             throw new MatcherError('Cannot spawn the process')
 
         this.process = process
+        const stdin = process.stdin
         const stdout = process.stdout
         const stderr = process.stderr
 
@@ -102,9 +120,25 @@ class Executable implements ExecutableInterface {
         stdout.pipe(stdoutFileStream)
         stderr.pipe(stderrFileStream)
 
+        if (this.stdinValue.length > 0) {
+            if (stdin === undefined)
+                throw new MatcherError('Cannot access the standard input of the process')
+
+            stdin.write(this.stdinValue.join('\n'))
+            stdin.close()
+        }
+
         const { error: error5 } = await process.wait()
         if (error5 !== undefined)
             throw new MatcherError(error5)
+
+        if (this.process.hasTimedOut)
+            throw new FrameworkError({
+                type: HintType.Timeout,
+                status: HintStatus.Failure,
+                category: HintCategory.Timeout,
+                timeout: this.processFactory.timeout
+            })
     }
 
     get exitCode(): number | null {
@@ -115,12 +149,26 @@ class Executable implements ExecutableInterface {
         return this.process.exitCode
     }
 
-    get pid(): number | undefined {
+    get pid(): number {
 
         if (this.process === undefined)
             throw new MatcherError('The process is not yet spawned')
 
+        if (this.process.pid === undefined)
+            throw new MatcherError('Cannot access the pid of the process')
+
         return this.process.pid
+    }
+
+    get stdin(): NativeWritable {
+
+        if (this.process === undefined)
+            throw new MatcherError('The process is not yet spawned')
+
+        if (this.process.stdin === undefined)
+            throw new MatcherError('Cannot access the standard input of the process')
+
+        return this.process.stdin
     }
 
 }

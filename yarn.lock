@@ -2533,16 +2533,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@minimouli/framework@workspace:packages/framework"
   dependencies:
-    "@minimouli/fs": ^2.0.0
+    "@minimouli/fs": ^2.0.1
     "@minimouli/ipc": ^2.0.0
     "@minimouli/matchers": ^2.0.0
-    "@minimouli/process": ^2.0.0
+    "@minimouli/process": ^2.0.1
     "@minimouli/types": ^2.0.0
     core-js: ^3.25.0
   languageName: unknown
   linkType: soft
 
-"@minimouli/fs@^2.0.0, @minimouli/fs@workspace:packages/fs":
+"@minimouli/fs@^2.0.0, @minimouli/fs@^2.0.1, @minimouli/fs@workspace:packages/fs":
   version: 0.0.0-use.local
   resolution: "@minimouli/fs@workspace:packages/fs"
   dependencies:
@@ -2594,7 +2594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/process@^2.0.0, @minimouli/process@workspace:packages/process":
+"@minimouli/process@^2.0.0, @minimouli/process@^2.0.1, @minimouli/process@workspace:packages/process":
   version: 0.0.0-use.local
   resolution: "@minimouli/process@workspace:packages/process"
   dependencies:

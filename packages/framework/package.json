@@ -1,6 +1,6 @@
 {
   "name": "@minimouli/framework",
-  "version": "2.0.1",
+  "version": "2.0.6",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
@@ -18,10 +18,10 @@
     "./dist"
   ],
   "dependencies": {
-    "@minimouli/fs": "^2.0.0",
+    "@minimouli/fs": "^2.0.1",
     "@minimouli/ipc": "^2.0.0",
     "@minimouli/matchers": "^2.0.0",
-    "@minimouli/process": "^2.0.1",
+    "@minimouli/process": "^2.0.2",
     "@minimouli/types": "^2.0.0",
     "core-js": "^3.25.0"
   }

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Directory, Path } from '@minimouli/fs'
 import { Channel } from '@minimouli/ipc'
 import { setConfig } from './config.js'
 import { Tree } from './tree/tree.js'
@@ -27,6 +28,11 @@ channel.on('run', () => {
     const suites = Tree.currentContext().suites
 
     void (async () => {
+
+        await new Directory(Path.tmp()).mkdir({
+            recursive: true
+        })
+
         await Promise.all(suites.map((suite) => suite.execute()))
         const results = suites.map((suite) => suite.synthesize())
 
@@ -43,6 +49,7 @@ export * from './blocks/expect.block.js'
 export * from './blocks/sleep.block.js'
 export * from './blocks/suite.block.js'
 export * from './blocks/test.block.js'
+export * from './errors/assertion.error.js'
 export * from './objects/executable.js'
 export * from './objects/gcc.js'
 export * from './objects/gpp.js'

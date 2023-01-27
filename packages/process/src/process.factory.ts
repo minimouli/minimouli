@@ -51,7 +51,7 @@ class ProcessFactory {
     }
 
     private _ipc = false
-    private timeout: Unit.ms = Number.NaN
+    public timeout: Unit.ms = Number.NaN
 
     constructor(name: string | Path, args: string[] = []) {
         this.name = name.toString()
