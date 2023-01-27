@@ -42,6 +42,7 @@ class Executable implements ExecutableInterface {
     private outputBasePath = Path.tmp().join('minimouli')
     public readonly savedStdoutPath = this.outputBasePath.random()
     public readonly savedStderrPath = this.outputBasePath.random()
+    private stdinValue: string[] = []
 
     constructor(executable: string | Path, args: ValidArguments = []) {
 
@@ -65,6 +66,11 @@ class Executable implements ExecutableInterface {
 
     setTimeout(timeout: Unit.ms): this {
         this.processFactory.setTimeout(timeout)
+        return this
+    }
+
+    setStdin(stdin: string[]): this {
+        this.stdinValue = stdin
         return this
     }
 
@@ -101,6 +107,7 @@ class Executable implements ExecutableInterface {
             throw new MatcherError('Cannot spawn the process')
 
         this.process = process
+        const stdin = process.stdin
         const stdout = process.stdout
         const stderr = process.stderr
 
@@ -112,6 +119,14 @@ class Executable implements ExecutableInterface {
 
         stdout.pipe(stdoutFileStream)
         stderr.pipe(stderrFileStream)
+
+        if (this.stdinValue.length > 0) {
+            if (stdin === undefined)
+                throw new MatcherError('Cannot access the standard input of the process')
+
+            stdin.write(this.stdinValue.join('\n'))
+            stdin.close()
+        }
 
         const { error: error5 } = await process.wait()
         if (error5 !== undefined)
