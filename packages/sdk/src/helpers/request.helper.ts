@@ -22,7 +22,8 @@ const request = async <T>(
         'User-Agent': 'buddies-sdk'
     }
     const data = options.body ?? {}
-    const validateStatus = options.validateStatus ?? ((status) => status >= 200 && status < 300)
+    const validateStatus: (status: number) => boolean
+        = options.validateStatus ?? ((status) => status >= 200 && status < 300)
 
     const response = await axios.request<T>({
         method,
