@@ -2536,7 +2536,7 @@ __metadata:
     "@minimouli/fs": ^2.0.1
     "@minimouli/ipc": ^2.0.0
     "@minimouli/matchers": ^2.0.0
-    "@minimouli/process": ^2.0.1
+    "@minimouli/process": ^2.0.2
     "@minimouli/types": ^2.0.0
     core-js: ^3.25.0
   languageName: unknown
@@ -2594,7 +2594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@minimouli/process@^2.0.0, @minimouli/process@^2.0.1, @minimouli/process@workspace:packages/process":
+"@minimouli/process@^2.0.0, @minimouli/process@^2.0.2, @minimouli/process@workspace:packages/process":
   version: 0.0.0-use.local
   resolution: "@minimouli/process@workspace:packages/process"
   dependencies:
