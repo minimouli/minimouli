@@ -19,7 +19,7 @@ const request = async <T>(
         Accept: 'application/json',
         'Content-Type': 'application/json',
         ...options.headers,
-        'User-Agent': 'buddies-sdk'
+        'User-Agent': 'minimoli-sdk/1.0'
     }
     const data = options.body ?? {}
     const validateStatus = options.validateStatus ?? ((status) => status >= 200 && status < 300)
